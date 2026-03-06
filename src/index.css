@@ -1,0 +1,17 @@
+/* Font khmer Hanuman */
+@import url('https://fonts.googleapis.com/css2?family=Hanuman:wght@100;300;400;700;900&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-hanuman: "Hanuman", serif;
+}
+
+/* Set as default for the whole page */
+*, *::before, *::after {
+  font-family: var(--font-hanuman) !important;
+}
+
+body {
+  line-height: 1.8;
+}
