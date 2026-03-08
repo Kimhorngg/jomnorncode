@@ -4,7 +4,7 @@ import React from 'react';
 const WhatYouWillLearn = ({ title, description }) => {
   return (
     <div className="w-full bg-[#fafafa] py-16">
-      <div className="max-w-[1490px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1610px] mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="mb-8">
           <h2 className="text-2xl md:text-4xl font-bold text-[#112d4f] flex items-center gap-2">

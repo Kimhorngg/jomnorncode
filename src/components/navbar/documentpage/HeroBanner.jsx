@@ -1,33 +1,32 @@
-import React from 'react';
+import React from "react";
 
 const HeroBanner = () => {
   return (
-    <section className="relative w-full bg-[#112d50] overflow-hidden min-h-[400px] flex items-center">
-      <div className="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between">
-        
-        {/* Left Content Column */}
-        <div className="w-full md:w-5/12 text-left z-10 lg:pl-6">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            <span className="text-[#ffa503]">ឯកសារលម្អិត</span> 
-            <span className="text-white ml-2">និងការណែនាំទៅកាន់អ្នកប្រើប្រាស់</span>
-          </h1>
-          
-          <p className="text-gray-300 text-base md:text-lg mb-6 leading-relaxed max-w-md">
-            ចូលរួមជាមួយសិស្សជាង ១០០០ នាក់ផ្សេងទៀតក្នុងការកសាងអនាគតបច្ចេកវិទ្យារបស់អ្នក។
-          </p>
-          
-          <button className="bg-white hover:bg-gray-300 text-[#ffa503] font-bold py-2 px-6 rounded-xl transition-colors duration-300 shadow-md text-lg">
-            ចុះឈ្មោះឥឡូវនេះ
-          </button>
-        </div>
+    <section className="w-full bg-[#112d50] min-h-[630px] flex items-center overflow-hidden">
+      <div className="w-full max-w-[1700px] mx-auto px-8 sm:px-10 lg:px-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
+          <div className="w-full">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.25]">
+              <span className="text-[#ffa503]">ឯកសារលម្អិត</span>
+              <span className="text-white"> និងការណែនាំទៅកាន់អ្នកប្រើប្រាស់</span>
+            </h1>
 
-        {/* Right Image Column */}
-        <div className="w-full md:w-1/2 flex justify-end mt-10 md:mt-0 relative">
-          <img 
-            src="src/assets/photo 6.png" 
-            alt="Student with laptop" 
-            className="h-auto max-h-[500px] object-contain"
-          />
+            <p className="mt-6 text-gray-300 text-lg leading-9 max-w-[700px]">
+              ចូលរួមជាមួយសិស្សជាង ១០០០ នាក់ផ្សេងទៀតក្នុងការកសាងអនាគតបច្ចេកវិទ្យារបស់អ្នក។
+            </p>
+
+            <button className="mt-8 bg-white hover:bg-gray-200 text-[#ffa503] font-bold py-3 px-8 rounded-2xl transition-colors duration-300 shadow-md text-lg">
+              ចុះឈ្មោះឥឡូវនេះ
+            </button>
+          </div>
+
+          <div className="w-full flex justify-center md:justify-end">
+            <img
+              src="src/assets/photo 6.png"
+              alt="Student with laptop"
+              className="w-full max-w-[520px] h-auto object-contain"
+            />
+          </div>
         </div>
       </div>
     </section>

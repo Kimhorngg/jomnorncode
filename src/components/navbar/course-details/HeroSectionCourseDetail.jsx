@@ -1,10 +1,10 @@
 import React from 'react';
 import { IoBookOutline, IoTimeOutline, IoPeopleOutline } from 'react-icons/io5';
 
-const HeroSection = ({ title, description, image }) => {
+const HeroSection = ({ title, description, image, onStartLearning }) => {
   return (
     <div className="w-full bg-gradient-to-r from-[#81aed1] via-[#3a618c] to-[#112d4f] min-h-[420px] flex items-center overflow-hidden">
-      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 w-full py-12">
+      <div className="max-w-[1610px] mx-auto px-4 sm:px-6 lg:px-8 w-full py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           
           {/* Left Side: Text Content */}
@@ -36,7 +36,10 @@ const HeroSection = ({ title, description, image }) => {
 
             {/* Action Button */}
             <div className="pt-6">
-              <button className="bg-[#4477ce] cursor-pointer hover:bg-blue-600 text-white px-12 py-3.5 rounded-xl font-bold transition-all shadow-xl hover:scale-105 active:scale-95">
+              <button
+                onClick={onStartLearning}
+                className="bg-[#4477ce] cursor-pointer hover:bg-blue-600 text-white px-12 py-3.5 rounded-xl font-bold transition-all shadow-xl hover:scale-105 active:scale-95"
+              >
                 ចូលរៀន
               </button>
             </div>

@@ -206,7 +206,10 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
   return (
     <div className="fixed inset-0 z-2000 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-[#0f2f4f]/60" onClick={onClose} />
-      <div className="relative w-full max-w-90 bg-[#f7f5f2] dark:bg-[#1e293b] rounded-3xl shadow-2xl p-6">
+      <div
+        className="relative w-full max-w-90 bg-[#f7f5f2] dark:bg-[#1e293b] rounded-3xl shadow-2xl p-6"
+        data-aos="zoom-in"
+      >
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"

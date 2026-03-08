@@ -3,11 +3,13 @@ export default function LearnBeforeLogin() {
   return (
     <div className="min-h-screen bg-[#f3f4f6] px-4 sm:px-8 md:px-16 lg:px-40 py-10 sm:py-14 md:py-16">
       {/* Header */}
-      <div className="mb-8 sm:mb-10 text-center md:text-left">
-       <h1 className="text-3xl md:text-4xl font-bold text-[#1e293b]">
+      <div
+        className="mb-8 sm:mb-10 text-center md:text-left"
+        data-aos="fade-up"
+      >
+        <h1 className="text-3xl md:text-4xl font-bold text-[#1e293b]">
           មកធ្វើឲ្យថ្ងៃនេះមាន<span className="text-[#ffa500]">លទ្ធផល</span>
         </h1>
-       
 
         <p className="text-gray-500 mt-6 text-sm sm:text-base max-w-xl mx-auto md:mx-0">
           តាមដានការរៀនរបស់អ្នក និងគ្រប់គ្រងដំណើរការរបស់អ្នក
@@ -15,7 +17,11 @@ export default function LearnBeforeLogin() {
       </div>
 
       {/* Announcement Box */}
-      <div className="bg-[#dfe6f4] rounded-xl p-5 sm:p-6 flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-center mb-8 sm:mb-10 text-center md:text-left">
+      <div
+        className="bg-[#dfe6f4] rounded-xl p-5 sm:p-6 flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-center mb-8 sm:mb-10 text-center md:text-left"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
         <p className="text-[#1e293b] font-medium text-base sm:text-lg">
           ចាប់ផ្តេីមចូលរៀនឥឡូវនេះជាឱកាសល្អសម្រាប់អ្នក
         </p>
@@ -31,9 +37,13 @@ export default function LearnBeforeLogin() {
       {/* Main Content */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
         {/* Left Card */}
-        <div className="bg-white rounded-xl p-6 shadow-sm">
+        <div
+          className="bg-white rounded-xl p-6 shadow-sm"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
           <h2 className="text-lg font-black text-[#112d4f] mb-6">
-           ផែនការក្នុងការសិក្សា
+            ផែនការក្នុងការសិក្សា
           </h2>
 
           <div className="flex justify-between">
@@ -49,10 +59,17 @@ export default function LearnBeforeLogin() {
         </div>
 
         {/* Right Big Card */}
-        <div className="md:col-span-2 bg-white rounded-xl p-5 sm:p-6 shadow-sm">
+        <div
+          className="md:col-span-2 bg-white rounded-xl p-5 sm:p-6 shadow-sm"
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
           {/* Tabs */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
-            <Link to="/learn" className="bg-[#98bae3] text-[#3f72af] border border-[#3f72af] px-4 sm:px-6 py-2 rounded-lg font-medium w-full sm:w-auto">
+            <Link
+              to="/learn"
+              className="bg-[#98bae3] text-[#3f72af] border border-[#3f72af] px-4 sm:px-6 py-2 rounded-lg font-medium w-full sm:w-auto"
+            >
               កំពុងដំណេីរការ
             </Link>
 

@@ -59,7 +59,7 @@ export default function Navbar() {
   }, []);
 
   const navLinkClass = ({ isActive }) =>
-    `transition hover:text-[#3f71af] block py-2 md:py-0 font-medium ${
+    `transition hover:text-[#3f71af] block py-2 md:py-0 font-medium text-base ${
       isActive ? "text-[#3f71af]" : "text-gray-700 dark:text-gray-300"
     }`;
 
@@ -78,12 +78,12 @@ export default function Navbar() {
 
   return (
     <nav className="w-full bg-white dark:bg-[#0f172a] relative z-100 transition-colors duration-300 shadow-sm">
-      <div className="max-w-360 mx-auto px-6 lg:px-12 py-4 flex items-center justify-between">
+      <div className="max-w-420 mx-auto px-6 lg:px-12 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center">
           <img
             src="/src/assets/jomnorncode_logo.png"
             alt="Logo"
-            className="w-16 h-16 object-contain dark:brightness-110"
+            className="w-18 h-18 object-contain dark:brightness-110"
           />
         </Link>
 

@@ -4,20 +4,25 @@ import { Link, useParams } from "react-router-dom";
 export default function LessonProgressCard() {
   const { courseId, lessonId } = useParams();
   const [lessonCompleted, setLessonCompleted] = useState(false);
-  const [practiceCompleted, setPracticeCompleted] = useState(false);
+  const [quizCompleted, setQuizCompleted] = useState(false);
 
   const loadProgress = () => {
-    setLessonCompleted(localStorage.getItem(`lesson-${lessonId}-lessonCompleted`) === "true");
-    setPracticeCompleted(localStorage.getItem(`lesson-${lessonId}-practiceCompleted`) === "true");
+    setLessonCompleted(
+      localStorage.getItem(`lesson-${lessonId}-lessonCompleted`) === "true",
+    );
+    setQuizCompleted(
+      localStorage.getItem(`lesson-${lessonId}-quizCompleted`) === "true",
+    );
   };
 
   useEffect(() => {
     loadProgress(); // load initial progress
     window.addEventListener("lessonProgressUpdated", loadProgress); // listen for editor updates
-    return () => window.removeEventListener("lessonProgressUpdated", loadProgress);
+    return () =>
+      window.removeEventListener("lessonProgressUpdated", loadProgress);
   }, [lessonId]);
 
-  const canUnlockQuiz = lessonCompleted && practiceCompleted;
+  const canUnlockQuiz = lessonCompleted;
 
   return (
     <div className="flex-1">
@@ -26,16 +31,20 @@ export default function LessonProgressCard() {
 
         <ul className="space-y-2 text-gray-700">
           <li className="flex items-center gap-2">
-            <span className={lessonCompleted ? "text-green-500" : "text-gray-400"}>
+            <span
+              className={lessonCompleted ? "text-green-500" : "text-gray-400"}
+            >
               {lessonCompleted ? "✔" : "○"}
             </span>
-            បញ្ចប់មេរៀន (Example Editor)
+            បញ្ចប់មេរៀននិងដំណេីរការកូដ
           </li>
           <li className="flex items-center gap-2">
-            <span className={practiceCompleted ? "text-green-500" : "text-gray-400"}>
-              {practiceCompleted ? "✔" : "○"}
+            <span
+              className={quizCompleted ? "text-green-500" : "text-gray-400"}
+            >
+              {quizCompleted ? "✔" : "○"}
             </span>
-            អនុវត្តជាមួយកូដ (Practice Editor)
+            ធ្វើតេស្ត
           </li>
         </ul>
 

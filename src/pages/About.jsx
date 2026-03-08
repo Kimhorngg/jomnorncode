@@ -14,20 +14,19 @@ import FeatureCard from "../components/navbar/card/FeatureCard.jsx";
 import LeaderCard from "../components/navbar/card/LeaderCard.jsx";
 import MemberCard from "../components/navbar/card/MemberCard.jsx";
 
-
 import { leaders, members, features } from "../data/aboutData.js";
 
 export default function About() {
   return (
-    <div className=" bg-white ">
+    <div className="bg-white">
       {/* HERO */}
       <header className="bg-[#2f60a9] py-12">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
-          <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-360 px-6 lg:px-12 py-14 md:py-20">
+          <div className="mx-auto max-w-3xl text-center" data-aos="fade-up">
             <h1 className="text-2xl font-[Battambang] leading-tight text-white md:text-4xl font-semibold">
               ត្រៀមខ្លួនរួចជាស្រេចដើម្បីចាប់ផ្ដើមជាមួយយើង?
             </h1>
-            <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 font-[Battambang] text-white md:text-base font-semibold">
+            <p className="mx-auto mt-3 max-w-2xl text-base leading-7 font-[Battambang] text-white md:text-lg font-semibold">
               ចូលរួមជាមួយសិស្សជាង ១០០០
               នាក់ផ្សេងទៀតក្នុងការកសាងអនាគតបច្ចេកវិទ្យារបស់អ្នក។
             </p>
@@ -43,37 +42,37 @@ export default function About() {
       </header>
 
       {/* ABOUT SECTION */}
-      <section className="mx-auto max-w-[1490px] px-4 py-12 md:py-16">
-        <div className="grid items-center gap-8 md:grid-cols-2 ">
-          <div>
-            <hr className="border-gray-300 my-5 w-290" />
+      <section className="mx-auto max-w-360 px-6 lg:px-12 py-12 md:py-16">
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          <div data-aos="fade-up">
+            <hr className="border-gray-300 my-5 w-full max-w-[320px]" />
             <div className="flex items-center gap-4">
               {/* Vertical Line */}
               <div className="w-1 h-10 bg-orange-300"></div>
-              {/* Title */}              
-              <h1 className="text-2xl max-w-[1490px] font-[Battambang] font-semibold">
+              {/* Title */}
+              <h1 className="text-2xl font-[Battambang] font-semibold">
                 <span className="text-slate-800">អំពី</span>{" "}
                 <span className="text-orange-300">ដំណាក់កាល</span>
               </h1>
             </div>
 
-            <p className="text-sm font-[Battambang] text-slate-500 mt-4 ">
+            <p className="text-base font-[Battambang] text-slate-500 mt-4 ">
               ជួយលើកទឺកចិត្តនិងជួយឲ្យនិស្សិតខ្មែរបង្កើតសមត្ថភាពក្នុងការសរសេរកូដ
               និងកសាងអាជីពនៅក្នុងវិស័យបច្ចេកវិទ្យា
             </p>
 
-            <hr className="border-gray-300 my-5 w-290" />
+            <hr className="border-gray-300 my-5 w-full max-w-[320px]" />
 
             <h2 className="text-2xl font-[Battambang] text-[#073170] leading-tight mt-15 font-semibold">
               បេសកកម្មរបស់ពួកយើង
             </h2>
-            <p className="mt-4 text-sm font-[Battambang] leading-7 text-slate-500 ">
+            <p className="mt-4 text-base font-[Battambang] leading-7 text-slate-500 ">
               ជំនាន់កូដ
               មានបេសកកម្មក្នងការបំបាត់ឧបសគ្គនានាក្នុងការវិស័យអប់រំបច្ចេកវិទ្យានៅកម្ពុជា។
               យើងជឿជាក់ថា
               និស្សិតគ្រប់រូបគួរតែមានឱកាសទទួលបានការអប់រំជំនាញសរសេរកូដដែលមានគុណភាពជាភាសាជាតិរបស់ពួកគេ។
             </p>
-            <p className="mt-4 text-sm font-[Battambang] leading-7 text-[#999da0]">
+            <p className="mt-4 text-base font-[Battambang] leading-7 text-[#999da0]">
               ដោយផ្ដល់វគ្គសិក្សាឥតគិតថ្លៃ ដែលមានមាតិការពេញលេញជាភាសាខ្មែរ
               យើងកំពុងផ្ដល់អំណាច ដល់អ្នកជំនាន់ក្រោយនៃអ្នកអភិវឌ្ឍន៍កម្មវិធី
               និងអ្នកច្នៃប្រឌិតនៅកម្ពុជា។
@@ -84,23 +83,34 @@ export default function About() {
             </button>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm mt-40">
+          <div
+            className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm mt-8 lg:mt-0"
+            data-aos="fade-left"
+          >
             <div className="overflow-hidden rounded-xl bg-slate-100">
               <img
                 src="src/assets/Learning.png"
                 alt="learning"
-                className="h-56 w-full object-cover md:h-64"
+                className="h-56 w-full object-cover sm:h-64 md:h-72"
               />
             </div>
           </div>
         </div>
 
         {/* FEATURES */}
-        <div className="mt-12 font-[Battambang] text-[#073170] text-center font-semibold mt-10">
-          <SectionTitle title="តម្លៃរបស់យើង" />
+        <div className="mt-12 font-[Battambang] text-[#073170] text-center font-semibold">
+          <div data-aos="fade-up">
+            <SectionTitle title="តម្លៃរបស់យើង" />
+          </div>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {features.map((f) => (
-              <FeatureCard key={f.title} item={f} />
+            {features.map((f, index) => (
+              <div
+                key={f.title}
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+              >
+                <FeatureCard item={f} />
+              </div>
             ))}
           </div>
         </div>
@@ -108,7 +118,7 @@ export default function About() {
 
       {/* TEAM */}
       <section className="bg-white">
-        <div className="mx-auto max-w-[1490px] px-4 py-12 mt-8 md:py-16 font-[Battambang]">
+        <div className="mx-auto max-w-360 px-6 lg:px-12 py-12 mt-8 md:py-16 font-[Battambang]">
           <SectionTitle
             title={
               <>
@@ -123,13 +133,22 @@ export default function About() {
           />
 
           <div className="mt-8 grid gap-4 md:grid-cols-2">
-            {leaders.map((x) => (
-              <LeaderCard key={x.name + x.role} item={x} />
+            {leaders.map((x, index) => (
+              <div
+                key={x.name + x.role}
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+              >
+                <LeaderCard item={x} />
+              </div>
             ))}
           </div>
 
           <div className="mt-12">
-            <div className="flex items-end justify-between gap-4">
+            <div
+              className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end"
+              data-aos="fade-up"
+            >
               <SectionTitle
                 title={
                   <>
@@ -165,11 +184,16 @@ export default function About() {
             </div> */}
             <div className="mt-6 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {members.slice(0, 4).map((m, idx) => (
-                <MemberCard key={idx} item={m} />
+                <div key={idx} data-aos="fade-up" data-aos-delay={idx * 80}>
+                  <MemberCard item={m} />
+                </div>
               ))}
 
               {/* CENTER LOGO */}
-              <div className="flex items-center justify-center rounded-2xl border border-slate-200 bg-white p-10 shadow-sm">
+              <div
+                className="flex items-center justify-center rounded-2xl border border-slate-200 bg-white p-10 shadow-sm"
+                data-aos="zoom-in"
+              >
                 <div className="h-40 w-40 md:h-44 md:w-44 rounded-full border-4 border-slate-200 bg-slate-50 flex items-center justify-center">
                   <img
                     src="src/assets/jomnorncode_logo (2).png"
@@ -179,7 +203,13 @@ export default function About() {
                 </div>
               </div>
               {members.slice(4).map((m, idx) => (
-                <MemberCard key={idx + 4} item={m} />
+                <div
+                  key={idx + 4}
+                  data-aos="fade-up"
+                  data-aos-delay={(idx + 4) * 80}
+                >
+                  <MemberCard item={m} />
+                </div>
               ))}
             </div>
           </div>
@@ -187,28 +217,33 @@ export default function About() {
       </section>
 
       {/* CONTACT */}
-      <section className="mx-auto max-w-[1490px] px-4 py-12 md:py-16 font-[Battambang]">
+      <section className="mx-auto max-w-360 px-6 lg:px-12 py-12 md:py-16 font-[Battambang]">
         <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 md:p-10">
-          <SectionTitle
-            title={
-              <>
-                <span className="text-orange-300 font-semibold">
-                  ទាក់ទងមកយើងខ្ញុំ
-                </span>
-              </>
-            }
-            subtitle={
-              <>
-                មានសំណួរឬចង់និយាយសួរសុខទុក្ខបន្តិចមែនទេ?
-                <br />
-                យើងរីករាយណាស់ក្នុងការទទួលសារពីអ្នក!
-              </>
-            }
-          />
+          <div data-aos="fade-up">
+            <SectionTitle
+              title={
+                <>
+                  <span className="text-orange-300 font-semibold">
+                    ទាក់ទងមកយើងខ្ញុំ
+                  </span>
+                </>
+              }
+              subtitle={
+                <>
+                  មានសំណួរឬចង់និយាយសួរសុខទុក្ខបន្តិចមែនទេ?
+                  <br />
+                  យើងរីករាយណាស់ក្នុងការទទួលសារពីអ្នក!
+                </>
+              }
+            />
+          </div>
 
           <div className="mt-8 grid gap-8 md:grid-cols-2 font-[Battambang]">
             {/* Form */}
-            <form className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <form
+              className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
+              data-aos="fade-up"
+            >
               <label className="block text-sm font-semibold text-slate-800">
                 ឈ្មោះ
               </label>
@@ -249,16 +284,16 @@ export default function About() {
             </form>
 
             {/* Contact info */}
-            <div className="">
-              <p className="text-lg font-semibold text-slate-800">
+            <div className="" data-aos="fade-left">
+              <p className="text-xl font-semibold text-slate-800">
                 ព័ត៌មានទំនាក់ទំនង
               </p>
-              <p className="mt-2 text-xs leading-6 text-slate-600">
+              <p className="mt-2 text-sm leading-7 text-slate-600">
                 អ្នកក៏អាចទាក់ទងមកខ្ញុំតាមរយៈអ៊ីមែល
                 ឬស្វែងរកខ្ញុំនៅលើបណ្តាញសង្គមផងដែរ
               </p>
 
-              <div className="mt-5 space-y-3 text-xs text-slate-700 ">
+              <div className="mt-5 space-y-3 text-sm text-slate-700 ">
                 {/* <div className="flex items-start gap-2">
                   <Mail className="mt-0.5 h-4 w-4 text-slate-500" />
                   

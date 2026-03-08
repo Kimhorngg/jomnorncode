@@ -1,0 +1,435 @@
+{
+  "data": [
+    {
+      "codeId": 11,
+      "sample": " <!DOCTYPE html>\n<html>\n<body>\n\n<h1>My First Heading</h1>\n<p>My first paragraph.</p>\n\n<h2>About HTML</h2>\n<p>HTML stands for HyperText Markup Language.</p>\n<p>It is used to create web pages.</p>\n\n<h2>My Favorite Subjects</h2>\n<ul>\n<li>HTML</li>\n<li>CSS</li>\n<li>JavaScript</li>\n</ul>\n\n<h2>Simple List</h2>\n<ol>\n<li>Learn HTML</li>\n<li>Practice Coding</li>\n<li>Create Websites</li>\n</ol>\n\n<p>This is a simple HTML example for beginners.</p>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 12,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>HTML Elements and Attributes</title>\n</head>\n<body>\n\n<h1 id=\"mainTitle\">HTML Elements Example</h1>\n<p class=\"text\">This is a paragraph element in HTML.</p>\n\n<h2 style=\"color:blue;\">Heading with Style Attribute</h2>\n<p>This paragraph shows how HTML elements display content.</p>\n\n<a href=\"https://www.google.com\">Visit Google</a>\n<br>\n\n<hr>\n\n<ul>\n<li>HTML</li>\n<li>CSS</li>\n<li>JavaScript</li>\n</ul>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 13,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>HTML Lists and Tables</title>\n</head>\n<body>\n\n<h1>HTML Lists Example</h1>\n\n<h2>Unordered List</h2>\n<ul>\n<li>HTML</li>\n<li>CSS</li>\n<li>JavaScript</li>\n</ul>\n\n<h2>Ordered List</h2>\n<ol>\n<li>Learn HTML</li>\n<li>Practice Coding</li>\n<li>Create Website</li>\n</ol>\n\n<hr>\n\n<h1>HTML Table Example</h1>\n\n<table border=\"1\">\n<tr>\n<th>Name</th>\n<th>Age</th>\n<th>Country</th>\n</tr>\n\n<tr>\n<td>Sok</td>\n<td>20</td>\n<td>Cambodia</td>\n</tr>\n\n<tr>\n<td>John</td>\n<td>25</td>\n<td>USA</td>\n</tr>\n\n</table>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 14,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>HTML Links and Images</title>\n</head>\n<body>\n\n<h1>HTML Links Example</h1>\n<p>Click the link below to visit Google:</p>\n<a href=\"https://www.google.com\">Visit Google</a>\n\n<br><br>\n\n<h1>HTML Images Example</h1>\n<p>This is an example of an image in HTML:</p>\n<img src=\"https://i.pinimg.com/736x/b4/6d/ef/b46def9121e54551ca467e1ecf149311.jpg\" alt=\"Sample Image\" width=\"150\" height=\"150\">\n\n<p>You can also use an image as a link:</p>\n<a href=\"https://www.wikipedia.org\">\n</a>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 15,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>HTML Forms and Input Fields</title>\n</head>\n<body>\n\n<h1>HTML Form Example</h1>\n\n<form>\n<label for=\"name\">Name:</label><br>\n<input type=\"text\" id=\"name\" name=\"name\"><br><br>\n\n<label for=\"email\">Email:</label><br>\n<input type=\"email\" id=\"email\" name=\"email\"><br><br>\n\n<label for=\"password\">Password:</label><br>\n<input type=\"password\" id=\"password\" name=\"password\"><br><br>\n\n<label>Gender:</label><br>\n<input type=\"radio\" name=\"gender\" value=\"male\"> Male<br>\n<input type=\"radio\" name=\"gender\" value=\"female\"> Female<br><br>\n\n<label>Skills:</label><br>\n<input type=\"checkbox\" name=\"skill\" value=\"html\"> HTML<br>\n<input type=\"checkbox\" name=\"skill\" value=\"css\"> CSS<br>\n<input type=\"checkbox\" name=\"skill\" value=\"javascript\"> JavaScript<br><br>\n\n<input type=\"submit\" value=\"Submit\">\n</form>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 16,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>Final Project - Styled Web Page</title>\n</head>\n<body style=\"font-family:Arial; background-color:#f4f4f4; margin:0; padding:0;\">\n\n<div style=\"background-color:#333; color:white; text-align:center; padding:20px;\">\n<h1>My Styled Web Page</h1>\n<p>Welcome to my final HTML project</p>\n</div>\n\n<div style=\"padding:20px;\">\n<h2 style=\"color:darkblue;\">About Me</h2>\n<p style=\"font-size:18px; color:#444;\">Hello! My name is Student. This is my final project using HTML styling.</p>\n\n<h2 style=\"color:darkgreen;\">My Skills</h2>\n<ul style=\"background:white; padding:15px; border:1px solid #ccc; width:200px;\">\n<li>HTML</li>\n<li>CSS</li>\n<li>JavaScript</li>\n</ul>\n\n<h2 style=\"color:darkred;\">My Weekly Schedule</h2>\n<table border=\"1\" style=\"border-collapse:collapse; width:60%; background:white; text-align:center;\">\n<tr style=\"background-color:#ddd;\">\n<th>Day</th>\n<th>Activity</th>\n</tr>\n<tr>\n<td>Monday</td>\n<td>Learn HTML</td>\n</tr>\n<tr>\n<td>Tuesday</td>\n<td>Practice CSS</td>\n</tr>\n<tr>\n<td>Wednesday</td>\n<td>Build Web Page</td>\n</tr>\n</table>\n\n<h2 style=\"color:purple;\">Contact Form</h2>\n<form style=\"background:white; padding:15px; border:1px solid #ccc; width:300px;\">\n<label>Name:</label><br>\n<input type=\"text\" style=\"width:100%; padding:8px;\"><br><br>\n\n<label>Email:</label><br>\n<input type=\"email\" style=\"width:100%; padding:8px;\"><br><br>\n\n<input type=\"submit\" value=\"Send\" style=\"background-color:blue; color:white; padding:10px 20px; border:none;\">\n</form>\n</div>\n\n<div style=\"background-color:#333; color:white; text-align:center; padding:10px; margin-top:20px;\">\n<p>© 2026 My Final HTML Project</p>\n</div>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 17,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>HTML Multimedia Elements</title>\n</head>\n<body>\n\n<h1>HTML Multimedia Elements</h1>\n\n<h2>Audio Example</h2>\n<p>Play the audio below:</p>\n<audio controls>\n<source src=\"audio.mp3\" type=\"audio/mpeg\">\nYour browser does not support the audio element.\n</audio>\n\n<br><br>\n\n<h2>Video Example</h2>\n<p>Watch the video below:</p>\n<video width=\"320\" height=\"240\" controls>\n<source src=\"video.mp4\" type=\"video/mp4\">\nYour browser does not support the video tag.\n</video>\n\n<br><br>\n\n<h2>YouTube Video Example</h2>\n<iframe width=\"420\" height=\"315\" src=\"https://www.youtube.com/embed/dQw4w9WgXcQ\">\n</iframe>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 18,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>HTML Iframes and Embeds</title>\n</head>\n<body>\n\n<h1>HTML Iframes Example</h1>\n<p>This is an example of displaying another webpage using iframe:</p>\n\n<iframe src=\"https://www.wikipedia.org\" width=\"400\" height=\"250\"></iframe>\n\n<br><br>\n\n<h1>Embedded YouTube Video</h1>\n<p>This is an example of embedding a YouTube video:</p>\n\n<iframe width=\"420\" height=\"315\" src=\"https://www.youtube.com/embed/dQw4w9WgXcQ\"></iframe>\n\n<br><br>\n\n<h1>Embed Google Map</h1>\n<iframe width=\"400\" height=\"300\" src=\"https://maps.google.com/maps?q=phnom%20penh&t=&z=13&ie=UTF8&iwloc=&output=embed\"></iframe>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 19,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>HTML Forms Advanced and Validation</title>\n</head>\n<body>\n\n<h1>Advanced HTML Form with Validation</h1>\n\n<form>\n<label for=\"name\">Full Name:</label><br>\n<input type=\"text\" id=\"name\" name=\"name\" required><br><br>\n\n<label for=\"email\">Email:</label><br>\n<input type=\"email\" id=\"email\" name=\"email\" required><br><br>\n\n<label for=\"age\">Age:</label><br>\n<input type=\"number\" id=\"age\" name=\"age\" min=\"1\" max=\"100\" required><br><br>\n\n<label for=\"password\">Password:</label><br>\n<input type=\"password\" id=\"password\" name=\"password\" minlength=\"6\" required><br><br>\n\n<label for=\"website\">Website:</label><br>\n<input type=\"url\" id=\"website\" name=\"website\"><br><br>\n\n<label for=\"birthday\">Birthday:</label><br>\n<input type=\"date\" id=\"birthday\" name=\"birthday\"><br><br>\n\n<label for=\"country\">Country:</label><br>\n<select id=\"country\" name=\"country\">\n<option value=\"cambodia\">Cambodia</option>\n<option value=\"usa\">USA</option>\n<option value=\"japan\">Japan</option>\n</select><br><br>\n\n<label for=\"message\">Message:</label><br>\n<textarea id=\"message\" name=\"message\" rows=\"4\" cols=\"30\"></textarea><br><br>\n\n<input type=\"submit\" value=\"Submit Form\">\n</form>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 20,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>Final Project - Complete HTML Web Page</title>\n</head>\n<body>\n\n<h1>Welcome to My Website</h1>\n<p>This is my final HTML project web page.</p>\n\n<hr>\n\n<h2>About Me</h2>\n<p>My name is Student. I am learning HTML and building my first complete web page.</p>\n\n<h2>My Skills</h2>\n<ul>\n<li>HTML</li>\n<li>CSS</li>\n<li>JavaScript</li>\n</ul>\n\n<h2>My Weekly Study Plan</h2>\n<table border=\"1\">\n<tr>\n<th>Day</th>\n<th>Activity</th>\n</tr>\n<tr>\n<td>Monday</td>\n<td>Learn HTML Basics</td>\n</tr>\n<tr>\n<td>Tuesday</td>\n<td>Practice Lists and Tables</td>\n</tr>\n<tr>\n<td>Wednesday</td>\n<td>Study Links and Images</td>\n</tr>\n</table>\n\n<h2>Useful Link</h2>\n<p><a href=\"https://www.google.com\">Visit Google</a></p>\n\n<h2>My Image</h2>\n<img src=\"https://via.placeholder.com/150\" alt=\"Sample Image\" width=\"150\" height=\"150\">\n\n<h2>Contact Form</h2>\n<form>\n<label for=\"name\">Name:</label><br>\n<input type=\"text\" id=\"name\" name=\"name\"><br><br>\n\n<label for=\"email\">Email:</label><br>\n<input type=\"email\" id=\"email\" name=\"email\"><br><br>\n\n<input type=\"submit\" value=\"Send\">\n</form>\n\n<hr>\n\n<p>© 2026 My Complete HTML Web Page</p>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 2,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>CSS Selectors and Properties</title>\n<style>\nbody { background-color: #f4f4f4; font-family: Arial; }\nh1 { color: blue; text-align: center; }\np { color: #333; font-size: 18px; }\n.highlight { color: red; font-weight: bold; }\n#mainBox { background-color: white; border: 2px solid black; padding: 15px; }\n</style>\n</head>\n<body>\n\n<h1>CSS Selectors Example</h1>\n\n<div id=\"mainBox\">\n<p>This paragraph uses the element selector.</p>\n<p class=\"highlight\">This paragraph uses the class selector.</p>\n<p>This is another normal paragraph.</p>\n</div>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 3,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>Colors and Fonts Example</title>\n<style>\nbody { background-color: #f0f8ff; font-family: Arial, sans-serif; }\nh1 { color: darkblue; text-align: center; }\np { color: #333333; font-size: 18px; }\n.highlight { color: red; font-family: 'Courier New', monospace; }\n.box { background-color: lightyellow; border: 1px solid gray; padding: 15px; }\n</style>\n</head>\n<body>\n\n<h1>Colors and Fonts in CSS</h1>\n\n<div class=\"box\">\n<p>This paragraph shows the default font and color.</p>\n<p class=\"highlight\">This text uses a different font and color.</p>\n<p style=\"color: green; font-size: 20px;\">This paragraph uses inline color and font size.</p>\n</div>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 4,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>CSS Box Model and Spacing</title>\n<style>\nbody { font-family: Arial; background-color: #f5f5f5; }\n.box { width: 300px; border: 3px solid blue; padding: 20px; margin: 30px; background-color: lightyellow; }\nh1 { text-align: center; color: darkblue; }\np { font-size: 16px; }\n</style>\n</head>\n<body>\n\n<h1>CSS Box Model Example</h1>\n\n<div class=\"box\">\n<p>This box demonstrates the CSS Box Model.</p>\n<p>It includes margin, border, padding, and content.</p>\n</div>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 5,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>CSS Flexbox Layout</title>\n<style>\nbody { font-family: Arial; background-color: #f5f5f5; }\n.container { display: flex; justify-content: space-around; background-color: lightgray; padding: 20px; }\n.box { background-color: steelblue; color: white; padding: 20px; margin: 10px; width: 100px; text-align: center; }\nh1 { text-align: center; }\n</style>\n</head>\n<body>\n\n<h1>Flexbox Layout Example</h1>\n\n<div class=\"container\">\n<div class=\"box\">Box 1</div>\n<div class=\"box\">Box 2</div>\n<div class=\"box\">Box 3</div>\n</div>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 6,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>Final Project - Complete Styled HTML Web Page</title>\n<style>\nbody { margin: 0; font-family: Arial, sans-serif; background: linear-gradient(to right, #e0f2fe, #fae8ff); color: #333; }\n.header { background: linear-gradient(to right, #2563eb, #9333ea); color: white; text-align: center; padding: 40px 20px; }\n.header h1 { margin: 0; font-size: 38px; }\n.header p { font-size: 18px; margin-top: 10px; }\n.container { width: 90%; max-width: 1000px; margin: 30px auto; }\n.section { background-color: white; margin-bottom: 25px; padding: 25px; border-radius: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }\n.section h2 { color: #2563eb; margin-top: 0; }\nul { padding-left: 20px; }\nli { margin: 8px 0; }\ntable { width: 100%; border-collapse: collapse; margin-top: 10px; background-color: #fff; }\nth, td { border: 1px solid #ccc; padding: 12px; text-align: center; }\nth { background-color: #dbeafe; }\na { color: #7c3aed; text-decoration: none; font-weight: bold; }\na:hover { color: #2563eb; }\nimg { display: block; margin: 15px auto; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }\nform { margin-top: 15px; }\ninput, textarea { width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box; }\ninput[type=\"submit\"] { background: linear-gradient(to right, #2563eb, #9333ea); color: white; border: none; font-size: 16px; cursor: pointer; }\ninput[type=\"submit\"]:hover { opacity: 0.9; }\n.footer { background-color: #1e1b4b; color: white; text-align: center; padding: 18px; }\n</style>\n</head>\n<body>\n\n<div class=\"header\">\n<h1>Welcome to My Complete Web Page</h1>\n<p>This is my final HTML project with beautiful styling</p>\n</div>\n\n<div class=\"container\">\n<div class=\"section\">\n<h2>About Me</h2>\n<p>Hello! My name is Student. I am learning HTML and building my first complete styled web page.</p>\n</div>\n\n<div class=\"section\">\n<h2>My Favorite Subjects</h2>\n<ul>\n<li>HTML</li>\n<li>CSS</li>\n<li>JavaScript</li>\n</ul>\n</div>\n\n<div class=\"section\">\n<h2>My Study Schedule</h2>\n<table>\n<tr>\n<th>Day</th>\n<th>Activity</th>\n</tr>\n<tr>\n<td>Monday</td>\n<td>Learn HTML Basics</td>\n</tr>\n<tr>\n<td>Tuesday</td>\n<td>Practice CSS</td>\n</tr>\n<tr>\n<td>Wednesday</td>\n<td>Build Web Pages</td>\n</tr>\n</table>\n</div>\n\n<div class=\"section\">\n<h2>Useful Link</h2>\n<p><a href=\"https://www.google.com\">Visit Google</a></p>\n</div>\n\n<div class=\"section\">\n<h2>Sample Image</h2>\n<img src=\"https://via.placeholder.com/200\" alt=\"Sample Image\" width=\"200\" height=\"200\">\n</div>\n\n<div class=\"section\">\n<h2>Contact Form</h2>\n<form>\n<label for=\"name\">Name:</label>\n<input type=\"text\" id=\"name\" name=\"name\">\n\n<label for=\"email\">Email:</label>\n<input type=\"email\" id=\"email\" name=\"email\">\n\n<label for=\"message\">Message:</label>\n<textarea id=\"message\" name=\"message\" rows=\"4\"></textarea>\n\n<input type=\"submit\" value=\"Send Message\">\n</form>\n</div>\n</div>\n\n<div class=\"footer\">\n<p>© 2026 My Complete Styled HTML Web Page</p>\n</div>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 7,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>CSS Transitions and Animations</title>\n<style>\nbody { font-family: Arial; text-align: center; background-color: #f4f4f4; }\n\n.box { width: 150px; height: 150px; background-color: blue; margin: 40px auto; transition: all 0.5s; }\n\n.box:hover { background-color: red; transform: scale(1.2); }\n\n.animate { width: 100px; height: 100px; background-color: green; position: relative; animation: move 4s infinite; }\n\n@keyframes move {\n0% { left: 0px; }\n50% { left: 200px; }\n100% { left: 0px; }\n}\n</style>\n</head>\n<body>\n\n<h1>CSS Transitions and Animations</h1>\n\n<p>Hover the box below to see the transition effect.</p>\n<div class=\"box\"></div>\n\n<p>The box below uses CSS animation.</p>\n<div class=\"animate\"></div>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 8,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>Responsive Design with Media Queries</title>\n<style>\nbody { font-family: Arial; margin: 0; background-color: #f4f4f4; }\n\n.header { background-color: darkblue; color: white; text-align: center; padding: 20px; }\n\n.container { display: flex; }\n\n.box { flex: 1; padding: 20px; background-color: lightblue; margin: 10px; text-align: center; }\n\n@media (max-width: 600px) {\n.container { flex-direction: column; }\n.box { background-color: lightgreen; }\n}\n</style>\n</head>\n<body>\n\n<div class=\"header\">\n<h1>Responsive Web Page</h1>\n<p>Resize the browser to see the layout change.</p>\n</div>\n\n<div class=\"container\">\n<div class=\"box\">Box 1</div>\n<div class=\"box\">Box 2</div>\n<div class=\"box\">Box 3</div>\n</div>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 9,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>Pseudo-classes and Pseudo-elements</title>\n<style>\nbody { font-family: Arial; background-color: #f4f4f4; padding: 20px; }\n\nbutton { padding: 10px 20px; background-color: blue; color: white; border: none; }\n\nbutton:hover { background-color: red; }\n\na:visited { color: purple; }\n\np::first-letter { font-size: 30px; color: darkblue; }\n\np::first-line { font-weight: bold; }\n</style>\n</head>\n<body>\n\n<h1>Pseudo-classes and Pseudo-elements</h1>\n\n<p>This paragraph demonstrates pseudo-elements in CSS.</p>\n\n<button>Hover Over Me</button>\n\n<br><br>\n\n<a href=\"https://www.google.com\">Visit Google</a>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 10,
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>Final Project - Beautiful Styled Web Page</title>\n<style>\nbody { margin: 0; font-family: Arial, sans-serif; background: linear-gradient(to right, #dbeafe, #fce7f3); color: #333; }\n.header { background: linear-gradient(to right, #2563eb, #7c3aed); color: white; text-align: center; padding: 50px 20px; }\n.header h1 { margin: 0; font-size: 40px; }\n.header p { font-size: 18px; margin-top: 10px; }\n.nav { background-color: rgba(0, 0, 0, 0.8); text-align: center; padding: 15px; }\n.nav a { color: white; text-decoration: none; margin: 0 20px; font-size: 18px; }\n.nav a:hover { color: #facc15; }\n.container { width: 90%; max-width: 1100px; margin: 30px auto; }\n.section { background-color: white; padding: 30px; margin-bottom: 25px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }\n.section h2 { color: #2563eb; margin-top: 0; }\n.cards { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }\n.card { flex: 1; min-width: 200px; background: linear-gradient(to bottom, #eff6ff, #ffffff); border: 1px solid #bfdbfe; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }\n.card h3 { color: #7c3aed; }\nbutton { background: linear-gradient(to right, #2563eb, #7c3aed); color: white; border: none; padding: 12px 24px; border-radius: 30px; font-size: 16px; cursor: pointer; }\nbutton:hover { opacity: 0.9; }\n.footer { background-color: #1e1b4b; color: white; text-align: center; padding: 20px; margin-top: 30px; }\n</style>\n</head>\n<body>\n\n<div class=\"header\">\n<h1>My Beautiful Website</h1>\n<p>A fully styled web page using HTML and CSS</p>\n</div>\n\n<div class=\"nav\">\n<a href=\"#home\">Home</a>\n<a href=\"#about\">About</a>\n<a href=\"#services\">Services</a>\n<a href=\"#contact\">Contact</a>\n</div>\n\n<div class=\"container\">\n<div class=\"section\" id=\"about\">\n<h2>About Me</h2>\n<p>Hello! I am a student learning web design. This page shows a modern and colorful website using HTML and CSS styling.</p>\n</div>\n\n<div class=\"section\" id=\"services\">\n<h2>My Services</h2>\n<div class=\"cards\">\n<div class=\"card\">\n<h3>Web Design</h3>\n<p>Create beautiful and simple website layouts.</p>\n</div>\n<div class=\"card\">\n<h3>HTML & CSS</h3>\n<p>Build structured and styled web pages.</p>\n</div>\n<div class=\"card\">\n<h3>Responsive Design</h3>\n<p>Make websites look good on all devices.</p>\n</div>\n</div>\n</div>\n\n<div class=\"section\" id=\"contact\">\n<h2>Contact Me</h2>\n<p>Email: student@example.com</p>\n<button>Send Message</button>\n</div>\n</div>\n\n<div class=\"footer\">\n<p>© 2026 My Beautiful Styled Web Page</p>\n</div>\n\n</body>\n</html>"
+    },
+    {
+        "codeId": 22,
+        "language":"cpp",
+        "sample": "#include <iostream>\n#include <fstream>\nusing namespace std;\n\nint main() {\n\n    try {\n        // File Output (Write to file)\n        ofstream outFile(\"data.txt\");\n\n        if (!outFile) {\n            throw \"Error opening file for writing\";\n        }\n\n        outFile << \"Hello from C++ File I/O!\" << endl;\n        outFile << \"This file was created using ofstream.\" << endl;\n\n        outFile.close();\n\n        // File Input (Read from file)\n        ifstream inFile(\"data.txt\");\n\n        if (!inFile) {\n            throw \"Error opening file for reading\";\n        }\n\n        string line;\n        cout << \"Reading from file:\" << endl;\n\n        while (getline(inFile, line)) {\n            cout << line << endl;\n        }\n\n        inFile.close();\n    }\n    catch (const char* error) {\n        cout << \"Exception: \" << error << endl;\n    }\n\n    return 0;\n}"
+    },
+    {
+      "codeId": 23,
+      "language": "cpp",
+      "sample": " #include <iostream>\nusing namespace std;\n\nint main() {\n\n    // Variables and Data Types\n    int age = 20;\n    float height = 1.75;\n    double weight = 65.5;\n    char grade = 'A';\n    bool isStudent = true;\n    string name = \"Sok\";\n\n    // Display values\n    cout << \"Name: \" << name << endl;\n    cout << \"Age: \" << age << endl;\n    cout << \"Height: \" << height << endl;\n    cout << \"Weight: \" << weight << endl;\n    cout << \"Grade: \" << grade << endl;\n    cout << \"Student Status: \" << isStudent << endl;\n\n    return 0;\n}"
+    },
+    {
+      "codeId": 24,
+      "language": "cpp",
+      "sample": " #include <iostream>\nusing namespace std;\n\nint main() {\n\n    int a = 10;\n    int b = 5;\n\n    // Arithmetic Operators\n    cout << \"Addition: \" << a + b << endl;\n    cout << \"Subtraction: \" << a - b << endl;\n    cout << \"Multiplication: \" << a * b << endl;\n    cout << \"Division: \" << a / b << endl;\n\n    // Relational Operators\n    cout << \"a > b: \" << (a > b) << endl;\n    cout << \"a < b: \" << (a < b) << endl;\n    cout << \"a == b: \" << (a == b) << endl;\n\n    // Logical Operators\n    cout << \"(a > 5 && b < 10): \" << (a > 5 && b < 10) << endl;\n    cout << \"(a < 5 || b < 10): \" << (a < 5 || b < 10) << endl;\n\n    return 0;\n}"
+    },
+    {
+      "codeId": 25,
+      "language": "cpp",
+      "sample": " #include <iostream>\nusing namespace std;\n\nint main() {\n\n    int number = 10;\n\n    // if statement\n    if (number > 0) {\n        cout << \"The number is positive\" << endl;\n    }\n\n    // if-else statement\n    if (number % 2 == 0) {\n        cout << \"The number is even\" << endl;\n    } else {\n        cout << \"The number is odd\" << endl;\n    }\n\n    // switch statement\n    int day = 2;\n\n    switch(day) {\n        case 1:\n            cout << \"Monday\" << endl;\n            break;\n        case 2:\n            cout << \"Tuesday\" << endl;\n            break;\n        case 3:\n            cout << \"Wednesday\" << endl;\n            break;\n        default:\n            cout << \"Other day\" << endl;\n    }\n\n    return 0;\n}"
+    },
+    {
+      "codeId": 26,
+      "language": "cpp",
+      "sample": " #include <iostream>\nusing namespace std;\n\nint main() {\n\n    // for loop\n    cout << \"For Loop:\" << endl;\n    for(int i = 1; i <= 5; i++) {\n        cout << i << endl;\n    }\n\n    // while loop\n    cout << \"While Loop:\" << endl;\n    int j = 1;\n    while(j <= 5) {\n        cout << j << endl;\n        j++;\n    }\n\n    // do-while loop\n    cout << \"Do-While Loop:\" << endl;\n    int k = 1;\n    do {\n        cout << k << endl;\n        k++;\n    } while(k <= 5);\n\n    return 0;\n}"
+    },
+    {
+      "codeId": 27,
+      "language": "cpp",
+      "sample": " #include <iostream>\nusing namespace std;\n\n// Function definition\nvoid greet() {\n    cout << \"Hello, welcome to C++ Functions!\" << endl;\n}\n\n// Function with parameters\nint add(int a, int b) {\n    return a + b;\n}\n\nint main() {\n\n    // Calling the greet function\n    greet();\n\n    // Calling the add function\n    int result = add(5, 3);\n    cout << \"Sum: \" << result << endl;\n\n    return 0;\n}"
+    },
+    {
+      "codeId": 28,
+      "language": "cpp",
+      "sample": " #include <iostream>\nusing namespace std;\n\nint main() {\n\n    // Array example\n    int numbers[5] = {10, 20, 30, 40, 50};\n\n    cout << \"Array Elements:\" << endl;\n    for(int i = 0; i < 5; i++) {\n        cout << numbers[i] << endl;\n    }\n\n    // String example\n    string name = \"Sok\";\n\n    cout << \"\\nString Example:\" << endl;\n    cout << \"Name: \" << name << endl;\n\n    return 0;\n}"
+    },
+    {
+      "codeId": 29,
+      "language": "cpp",
+      "sample": " #include <iostream>\nusing namespace std;\n\nint main() {\n\n    int number = 10;\n\n    // Pointer declaration\n    int* ptr = &number;\n\n    cout << \"Value of number: \" << number << endl;\n    cout << \"Address of number: \" << &number << endl;\n    cout << \"Pointer value (address): \" << ptr << endl;\n    cout << \"Value using pointer: \" << *ptr << endl;\n\n    // Dynamic memory allocation\n    int* dynamicNumber = new int;\n    *dynamicNumber = 25;\n\n    cout << \"\\nDynamic Memory Value: \" << *dynamicNumber << endl;\n\n    // Free allocated memory\n    delete dynamicNumber;\n\n    return 0;\n}"
+    },
+    {
+      "codeId": 30,
+      "language": "cpp",
+      "sample": " #include <iostream>\nusing namespace std;\n\n// Class definition\nclass Student {\npublic:\n    string name;\n    int age;\n\n    // Member function\n    void display() {\n        cout << \"Name: \" << name << endl;\n        cout << \"Age: \" << age << endl;\n    }\n};\n\nint main() {\n\n    // Creating object\n    Student s1;\n\n    // Assign values\n    s1.name = \"Sok\";\n    s1.age = 20;\n\n    // Calling function\n    s1.display();\n\n    return 0;\n}"
+    },
+    {
+      "codeId": 31,
+      "language": "cpp",
+      "sample": " #include <iostream>\nusing namespace std;\n\nint main() {\n    int choice;\n    string name;\n    int age;\n\n    cout << \"===== Student Information System =====\" << endl;\n    cout << \"1. Enter Student Information\" << endl;\n    cout << \"2. Display Welcome Message\" << endl;\n    cout << \"3. Exit\" << endl;\n    cout << \"Enter your choice: \";\n    cin >> choice;\n\n    switch(choice) {\n        case 1:\n            cout << \"Enter your name: \";\n            cin >> name;\n            cout << \"Enter your age: \";\n            cin >> age;\n            cout << \"Student Information Saved!\" << endl;\n            cout << \"Name: \" << name << endl;\n            cout << \"Age: \" << age << endl;\n            break;\n\n        case 2:\n            cout << \"Welcome to the C++ Console Application Project!\" << endl;\n            break;\n\n        case 3:\n            cout << \"Exiting the program...\" << endl;\n            break;\n\n        default:\n            cout << \"Invalid choice!\" << endl;\n    }\n\n    return 0;\n}"
+    },
+    {
+      "codeId": 32,
+      "language": "javascript",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>JavaScript Basics</title>\n</head>\n<body>\n\n<h1>JavaScript Introduction</h1>\n<p id=\"demo\">Click the button to see JavaScript in action.</p>\n\n<button onclick=\"showMessage()\">Click Me</button>\n\n<script>\nfunction showMessage() {\n    document.getElementById(\"demo\").innerHTML = \"Hello! Welcome to JavaScript Programming.\";\n}\n</script>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 33,
+      "language": "javascript",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>JavaScript Variables and Data Types</title>\n</head>\n<body>\n\n<h1>JavaScript Variables and Data Types</h1>\n<p id=\"output\"></p>\n\n<script>\nlet name = \"Sok\";\nlet age = 20;\nlet height = 1.75;\nlet isStudent = true;\n\nlet message = \"Name: \" + name + \"<br>\" +\n              \"Age: \" + age + \"<br>\" +\n              \"Height: \" + height + \"<br>\" +\n              \"Student: \" + isStudent;\n\ndocument.getElementById(\"output\").innerHTML = message;\n</script>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 34,
+      "language": "javascript",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>JavaScript Operators and Expressions</title>\n</head>\n<body>\n\n<h1>JavaScript Operators and Expressions</h1>\n<p id=\"result\"></p>\n\n<script>\nlet a = 10;\nlet b = 5;\n\n// Arithmetic Operators\nlet sum = a + b;\nlet difference = a - b;\nlet product = a * b;\nlet division = a / b;\n\n// Comparison Operator\nlet comparison = a > b;\n\n// Logical Expression\nlet logical = (a > 5 && b < 10);\n\nlet output = \"Sum: \" + sum + \"<br>\" +\n             \"Difference: \" + difference + \"<br>\" +\n             \"Product: \" + product + \"<br>\" +\n             \"Division: \" + division + \"<br>\" +\n             \"a > b: \" + comparison + \"<br>\" +\n             \"Logical Expression (a > 5 && b < 10): \" + logical;\n\ndocument.getElementById(\"result\").innerHTML = output;\n</script>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 35,
+      "language": "javascript",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>JavaScript Conditional Statements</title>\n</head>\n<body>\n\n<h1>JavaScript Conditional Statements</h1>\n<p id=\"result\"></p>\n\n<script>\nlet number = 10;\nlet day = 2;\nlet output = \"\";\n\n// if statement\nif (number > 0) {\n    output += \"The number is positive.<br>\";\n}\n\n// if-else statement\nif (number % 2 === 0) {\n    output += \"The number is even.<br>\";\n} else {\n    output += \"The number is odd.<br>\";\n}\n\n// switch statement\nswitch(day) {\n    case 1:\n        output += \"Today is Monday.<br>\";\n        break;\n    case 2:\n        output += \"Today is Tuesday.<br>\";\n        break;\n    case 3:\n        output += \"Today is Wednesday.<br>\";\n        break;\n    default:\n        output += \"Another day.<br>\";\n}\n\ndocument.getElementById(\"result\").innerHTML = output;\n</script>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 36,
+      "language": "javascript",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>JavaScript Loops</title>\n</head>\n<body>\n\n<h1>JavaScript Loops Example</h1>\n<p id=\"output\"></p>\n\n<script>\nlet result = \"\";\n\n// for loop\nresult += \"For Loop:<br>\";\nfor (let i = 1; i <= 5; i++) {\n    result += i + \" \";\n}\n\nresult += \"<br><br>\";\n\n// while loop\nresult += \"While Loop:<br>\";\nlet j = 1;\nwhile (j <= 5) {\n    result += j + \" \";\n    j++;\n}\n\nresult += \"<br><br>\";\n\n// do-while loop\nresult += \"Do-While Loop:<br>\";\nlet k = 1;\ndo {\n    result += k + \" \";\n    k++;\n} while (k <= 5);\n\n// display result\ndocument.getElementById(\"output\").innerHTML = result;\n</script>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 37,
+      "language": "javascript",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>JavaScript Functions</title>\n</head>\n<body>\n\n<h1>JavaScript Functions Example</h1>\n<p id=\"result\"></p>\n\n<button onclick=\"showGreeting()\">Show Greeting</button>\n\n<script>\n// Function without parameters\nfunction showGreeting() {\n    document.getElementById(\"result\").innerHTML = \"Hello! Welcome to JavaScript Functions.\";\n}\n\n// Function with parameters\nfunction addNumbers(a, b) {\n    return a + b;\n}\n\nlet sum = addNumbers(5, 3);\nconsole.log(\"Sum: \" + sum);\n</script>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 38,
+      "language": "javascript",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>JavaScript Arrays and Objects</title>\n</head>\n<body>\n\n<h1>JavaScript Arrays and Objects</h1>\n<p id=\"output\"></p>\n\n<script>\n// Array example\nlet fruits = [\"Apple\", \"Banana\", \"Orange\"];\n\n// Object example\nlet student = {\n    name: \"Sok\",\n    age: 20,\n    course: \"Web Development\"\n};\n\nlet result = \"Array Example:<br>\";\nresult += fruits[0] + \", \" + fruits[1] + \", \" + fruits[2] + \"<br><br>\";\n\nresult += \"Object Example:<br>\";\nresult += \"Name: \" + student.name + \"<br>\";\nresult += \"Age: \" + student.age + \"<br>\";\nresult += \"Course: \" + student.course;\n\ndocument.getElementById(\"output\").innerHTML = result;\n</script>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 39,
+      "language": "javascript",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>JavaScript DOM Manipulation</title>\n</head>\n<body>\n\n<h1 id=\"title\">DOM Manipulation Example</h1>\n<p id=\"text\">This is the original text.</p>\n\n<button onclick=\"changeText()\">Change Text</button>\n\n<script>\nfunction changeText() {\n    document.getElementById(\"text\").innerHTML = \"The text has been changed using JavaScript!\";\n    document.getElementById(\"title\").style.color = \"blue\";\n}\n</script>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 40,
+      "language": "javascript",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>Async JavaScript Example</title>\n</head>\n<body>\n\n<h1>Asynchronous JavaScript</h1>\n<p id=\"output\">Waiting for data...</p>\n\n<button onclick=\"loadData()\">Load Data</button>\n\n<script>\n// Promise example\nfunction getData() {\n    return new Promise((resolve, reject) => {\n        setTimeout(() => {\n            resolve(\"Data loaded successfully!\");\n        }, 2000);\n    });\n}\n\n// Async/Await example\nasync function loadData() {\n    let result = await getData();\n    document.getElementById(\"output\").innerHTML = result;\n}\n</script>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 41,
+      "language": "javascript",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>Final Project - Interactive Web Application</title>\n<style>\nbody { font-family: Arial, sans-serif; background: linear-gradient(to right, #dbeafe, #fce7f3); margin: 0; padding: 0; }\n.container { width: 90%; max-width: 700px; margin: 40px auto; background-color: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }\nh1 { text-align: center; color: #2563eb; }\np { text-align: center; color: #555; }\ninput { width: 100%; padding: 12px; margin-top: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box; }\nbutton { background: linear-gradient(to right, #2563eb, #9333ea); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; margin-right: 10px; }\nbutton:hover { opacity: 0.9; }\n#output { margin-top: 20px; padding: 15px; background-color: #eff6ff; border-radius: 10px; color: #1e3a8a; font-weight: bold; text-align: center; }\n</style>\n</head>\n<body>\n\n<div class=\"container\">\n<h1>Interactive Web Application</h1>\n<p>Enter your name and click the button to interact with the page.</p>\n\n<input type=\"text\" id=\"name\" placeholder=\"Enter your name\">\n\n<button onclick=\"showMessage()\">Show Message</button>\n<button onclick=\"changeColor()\">Change Background</button>\n\n<div id=\"output\">Your result will appear here.</div>\n</div>\n\n<script>\nfunction showMessage() {\n    let userName = document.getElementById(\"name\").value;\n\n    if (userName === \"\") {\n        document.getElementById(\"output\").innerHTML = \"Please enter your name first.\";\n    } else {\n        document.getElementById(\"output\").innerHTML = \"Hello, \" + userName + \"! Welcome to the Interactive Web App.\";\n    }\n}\n\nfunction changeColor() {\n    document.body.style.background = \"linear-gradient(to right, #fde68a, #fca5a5)\";\n}\n</script>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 47,
+      "language": "python",
+      "sample": " # Variables and Data Types in Python\n\n# String\nname = \"Sok\"\n\n# Integer\nage = 20\n\n# Float\nheight = 1.75\n\n# Boolean\nis_student = True\n\n# Display values\nprint(\"Name:\", name)\nprint(\"Age:\", age)\nprint(\"Height:\", height)\nprint(\"Is Student:\", is_student)\n\n# Check data types\nprint(type(name))\nprint(type(age))\nprint(type(height))\nprint(type(is_student))\n"
+    },
+    {
+      "codeId": 48,
+      "language": "python",
+      "sample": " # Operators and Calculations in Python\n\n# Variables\na = 10\nb = 3\n\n# Arithmetic operations\nsum = a + b\nsubtraction = a - b\nmultiplication = a * b\ndivision = a / b\nmodulus = a % b\n\n# Display results\nprint(\"Addition:\", sum)\nprint(\"Subtraction:\", subtraction)\nprint(\"Multiplication:\", multiplication)\nprint(\"Division:\", division)\nprint(\"Modulus:\", modulus)\n\n# Comparison operations\nprint(\"a > b:\", a > b)\nprint(\"a < b:\", a < b)\nprint(\"a == b:\", a == b)\n"
+    },
+    {
+      "codeId": 49,
+      "language": "python",
+      "sample": " # Conditional Statements in Python\n\nnumber = 10\n\n# if statement\nif number > 0:\n    print(\"The number is positive\")\n\n# if-else statement\nif number % 2 == 0:\n    print(\"The number is even\")\nelse:\n    print(\"The number is odd\")\n\n# switch-like logic using if-elif-else\nday = 2\n\nif day == 1:\n    print(\"Monday\")\nelif day == 2:\n    print(\"Tuesday\")\nelif day == 3:\n    print(\"Wednesday\")\nelse:\n    print(\"Other day\")\n"
+    },
+    {
+      "codeId": 50,
+      "language": "python",
+      "sample": " # Loops and Iteration in Python\n\n# for loop\nprint(\"For Loop:\")\nfor i in range(1, 6):\n    print(i)\n\n# while loop\nprint(\"\\nWhile Loop:\")\nj = 1\nwhile j <= 5:\n    print(j)\n    j += 1\n\n# loop through a list\nprint(\"\\nLoop through a list:\")\nfruits = [\"Apple\", \"Banana\", \"Orange\"]\nfor fruit in fruits:\n    print(fruit)\n"
+    },
+    {
+      "codeId": 51,
+      "language": "python",
+      "sample": " # List, Tuple, and Dictionary in Python\n\n# List example\nfruits = [\"Apple\", \"Banana\", \"Orange\"]\nprint(\"List:\")\nprint(fruits)\n\n# Tuple example\ncolors = (\"Red\", \"Green\", \"Blue\")\nprint(\"\\nTuple:\")\nprint(colors)\n\n# Dictionary example\nstudent = {\n    \"name\": \"Sok\",\n    \"age\": 20,\n    \"course\": \"Programming\"\n}\n\nprint(\"\\nDictionary:\")\nprint(\"Name:\", student[\"name\"])\nprint(\"Age:\", student[\"age\"])\nprint(\"Course:\", student[\"course\"])\n"
+    },
+    {
+      "codeId": 52,
+      "language": "python",
+      "sample": " # Functions and Modules in Python\n\n# Function definition\ndef greet(name):\n    print(\"Hello,\", name)\n\n# Calling the function\ngreet(\"Sok\")\n\n# Function with return value\ndef add(a, b):\n    return a + b\n\nresult = add(5, 3)\nprint(\"Sum:\", result)\n\n# Using a module\nimport math\n\nnumber = 16\nsquare_root = math.sqrt(number)\n\nprint(\"Square root of\", number, \"is\", square_root)\n"
+    },
+    {
+      "codeId": 53,
+      "language": "python",
+      "sample": " # Class and Object in Python\n\n# Create a class\nclass Student:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n    def display(self):\n        print(\"Name:\", self.name)\n        print(\"Age:\", self.age)\n\n# Create an object\ns1 = Student(\"Sok\", 20)\n\n# Call method\ns1.display()\n"
+    },
+    {
+      "codeId": 54,
+      "language": "python",
+      "sample": " # Inheritance and Polymorphism in Python\n\n# Parent class\nclass Animal:\n    def speak(self):\n        print(\"Animal makes a sound\")\n\n# Child class (Inheritance)\nclass Dog(Animal):\n    def speak(self):\n        print(\"Dog barks\")\n\n# Another child class\nclass Cat(Animal):\n    def speak(self):\n        print(\"Cat meows\")\n\n# Create objects\na = Animal()\nd = Dog()\nc = Cat()\n\n# Call methods (Polymorphism)\na.speak()\nd.speak()\nc.speak()\n"
+    },
+    {
+      "codeId": 55,
+      "language": "python",
+      "sample": " # Exception Handling and File I/O in Python\n\n# Exception Handling example\ntry:\n    num = int(input(\"Enter a number: \"))\n    result = 10 / num\n    print(\"Result:\", result)\n\nexcept ZeroDivisionError:\n    print(\"Error: Cannot divide by zero\")\n\nexcept ValueError:\n    print(\"Error: Invalid input\")\n\nfinally:\n    print(\"Execution completed\")\n\n# File I/O example\n# Writing to a file\nfile = open(\"example.txt\", \"w\")\nfile.write(\"Hello, this is a Python file example.\")\nfile.close()\n\n# Reading from a file\nfile = open(\"example.txt\", \"r\")\ncontent = file.read()\nprint(\"File Content:\")\nprint(content)\nfile.close()\n"
+    },
+    {
+      "codeId": 135,
+      "language": "python",
+      "sample": " # Using external package\nimport requests\n\nresponse = requests.get(\"https://api.github.com\")\nprint(response.status_code)\nprint(response.json())\n"
+    },
+    {
+      "codeId": 56,
+      "language": "php",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>PHP Introduction</title>\n</head>\n<body>\n\n<h1>Welcome to PHP</h1>\n\n<?php\n// PHP code example\n$name = \"Sok\";\n$age = 20;\n\necho \"Hello, my name is \" . $name . \"<br>\";\necho \"I am \" . $age . \" years old.\";\n?>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 57,
+      "language": "php",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>PHP Variables and Data Types</title>\n</head>\n<body>\n\n<h1>PHP Variables and Data Types</h1>\n\n<?php\n// String\n$name = \"Sok\";\n\n// Integer\n$age = 20;\n\n// Float\n$height = 1.75;\n\n// Boolean\n$isStudent = true;\n\n// Display values\necho \"Name: \" . $name . \"<br>\";\necho \"Age: \" . $age . \"<br>\";\necho \"Height: \" . $height . \"<br>\";\necho \"Student: \" . $isStudent;\n?>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 58,
+      "language": "php",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>PHP Operators and Calculations</title>\n</head>\n<body>\n\n<h1>PHP Operators Example</h1>\n\n<?php\n$a = 10;\n$b = 5;\n\n// Arithmetic operations\n$sum = $a + $b;\n$subtraction = $a - $b;\n$multiplication = $a * $b;\n$division = $a / $b;\n\n// Display results\necho \"Addition: \" . $sum . \"<br>\";\necho \"Subtraction: \" . $subtraction . \"<br>\";\necho \"Multiplication: \" . $multiplication . \"<br>\";\necho \"Division: \" . $division . \"<br><br>\";\n\n// Comparison operations\necho \"a > b: \" . ($a > $b) . \"<br>\";\necho \"a < b: \" . ($a < $b) . \"<br>\";\necho \"a == b: \" . ($a == $b);\n?>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 59,
+      "language": "php",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>PHP Conditional Statements</title>\n</head>\n<body>\n\n<h1>PHP Conditional Statements</h1>\n\n<?php\n$number = 10;\n\n// if statement\nif ($number > 0) {\n    echo \"The number is positive<br>\";\n}\n\n// if...else statement\nif ($number % 2 == 0) {\n    echo \"The number is even<br>\";\n} else {\n    echo \"The number is odd<br>\";\n}\n\n// switch statement\n$day = 2;\n\nswitch ($day) {\n    case 1:\n        echo \"Monday\";\n        break;\n\n    case 2:\n        echo \"Tuesday\";\n        break;\n\n    case 3:\n        echo \"Wednesday\";\n        break;\n\n    default:\n        echo \"Other day\";\n}\n?>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 60,
+      "language": "php",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>PHP Loops</title>\n</head>\n<body>\n\n<h1>PHP Loops Example</h1>\n\n<?php\n\n// for loop\necho \"For Loop:<br>\";\nfor ($i = 1; $i <= 5; $i++) {\n    echo $i . \"<br>\";\n}\n\necho \"<br>\";\n\n// while loop\necho \"While Loop:<br>\";\n$j = 1;\nwhile ($j <= 5) {\n    echo $j . \"<br>\";\n    $j++;\n}\n\necho \"<br>\";\n\n// do...while loop\necho \"Do While Loop:<br>\";\n$k = 1;\ndo {\n    echo $k . \"<br>\";\n    $k++;\n} while ($k <= 5);\n\n?>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 61,
+      "language": "php",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>PHP Arrays</title>\n</head>\n<body>\n\n<h1>PHP Array Example</h1>\n\n<?php\n\n// Indexed Array\n$fruits = array(\"Apple\", \"Banana\", \"Orange\");\n\necho \"Indexed Array:<br>\";\necho $fruits[0] . \"<br>\";\necho $fruits[1] . \"<br>\";\necho $fruits[2] . \"<br><br>\";\n\n// Associative Array\n$student = array(\n    \"name\" => \"Sok\",\n    \"age\" => 20,\n    \"course\" => \"Programming\"\n);\n\necho \"Associative Array:<br>\";\necho \"Name: \" . $student[\"name\"] . \"<br>\";\necho \"Age: \" . $student[\"age\"] . \"<br>\";\necho \"Course: \" . $student[\"course\"];\n\n?>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 62,
+      "language": "php",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>PHP Functions and Methods</title>\n</head>\n<body>\n\n<h1>PHP Functions and Methods</h1>\n\n<?php\n\n// Function example\nfunction greet($name) {\n    echo \"Hello \" . $name . \"<br>\";\n}\n\n// Call function\ngreet(\"Sok\");\n\n// Function with return value\nfunction add($a, $b) {\n    return $a + $b;\n}\n\n$result = add(5, 3);\necho \"Sum: \" . $result . \"<br><br>\";\n\n// Class with method\nclass Student {\n    function introduce($name) {\n        echo \"My name is \" . $name;\n    }\n}\n\n// Create object\n$s1 = new Student();\n\n// Call method\n$s1->introduce(\"Sok\");\n\n?>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 63,
+      "language": "php",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>PHP Class and Object</title>\n</head>\n<body>\n\n<h1>PHP Class and Object Example</h1>\n\n<?php\n\n// Create class\nclass Student {\n\n    public $name;\n    public $age;\n\n    // Method\n    function display() {\n        echo \"Name: \" . $this->name . \"<br>\";\n        echo \"Age: \" . $this->age . \"<br>\";\n    }\n}\n\n// Create object\n$s1 = new Student();\n\n// Assign values\n$s1->name = \"Sok\";\n$s1->age = 20;\n\n// Call method\n$s1->display();\n\n?>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 64,
+      "language": "php",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>PHP Inheritance and Polymorphism</title>\n</head>\n<body>\n\n<h1>PHP Inheritance Example</h1>\n\n<?php\n\n// Parent class\nclass Animal {\n    function speak() {\n        echo \"Animal makes a sound<br>\";\n    }\n}\n\n// Child class\nclass Dog extends Animal {\n    function speak() {\n        echo \"Dog barks<br>\";\n    }\n}\n\n// Another child class\nclass Cat extends Animal {\n    function speak() {\n        echo \"Cat meows<br>\";\n    }\n}\n\n// Create objects\n$a = new Animal();\n$d = new Dog();\n$c = new Cat();\n\n// Call methods\n$a->speak();\n$d->speak();\n$c->speak();\n\n?>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 65,
+      "language": "php",
+      "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>PHP Exception and File I/O</title>\n</head>\n<body>\n\n<h1>PHP Exception Handling and File I/O</h1>\n\n<?php\n\n// Exception Handling example\nfunction divide($a, $b) {\n\n    if ($b == 0) {\n        throw new Exception(\"Cannot divide by zero\");\n    }\n\n    return $a / $b;\n}\n\ntry {\n\n    echo divide(10, 2) . \"<br>\";\n\n} catch (Exception $e) {\n\n    echo \"Error: \" . $e->getMessage();\n\n}\n\n// File Writing\n$file = fopen(\"example.txt\", \"w\");\nfwrite($file, \"Hello, this is a PHP file example.\");\nfclose($file);\n\n// File Reading\n$file = fopen(\"example.txt\", \"r\");\n$content = fread($file, filesize(\"example.txt\"));\nfclose($file);\n\necho \"<br>File Content: \" . $content;\n\n?>\n\n</body>\n</html>"
+    },
+    {
+      "codeId": 95,
+      "language": "java",
+      "sample": "public class Main {\n\n    public static void main(String[] args) {\n\n        System.out.println(\"Welcome to Java Programming!\");\n        System.out.println(\"This is an introduction to Java.\");\n\n        int a = 10;\n        int b = 5;\n\n        int sum = a + b;\n\n        System.out.println(\"Sum of a and b = \" + sum);\n\n    }\n\n}"
+    },
+    {
+      "codeId": 96,
+      "language": "java",
+      "sample": "public class Main {\n\n    public static void main(String[] args) {\n\n        // Basic Java Syntax Example\n        System.out.println(\"Java Basic Syntax Example\");\n\n        // Variable declaration\n        int number = 10;\n        String message = \"Hello Java\";\n\n        // Print variables\n        System.out.println(\"Number: \" + number);\n        System.out.println(\"Message: \" + message);\n\n        // Simple condition\n        if (number > 5) {\n            System.out.println(\"Number is greater than 5\");\n        }\n\n    }\n\n}"
+    },
+    {
+      "codeId": 97,
+      "language": "java",
+      "sample": "public class Main {\n\n    public static void main(String[] args) {\n\n        // Variables and Data Types Example\n\n        int age = 20;\n        double height = 1.75;\n        char grade = 'A';\n        boolean isStudent = true;\n        String name = \"Dara\";\n\n        System.out.println(\"Name: \" + name);\n        System.out.println(\"Age: \" + age);\n        System.out.println(\"Height: \" + height);\n        System.out.println(\"Grade: \" + grade);\n        System.out.println(\"Is Student: \" + isStudent);\n\n    }\n\n}"
+    },
+    {
+      "codeId": 98,
+      "language": "java",
+      "sample": "public class Main {\n\n    public static void main(String[] args) {\n\n        // Operators in Java\n\n        int a = 10;\n        int b = 5;\n\n        // Arithmetic Operators\n        System.out.println(\"Addition: \" + (a + b));\n        System.out.println(\"Subtraction: \" + (a - b));\n        System.out.println(\"Multiplication: \" + (a * b));\n        System.out.println(\"Division: \" + (a / b));\n\n        // Comparison Operators\n        System.out.println(\"a > b: \" + (a > b));\n        System.out.println(\"a == b: \" + (a == b));\n\n        // Logical Operators\n        boolean x = true;\n        boolean y = false;\n\n        System.out.println(\"x && y: \" + (x && y));\n        System.out.println(\"x || y: \" + (x || y));\n\n    }\n\n}"
+    },
+    {
+      "codeId": 99,
+      "language": "java",
+      "sample": "public class Main {\n\n    public static void main(String[] args) {\n\n        // Conditional Statements Example\n\n        int number = 10;\n\n        if (number > 0) {\n            System.out.println(\"The number is positive\");\n        } else if (number < 0) {\n            System.out.println(\"The number is negative\");\n        } else {\n            System.out.println(\"The number is zero\");\n        }\n\n        // Another condition example\n        int score = 85;\n\n        if (score >= 90) {\n            System.out.println(\"Grade: A\");\n        } else if (score >= 80) {\n            System.out.println(\"Grade: B\");\n        } else {\n            System.out.println(\"Grade: C\");\n        }\n\n    }\n\n}"
+    },
+    {
+      "codeId": 100,
+      "language": "java",
+      "sample": "public class Main {\n\n    public static void main(String[] args) {\n\n        // For Loop Example\n        System.out.println(\"For Loop:\");\n        for (int i = 1; i <= 5; i++) {\n            System.out.println(\"i = \" + i);\n        }\n\n        // While Loop Example\n        System.out.println(\"While Loop:\");\n        int j = 1;\n        while (j <= 3) {\n            System.out.println(\"j = \" + j);\n            j++;\n        }\n\n        // Do-While Loop Example\n        System.out.println(\"Do-While Loop:\");\n        int k = 1;\n        do {\n            System.out.println(\"k = \" + k);\n            k++;\n        } while (k <= 2);\n\n    }\n\n}"
+    },
+    {
+      "codeId": 101,
+      "language": "java",
+      "sample": "public class Main {\n\n    // Method to add two numbers\n    static int addNumbers(int a, int b) {\n        return a + b;\n    }\n\n    // Method to display a message\n    static void greet() {\n        System.out.println(\"Welcome to Java Methods!\");\n    }\n\n    public static void main(String[] args) {\n\n        // Calling a method\n        greet();\n\n        int result = addNumbers(5, 7);\n        System.out.println(\"Sum: \" + result);\n\n    }\n\n}"
+    },
+    {
+      "codeId": 102,
+      "language": "java",
+      "sample": "public class Main {\n\n    public static void main(String[] args) {\n\n        // Array Example\n\n        int[] numbers = {10, 20, 30, 40, 50};\n\n        System.out.println(\"First element: \" + numbers[0]);\n\n        System.out.println(\"All elements in the array:\");\n\n        for (int i = 0; i < numbers.length; i++) {\n            System.out.println(numbers[i]);\n        }\n\n    }\n\n}"
+    },
+    {
+      "codeId": 103,
+      "language": "java",
+      "sample": "class Student {\n\n    String name;\n    int age;\n\n    void displayInfo() {\n        System.out.println(\"Name: \" + name);\n        System.out.println(\"Age: \" + age);\n    }\n\n}\n\npublic class Main {\n\n    public static void main(String[] args) {\n\n        // Creating an object\n        Student s1 = new Student();\n\n        // Assigning values\n        s1.name = \"Dara\";\n        s1.age = 20;\n\n        // Calling method\n        s1.displayInfo();\n\n    }\n\n}"
+    },
+    {
+      "codeId": 104,
+      "language": "java",
+      "sample": "class Animal {\n\n    void makeSound() {\n        System.out.println(\"Animal makes a sound\");\n    }\n\n}\n\nclass Dog extends Animal {\n\n    // Polymorphism (method overriding)\n    void makeSound() {\n        System.out.println(\"Dog barks\");\n    }\n\n}\n\npublic class Main {\n\n    public static void main(String[] args) {\n\n        Animal a = new Animal();\n        a.makeSound();\n\n        Dog d = new Dog();\n        d.makeSound();\n\n    }\n\n}"
+    },
+    {
+      "codeId": 66,
+      "language": "sql",
+      "sample": "-- Introduction to SQL\n\n-- Create a table\nCREATE TABLE Students (\n    id INT PRIMARY KEY,\n    name VARCHAR(50),\n    age INT\n);\n\n-- Insert data into the table\nINSERT INTO Students (id, name, age) VALUES (1, 'Dara', 20);\nINSERT INTO Students (id, name, age) VALUES (2, 'Sokha', 22);\n\n-- Select data from the table\nSELECT * FROM Students;"
+    },
+    {
+      "codeId": 67,
+      "language": "sql",
+      "sample": "-- Tables and Data Types in SQL\n\nCREATE TABLE Employees (\n    id INT PRIMARY KEY,\n    name VARCHAR(100),\n    age INT,\n    salary DECIMAL(10,2),\n    hire_date DATE,\n    is_active BOOLEAN\n);"
+    },
+    {
+      "codeId": 68,
+      "language": "sql",
+      "sample": "-- INSERT data into a table\n\n-- Create table\nCREATE TABLE Students (\n    id INT PRIMARY KEY,\n    name VARCHAR(50),\n    age INT\n);\n\n-- Insert a single row\nINSERT INTO Students (id, name, age)\nVALUES (1, 'Dara', 20);\n\n-- Insert multiple rows\nINSERT INTO Students (id, name, age)\nVALUES \n(2, 'Sokha', 21),\n(3, 'Vanna', 22);\n\n-- Display data\nSELECT * FROM Students;"
+    },
+    {
+      "codeId": 69,
+      "language": "sql",
+      "sample": "-- Basic SELECT Queries in SQL\n\n-- Create table\nCREATE TABLE Students (\n    id INT PRIMARY KEY,\n    name VARCHAR(50),\n    age INT,\n    city VARCHAR(50)\n);\n\n-- Insert sample data\nINSERT INTO Students (id, name, age, city) VALUES (1, 'Dara', 20, 'Phnom Penh');\nINSERT INTO Students (id, name, age, city) VALUES (2, 'Sokha', 21, 'Siem Reap');\nINSERT INTO Students (id, name, age, city) VALUES (3, 'Vanna', 22, 'Battambang');\n\n-- Select all columns\nSELECT * FROM Students;\n\n-- Select specific columns\nSELECT name, age FROM Students;"
+    },
+    {
+      "codeId": 70,
+      "language": "sql",
+      "sample": "-- UPDATE and DELETE in SQL\n\n-- Create table\nCREATE TABLE Students (\n    id INT PRIMARY KEY,\n    name VARCHAR(50),\n    age INT\n);\n\n-- Insert sample data\nINSERT INTO Students (id, name, age) VALUES (1, 'Dara', 20);\nINSERT INTO Students (id, name, age) VALUES (2, 'Sokha', 21);\n\n-- Update data\nUPDATE Students\nSET age = 22\nWHERE id = 2;\n\n-- Delete data\nDELETE FROM Students\nWHERE id = 1;\n\n-- View remaining data\nSELECT * FROM Students;"
+    },
+    {
+      "codeId": 71,
+      "language": "sql",
+      "sample": "-- Filtering and Conditions in SQL\n\n-- Create table\nCREATE TABLE Students (\n    id INT PRIMARY KEY,\n    name VARCHAR(50),\n    age INT,\n    city VARCHAR(50)\n);\n\n-- Insert sample data\nINSERT INTO Students (id, name, age, city) VALUES (1, 'Dara', 20, 'Phnom Penh');\nINSERT INTO Students (id, name, age, city) VALUES (2, 'Sokha', 21, 'Siem Reap');\nINSERT INTO Students (id, name, age, city) VALUES (3, 'Vanna', 22, 'Phnom Penh');\n\n-- Filter with WHERE condition\nSELECT * FROM Students\nWHERE city = 'Phnom Penh';\n\n-- Filter with AND condition\nSELECT * FROM Students\nWHERE age > 20 AND city = 'Siem Reap';"
+    },
+    {
+      "codeId": 72,
+      "language": "sql",
+      "sample": "-- Aggregate Functions in SQL\n\n-- Create table\nCREATE TABLE Employees (\n    id INT PRIMARY KEY,\n    name VARCHAR(50),\n    salary DECIMAL(10,2)\n);\n\n-- Insert sample data\nINSERT INTO Employees (id, name, salary) VALUES (1, 'Dara', 500.00);\nINSERT INTO Employees (id, name, salary) VALUES (2, 'Sokha', 700.00);\nINSERT INTO Employees (id, name, salary) VALUES (3, 'Vanna', 600.00);\n\n-- COUNT function\nSELECT COUNT(*) AS total_employees FROM Employees;\n\n-- SUM function\nSELECT SUM(salary) AS total_salary FROM Employees;\n\n-- AVG function\nSELECT AVG(salary) AS average_salary FROM Employees;\n\n-- MAX function\nSELECT MAX(salary) AS highest_salary FROM Employees;\n\n-- MIN function\nSELECT MIN(salary) AS lowest_salary FROM Employees;"
+    },
+    {
+      "codeId": 73,
+      "language": "sql",
+      "sample": "-- GROUP BY and HAVING in SQL\n\n-- Create table\nCREATE TABLE Employees (\n    id INT PRIMARY KEY,\n    name VARCHAR(50),\n    department VARCHAR(50),\n    salary DECIMAL(10,2)\n);\n\n-- Insert sample data\nINSERT INTO Employees (id, name, department, salary) VALUES (1, 'Dara', 'IT', 700);\nINSERT INTO Employees (id, name, department, salary) VALUES (2, 'Sokha', 'HR', 500);\nINSERT INTO Employees (id, name, department, salary) VALUES (3, 'Vanna', 'IT', 800);\nINSERT INTO Employees (id, name, department, salary) VALUES (4, 'Lina', 'HR', 600);\n\n-- GROUP BY department\nSELECT department, AVG(salary) AS average_salary\nFROM Employees\nGROUP BY department;\n\n-- GROUP BY with HAVING condition\nSELECT department, AVG(salary) AS average_salary\nFROM Employees\nGROUP BY department\nHAVING AVG(salary) > 600;"
+    },
+    {
+      "codeId": 74,
+      "language": "sql",
+      "sample": "-- JOIN Tables in SQL\n\n-- Create Students table\nCREATE TABLE Students (\n    student_id INT PRIMARY KEY,\n    name VARCHAR(50)\n);\n\n-- Create Courses table\nCREATE TABLE Courses (\n    course_id INT PRIMARY KEY,\n    course_name VARCHAR(50),\n    student_id INT\n);\n\n-- Insert data into Students\nINSERT INTO Students (student_id, name) VALUES (1, 'Dara');\nINSERT INTO Students (student_id, name) VALUES (2, 'Sokha');\n\n-- Insert data into Courses\nINSERT INTO Courses (course_id, course_name, student_id) VALUES (101, 'Database', 1);\nINSERT INTO Courses (course_id, course_name, student_id) VALUES (102, 'Programming', 2);\n\n-- INNER JOIN example\nSELECT Students.name, Courses.course_name\nFROM Students\nINNER JOIN Courses\nON Students.student_id = Courses.student_id;"
+    },
+    {
+      "codeId": 75,
+      "language": "sql",
+      "sample": "-- Indexes and Database Optimization in SQL\n\n-- Create table\nCREATE TABLE Employees (\n    id INT PRIMARY KEY,\n    name VARCHAR(100),\n    department VARCHAR(50),\n    salary DECIMAL(10,2)\n);\n\n-- Create an index on the name column\nCREATE INDEX idx_employee_name\nON Employees(name);\n\n-- Insert sample data\nINSERT INTO Employees (id, name, department, salary) VALUES (1, 'Dara', 'IT', 700);\nINSERT INTO Employees (id, name, department, salary) VALUES (2, 'Sokha', 'HR', 500);\nINSERT INTO Employees (id, name, department, salary) VALUES (3, 'Vanna', 'Finance', 650);\n\n-- Query using indexed column\nSELECT * FROM Employees\nWHERE name = 'Dara';"
+    },
+    {
+      "codeId": 44,
+      "language": "csharp",
+      "sample": "// Introduction to C#\n\nusing System;\n\nclass Program\n{\n    static void Main()\n    {\n        Console.WriteLine(\"Welcome to C# Programming!\");\n        Console.WriteLine(\"This is a simple introduction to C#.\");\n\n        int a = 10;\n        int b = 5;\n\n        int sum = a + b;\n\n        Console.WriteLine(\"Sum of a and b = \" + sum);\n    }\n}"
+    },
+    {
+      "codeId": 45,
+      "language": "csharp",
+      "sample": "// Variables and Data Types in C#\n\nusing System;\n\nclass Program\n{\n    static void Main()\n    {\n        int age = 20;\n        double height = 1.75;\n        char grade = 'A';\n        bool isStudent = true;\n        string name = \"Dara\";\n\n        Console.WriteLine(\"Name: \" + name);\n        Console.WriteLine(\"Age: \" + age);\n        Console.WriteLine(\"Height: \" + height);\n        Console.WriteLine(\"Grade: \" + grade);\n        Console.WriteLine(\"Is Student: \" + isStudent);\n    }\n}"
+    },
+    {
+      "codeId": 86,
+      "language": "csharp",
+      "sample": "// Operators and Calculations in C#\n\nusing System;\n\nclass Program\n{\n    static void Main()\n    {\n        int a = 10;\n        int b = 5;\n\n        // Arithmetic operators\n        Console.WriteLine(\"Addition: \" + (a + b));\n        Console.WriteLine(\"Subtraction: \" + (a - b));\n        Console.WriteLine(\"Multiplication: \" + (a * b));\n        Console.WriteLine(\"Division: \" + (a / b));\n\n        // Comparison operators\n        Console.WriteLine(\"a > b: \" + (a > b));\n        Console.WriteLine(\"a == b: \" + (a == b));\n\n        // Logical operators\n        bool x = true;\n        bool y = false;\n\n        Console.WriteLine(\"x && y: \" + (x && y));\n        Console.WriteLine(\"x || y: \" + (x || y));\n    }\n}"
+    },
+    {
+      "codeId": 87,
+      "language": "csharp",
+      "sample": "// Operators and Calculations in C#\n\nusing System;\n\nclass Program\n{\n    static void Main()\n    {\n        int a = 10;\n        int b = 5;\n\n        // Arithmetic operations\n        int sum = a + b;\n        int difference = a - b;\n        int product = a * b;\n        int quotient = a / b;\n\n        Console.WriteLine(\"Addition: \" + sum);\n        Console.WriteLine(\"Subtraction: \" + difference);\n        Console.WriteLine(\"Multiplication: \" + product);\n        Console.WriteLine(\"Division: \" + quotient);\n    }\n}"
+    },
+    {
+      "codeId": 88,
+      "language": "csharp",
+      "sample": "// If and Switch Conditions in C#\n\nusing System;\n\nclass Program\n{\n    static void Main()\n    {\n        int number = 10;\n\n        // if condition\n        if (number > 0)\n        {\n            Console.WriteLine(\"The number is positive\");\n        }\n        else\n        {\n            Console.WriteLine(\"The number is negative or zero\");\n        }\n\n        // switch condition\n        int day = 3;\n\n        switch (day)\n        {\n            case 1:\n                Console.WriteLine(\"Monday\");\n                break;\n            case 2:\n                Console.WriteLine(\"Tuesday\");\n                break;\n            case 3:\n                Console.WriteLine(\"Wednesday\");\n                break;\n            default:\n                Console.WriteLine(\"Another day\");\n                break;\n        }\n    }\n}"
+    },
+    {
+      "codeId": 89,
+      "language": "csharp",
+      "sample": "// Loop and Iteration in C#\n\nusing System;\n\nclass Program\n{\n    static void Main()\n    {\n        // For loop\n        for (int i = 1; i <= 5; i++)\n        {\n            Console.WriteLine(\"For Loop i = \" + i);\n        }\n\n        // While loop\n        int j = 1;\n        while (j <= 3)\n        {\n            Console.WriteLine(\"While Loop j = \" + j);\n            j++;\n        }\n\n        // Do-While loop\n        int k = 1;\n        do\n        {\n            Console.WriteLine(\"Do-While Loop k = \" + k);\n            k++;\n        } while (k <= 2);\n    }\n}"
+    },
+    {
+      "codeId": 90,
+      "language": "csharp",
+      "sample": "// Basic Array and List in C#\n\nusing System;\nusing System.Collections.Generic;\n\nclass Program\n{\n    static void Main()\n    {\n        // Array example\n        int[] numbers = { 10, 20, 30 };\n        Console.WriteLine(\"Array elements:\");\n        foreach (int num in numbers)\n        {\n            Console.WriteLine(num);\n        }\n\n        // List example\n        List<string> names = new List<string>();\n        names.Add(\"Dara\");\n        names.Add(\"Sokha\");\n        names.Add(\"Vanna\");\n\n        Console.WriteLine(\"List elements:\");\n        foreach (string name in names)\n        {\n            Console.WriteLine(name);\n        }\n    }\n}"
+    },
+    {
+      "codeId": 91,
+      "language": "csharp",
+      "sample": "// Methods and Functions in C#\n\nusing System;\n\nclass Program\n{\n    // Method with return value\n    static int Add(int a, int b)\n    {\n        return a + b;\n    }\n\n    // Method without return value\n    static void Greet()\n    {\n        Console.WriteLine(\"Welcome to C# Methods!\");\n    }\n\n    static void Main()\n    {\n        // Call method without return value\n        Greet();\n\n        // Call method with return value\n        int result = Add(5, 7);\n        Console.WriteLine(\"Sum: \" + result);\n    }\n}"
+    },
+    {
+      "codeId": 92,
+      "language": "csharp",
+      "sample": "// Class and Object in C#\n\nusing System;\n\nclass Student\n{\n    public string name;\n    public int age;\n\n    public void DisplayInfo()\n    {\n        Console.WriteLine(\"Name: \" + name);\n        Console.WriteLine(\"Age: \" + age);\n    }\n}\n\nclass Program\n{\n    static void Main()\n    {\n        // Create object\n        Student s1 = new Student();\n\n        // Assign values\n        s1.name = \"Dara\";\n        s1.age = 20;\n\n        // Call method\n        s1.DisplayInfo();\n    }\n}"
+    },
+    {
+      "codeId": 93,
+      "language": "csharp",
+      "sample": "// Inheritance and Polymorphism in C#\n\nusing System;\n\nclass Animal\n{\n    public virtual void MakeSound()\n    {\n        Console.WriteLine(\"Animal makes a sound\");\n    }\n}\n\nclass Dog : Animal\n{\n    // Polymorphism (method overriding)\n    public override void MakeSound()\n    {\n        Console.WriteLine(\"Dog barks\");\n    }\n}\n\nclass Program\n{\n    static void Main()\n    {\n        Animal a = new Animal();\n        a.MakeSound();\n\n        Dog d = new Dog();\n        d.MakeSound();\n    }\n}"
+    },
+    {
+      "codeId": 94,
+      "language": "csharp",
+      "sample": "// Exception Handling and File I/O in C#\n\nusing System;\nusing System.IO;\n\nclass Program\n{\n    static void Main()\n    {\n        // Exception Handling\n        try\n        {\n            int a = 10;\n            int b = 0;\n            int result = a / b;\n            Console.WriteLine(result);\n        }\n        catch (Exception e)\n        {\n            Console.WriteLine(\"Error: \" + e.Message);\n        }\n\n        // File Writing\n        string path = \"example.txt\";\n        File.WriteAllText(path, \"Hello, this is a C# file example.\");\n\n        // File Reading\n        string content = File.ReadAllText(path);\n        Console.WriteLine(\"File Content: \" + content);\n    }\n}"
+    }
+  ]
+}

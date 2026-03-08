@@ -1,6 +1,56 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+const PUBLIC_API_CANDIDATES = [
+  "https://jomnorncode-api.cheat.casa/api/courses/public?all=true&page=0&size=20",
+  "https://jomnorncode-api.cheat.casa/api/api/courses/public?all=true&page=0&size=20",
+];
+const AUTH_API_CANDIDATES = [
+  ...PUBLIC_API_CANDIDATES,
+  "https://jomnorncode-api.cheat.casa/api/courses",
+];
+
+const extractList = (payload) => {
+  if (Array.isArray(payload)) return payload;
+  if (Array.isArray(payload?.data)) return payload.data;
+  if (Array.isArray(payload?.content)) return payload.content;
+  if (Array.isArray(payload?.courses)) return payload.courses;
+  if (Array.isArray(payload?.items)) return payload.items;
+  if (Array.isArray(payload?.results)) return payload.results;
+  if (Array.isArray(payload?.categoryCourses)) return payload.categoryCourses;
+  if (Array.isArray(payload?.category?.courses))
+    return payload.category.courses;
+  return [];
+};
+
+const normalizeCourses = (rawCourses) =>
+  rawCourses
+    .map((course) => {
+      const courseId = course.courseId ?? course.id;
+      if (!courseId) return null;
+
+      return {
+        id: courseId,
+        title: course.courseTitle ?? course.title ?? "គ្មានចំណងជើង",
+        description: course.description ?? "",
+        image:
+          course.thumbnailUrl ?? course.image ?? "/default-course-image.jpg",
+        lessonCount: course.lessonCount ?? 0,
+        categoryId: course.category?.id ?? course.categoryId,
+        categoryName: course.category?.name ?? course.categoryName ?? "",
+      };
+    })
+    .filter(Boolean);
+
+const isPopularCourse = (course) => {
+  const categoryName = (course.categoryName || "").toLowerCase();
+  return (
+    Number(course.categoryId) === 15 ||
+    categoryName.includes("ពេញនិយម") ||
+    categoryName.includes("popular")
+  );
+};
+
 export default function RenderPopularHomepageCard() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +67,9 @@ export default function RenderPopularHomepageCard() {
       if (!token) return null;
 
       try {
-        const payload = JSON.parse(atob(token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")));
+        const payload = JSON.parse(
+          atob(token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")),
+        );
         const now = Math.floor(Date.now() / 1000);
         if (payload?.exp && now >= payload.exp) return null;
       } catch {
@@ -27,94 +79,55 @@ export default function RenderPopularHomepageCard() {
       return token;
     };
 
-    const buildHeaders = () => {
-      const token = getAuthToken();
-      return {
+    const token = getAuthToken();
+    const apiCandidates = token ? AUTH_API_CANDIDATES : PUBLIC_API_CANDIDATES;
+
+    const fetchJson = async (url) => {
+      const headers = {
         Accept: "application/json",
-        "Content-Type": "application/json",
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
       };
+
+      let response = await fetch(url, { method: "GET", headers });
+      if ((response.status === 401 || response.status === 403) && token) {
+        response = await fetch(url, {
+          method: "GET",
+          headers: { Accept: "application/json" },
+        });
+      }
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status} on ${url}`);
+      }
+
+      return response.json();
     };
-
-    const extractList = (payload) => {
-      if (Array.isArray(payload)) return payload;
-      if (Array.isArray(payload?.data)) return payload.data;
-      if (Array.isArray(payload?.courses)) return payload.courses;
-      if (Array.isArray(payload?.items)) return payload.items;
-      if (Array.isArray(payload?.categoryCourses)) return payload.categoryCourses;
-      if (Array.isArray(payload?.category?.courses)) return payload.category.courses;
-      return [];
-    };
-
-    const normalizeCourses = (rawCourses) =>
-      rawCourses
-        .map((course) => {
-          const courseId = course.courseId ?? course.id;
-          if (!courseId) return null;
-
-          return {
-            id: courseId,
-            title: course.courseTitle ?? course.title ?? "គ្មានចំណងជើង",
-            description: course.description ?? "",
-            image: course.thumbnailUrl ?? course.image ?? "/default-course-image.jpg",
-            lessonCount: course.lessonCount ?? 0,
-            categoryId: course.category?.id ?? course.categoryId,
-            categoryName: course.category?.name ?? course.categoryName ?? "",
-          };
-        })
-        .filter(Boolean);
-
-    const isPopularCourse = (course) =>
-      Number(course.categoryId) === 15 ||
-      course.categoryName?.toLowerCase().includes("ពេញនិយម") ||
-      course.categoryName?.toLowerCase().includes("popular");
 
     const fetchPopularCourses = async () => {
-      const requestJson = async (url) => {
-        const authHeaders = buildHeaders();
-        const publicHeaders = {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        };
-
-        let response = await fetch(url, { method: "GET", headers: authHeaders });
-        if (response.status === 401 || response.status === 403) {
-          response = await fetch(url, { method: "GET", headers: publicHeaders });
-        }
-
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-
-        return response.json();
-      };
-
       try {
-        // Try both category endpoint variants
-        let categoryPayload = null;
-        // try {
-        //   categoryPayload = await requestJson("https://jomnorncode-api.cheat.casa/api/categories/15");
-        // } catch {
-        //   categoryPayload = await requestJson(
-        //     "https://jomnorncode-api.cheat.casa/api/api/categories/15",
-        //   );
-        // }
+        let allCourses = [];
 
-        const directCategoryCourses = normalizeCourses(extractList(categoryPayload));
-        if (directCategoryCourses.length > 0) {
-          setCourses(directCategoryCourses);
-          return;
+        for (const url of apiCandidates) {
+          try {
+            const payload = await fetchJson(url);
+            const parsed = normalizeCourses(extractList(payload));
+            if (parsed.length) {
+              allCourses = parsed;
+              break;
+            }
+          } catch {
+            // try next candidate URL
+          }
         }
 
-        // Fallback: use courses endpoint and filter category
-        const allCoursesPayload = await requestJson(
-          "https://jomnorncode-api.cheat.casa/api/courses/public?all=true&page=0&size=1&sort=%5B%22string%22%5D",
-        );
-        console.log("Console log");
-        const allCourses = normalizeCourses(extractList(allCoursesPayload));
-        const popularCourses = allCourses.filter(isPopularCourse);
+        if (!allCourses.length) {
+          throw new Error("No courses found from available endpoints");
+        }
 
-        setCourses(popularCourses.length ? popularCourses : allCourses.slice(0, 6));
+        const popularCourses = allCourses.filter(isPopularCourse);
+        setCourses(
+          popularCourses.length ? popularCourses : allCourses.slice(0, 6),
+        );
       } catch (err) {
         console.error("Error fetching courses:", err);
         setError("មិនអាចទាញវគ្គសិក្សាពេញនិយមបាន");
@@ -128,17 +141,13 @@ export default function RenderPopularHomepageCard() {
 
   if (loading) {
     return (
-      <h1 className="text-center mt-20 mb-20 text-2xl">
-        កំពុងដំណើរការ...
-      </h1>
+      <h1 className="text-center mt-20 mb-20 text-2xl">កំពុងដំណើរការ...</h1>
     );
   }
 
   if (error) {
     return (
-      <h2 className="text-center mt-20 mb-20 text-xl text-red-600">
-        {error}
-      </h2>
+      <h2 className="text-center mt-20 mb-20 text-xl text-red-600">{error}</h2>
     );
   }
 
@@ -150,22 +159,23 @@ export default function RenderPopularHomepageCard() {
     );
   }
 
-  // Show 3 by default, show all if toggled
   const displayedCourses = showAll ? courses : courses.slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-gray-100 py-16">
-      <div className="max-w-[1490px] mx-auto px-6 lg:px-8">
-        <div className="text-center mb-16">
+    <div className="bg-gray-100 pt-16 pb-8">
+      <div className="max-w-420 mx-auto px-6 lg:px-12">
+        <div className="text-center mb-16" data-aos="fade-up">
           <h1 className="text-4xl font-bold text-[#112d4f]">
             វគ្គសិក្សាដែលពេញនិយម
           </h1>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {displayedCourses.map((course) => (
+          {displayedCourses.map((course, index) => (
             <div
               key={course.id}
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
               className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300"
             >
               <div className="h-72 flex items-center justify-center bg-gray-100">
@@ -203,9 +213,8 @@ export default function RenderPopularHomepageCard() {
           ))}
         </div>
 
-        {/* Toggle Button */}
         {courses.length > 3 && (
-          <div className="text-center mt-12">
+          <div className="text-center mt-12" data-aos="fade-up">
             <button
               onClick={() => setShowAll(!showAll)}
               className="bg-[#3f72af] hover:bg-[#0d223a] text-white px-8 py-3 rounded-lg transition duration-300"

@@ -14,8 +14,6 @@ import StudentFeedback from "./components/navbar/homepage/StudentFeedback";
 import ConfirmCard from "./components/navbar/homepage/ConfirmCard";
 
 export default function App() {
-  
-
   // const [courses, setCourses] = useState([]);
   // const [loading, setLoading] = useState(true);
 
@@ -36,11 +34,10 @@ export default function App() {
     <>
       <div className="min-h-screen bg-[#112d4f] text-white dark:bg-[#0e172b] font-sans">
         <div className="relative py-16 md:py-20 lg:py-28 overflow-hidden">
-          {/* Wider container for more edge spacing control */}
-          <div className="w-full px-6 md:px-10 lg:px-16 xl:px-24">
+          <div className="max-w-420 mx-auto px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               {/* LEFT SIDE */}
-              <div className="text-center lg:text-left lg:pl-8 xl:pl-16">
+              <div className="text-center lg:text-left" data-aos="fade-up">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
                   សិក្សាកូដជាភាសាខ្មែរជាមួយ{" "}
                   <span className="block text-[#f59e0b] mt-3 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
@@ -55,19 +52,19 @@ export default function App() {
 
                 {/* Buttons */}
                 <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 sm:gap-5 mb-12">
-                 <Link
-  to="/course"
-  className="inline-block bg-[#0e468b] hover:bg-[#f2f2f2] hover:text-[#112d50] text-white text-base sm:text-lg font-semibold px-8 py-4 sm:px-10 sm:py-5 rounded-xl transition-all transform hover:scale-105"
->
-  មេីលវគ្គសិក្សា &gt;
-</Link>
+                  <Link
+                    to="/course"
+                    className="inline-block bg-[#0e468b] hover:bg-[#f2f2f2] hover:text-[#112d50] text-white text-base sm:text-lg font-semibold px-8 py-4 sm:px-10 sm:py-5 rounded-xl transition-all transform hover:scale-105"
+                  >
+                    មេីលវគ្គសិក្សា &gt;
+                  </Link>
 
-                 <Link
-  to="/signup"
-  className="inline-block bg-[#f2f2f2] border-2 border-gray-500 hover:border-gray-300 text-[#0e468b] hover:bg-[#0e468b] hover:text-white text-base sm:text-lg font-semibold px-8 py-4 sm:px-10 sm:py-5 rounded-xl transition-all"
->
-  ចុះឈ្មោះឥឡូវនេះ
-</Link>
+                  <Link
+                    to="/signup"
+                    className="inline-block bg-[#f2f2f2] border-2 border-gray-500 hover:border-gray-300 text-[#0e468b] hover:bg-[#0e468b] hover:text-white text-base sm:text-lg font-semibold px-8 py-4 sm:px-10 sm:py-5 rounded-xl transition-all"
+                  >
+                    ចុះឈ្មោះឥឡូវនេះ
+                  </Link>
                 </div>
 
                 {/* Stats */}
@@ -96,7 +93,10 @@ export default function App() {
               </div>
 
               {/* RIGHT SIDE */}
-              <div className="flex justify-center lg:justify-end lg:pl-10 xl:pl-20">
+              <div
+                className="flex justify-center lg:justify-end"
+                data-aos="fade-left"
+              >
                 <img
                   src="/src/assets/image.png"
                   alt="Online Course Illustration"
@@ -110,23 +110,14 @@ export default function App() {
         {/* rendering the card */}
         <RenderPopularHomepageCard />
       </div>
- <RenderCourseForBeginner />
-     <>
-    
-  
- 
-  {/* Grid container */}
-    
-</>
-    {/* second section */}
-     <WhyChooseUs />
-    <Carocel />
-    <Roadmap/>
-    <StudentFeedback/>
-    <ConfirmCard/>
-
-
-      
+      <RenderCourseForBeginner />
+      <>{/* Grid container */}</>
+      {/* second section */}
+      <WhyChooseUs />
+      <Carocel />
+      <Roadmap />
+      <StudentFeedback />
+      <ConfirmCard />
     </>
   );
 }

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-export default function Quiz({ courseId }) {
-  const { lessonId } = useParams();
+export default function Quiz() {
+  const reduxToken = useSelector((state) => state?.auth?.token);
+  const { lessonId, courseId } = useParams();
   const navigate = useNavigate();
 
   const [questions, setQuestions] = useState([]);
@@ -11,25 +13,106 @@ export default function Quiz({ courseId }) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showResult, setShowResult] = useState(false);
+  const [fetchError, setFetchError] = useState(null);
 
   const shuffle = (arr) => arr.sort(() => Math.random() - 0.5);
 
-  useEffect(() => {
-    setCurrentIndex(0);
-    setSelectedAnswer(null);
-    setAnswers([]);
+  const getAuthToken = () => {
+    const token =
+      reduxToken ||
+      localStorage.getItem("token") ||
+      localStorage.getItem("accessToken") ||
+      localStorage.getItem("authToken") ||
+      import.meta.env.VITE_API_TOKEN;
+    if (!token) return null;
 
-    fetch("https://opentdb.com/api.php?amount=5&type=multiple")
-      .then((res) => res.json())
-      .then((data) => {
-        const formatted = data.results.map((q) => ({
-          question: q.question,
-          correct: q.correct_answer,
-          answers: shuffle([...q.incorrect_answers, q.correct_answer]),
-        }));
+    try {
+      const payload = JSON.parse(
+        atob(token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")),
+      );
+      const now = Math.floor(Date.now() / 1000);
+      if (payload?.exp && now >= payload.exp) return null;
+    } catch {
+      return token;
+    }
+    return token;
+  };
+
+  const authToken = getAuthToken();
+
+  useEffect(() => {
+    const fetchQuiz = async () => {
+      setCurrentIndex(0);
+      setSelectedAnswer(null);
+      setAnswers([]);
+      setFetchError(null);
+      setLoading(true);
+
+      const token = authToken;
+      if (!token) {
+        setFetchError("សូមចូលគណនីជាមុនសិន");
+        setLoading(false);
+        return;
+      }
+
+      const headers = {
+        Accept: "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      };
+
+      // fetch("https://opentdb.com/api.php?amount=5&type=multiple")
+
+      try {
+        const quizRes = await fetch(
+          `https://jomnorncode-api.cheat.casa/api/api/quizzes/lesson/${lessonId}`,
+          { headers },
+        );
+        if (!quizRes.ok) throw new Error(`HTTP ${quizRes.status}`);
+        const quizData = await quizRes.json();
+
+        const quizId = quizData?.content?.[0]?.id;
+        if (!quizId) {
+          setFetchError("មិនមានតេស្តសម្រាប់មេរៀននេះទេ");
+          setLoading(false);
+          return;
+        }
+
+        const questionsRes = await fetch(
+          `https://jomnorncode-api.cheat.casa/api/api/questions/quiz/${quizId}?page=0&size=10`,
+          { headers },
+        );
+        if (!questionsRes.ok) throw new Error(`HTTP ${questionsRes.status}`);
+        const data = await questionsRes.json();
+
+        const formatted = (data?.content || [])
+          .map((q) => {
+            const baseChoices = (q.choices || []).filter(Boolean);
+            const uniqueAnswers = Array.from(
+              new Set([...baseChoices, q.correctAnswer].filter(Boolean)),
+            );
+            if (!uniqueAnswers.length) return null;
+            return {
+              question: q.question || "",
+              correct: q.correctAnswer || "",
+              answers: shuffle([...uniqueAnswers]),
+            };
+          })
+          .filter(Boolean);
+
+        if (!formatted.length) {
+          setFetchError("មិនមានសំណួរទេ");
+          setLoading(false);
+          return;
+        }
+
         setQuestions(formatted);
         setLoading(false);
-      });
+      } catch (error) {
+        setFetchError("មិនអាចទាញសំណួរបាន");
+        setLoading(false);
+      }
+    };
+    fetchQuiz();
   }, [lessonId]);
 
   const handleAnswer = (answer) => {
@@ -51,6 +134,14 @@ export default function Quiz({ courseId }) {
   };
 
   if (loading) return <div className="text-center mt-20">កំពុងដំណើរការ...</div>;
+
+  if (fetchError) {
+    return <div className="text-center mt-20 text-red-600">{fetchError}</div>;
+  }
+
+  if (!questions.length) {
+    return <div className="text-center mt-20 text-gray-500">មិនមានសំណួរទេ</div>;
+  }
 
   // ================= RESULTS =================
   if (showResult) {
@@ -113,15 +204,15 @@ export default function Quiz({ courseId }) {
                   <p className="text-red-500">
                     ចម្លើយអ្នក:{" "}
                     <span
-                      dangerouslySetInnerHTML={{ __html: m.user || "មិនបានជ្រើស" }}
+                      dangerouslySetInnerHTML={{
+                        __html: m.user || "មិនបានជ្រើស",
+                      }}
                     />
                   </p>
 
                   <p className="text-green-600">
                     ចម្លើយត្រឹមត្រូវ:{" "}
-                    <span
-                      dangerouslySetInnerHTML={{ __html: m.correct }}
-                    />
+                    <span dangerouslySetInnerHTML={{ __html: m.correct }} />
                   </p>
                 </div>
               ))}
@@ -141,7 +232,9 @@ export default function Quiz({ courseId }) {
             {passed && (
               <button
                 onClick={() =>
-                  navigate(`/coursedetail/${courseId}/lesson/${parseInt(lessonId) + 1}`)
+                  navigate(
+                    `/coursedetail/${courseId}/lesson/${parseInt(lessonId) + 1}`,
+                  )
                 }
                 className="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600"
               >
@@ -161,7 +254,6 @@ export default function Quiz({ courseId }) {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-between px-4 sm:px-8 lg:px-50 py-6">
-
       <div>
         <Link
           to={`/coursedetail/${courseId}/lesson/${lessonId}`}
@@ -172,7 +264,6 @@ export default function Quiz({ courseId }) {
       </div>
 
       <div className="flex flex-col items-center justify-center flex-1">
-
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-3">
           សំណួរ<span className="text-[#ffa500]">តេស្តមេរៀន</span>
         </h1>
@@ -221,12 +312,10 @@ export default function Quiz({ courseId }) {
             ))}
           </div>
         </div>
-
       </div>
 
       {/* Bottom */}
       <div className="flex flex-col sm:flex-row items-center justify-between mt-8 gap-4">
-
         <button
           onClick={() => currentIndex > 0 && setCurrentIndex(currentIndex - 1)}
           className="bg-white shadow-md rounded-lg px-6 py-3 font-medium hover:bg-gray-50"
@@ -241,7 +330,6 @@ export default function Quiz({ courseId }) {
         >
           បន្តទៅមុខ
         </button>
-
       </div>
     </div>
   );

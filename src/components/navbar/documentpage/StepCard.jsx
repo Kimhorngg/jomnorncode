@@ -4,7 +4,7 @@ const StepCard = ({ stepNumber, title, steps, bgColor, borderColor, textColor, l
   return (
     <div className="flex justify-center px-4 py-6 mt-10">
       {/* Smaller card wrapper */}
-      <div className="w-full max-w-[1435px]">
+      <div className="w-full max-w-[1535px]">
         {/* ចំណងជើងជំហាន */}
         <h2 className="text-xl md:text-2xl font-bold mb-4">
           <span className="text-[#f9a825]">ជំហានទី{stepNumber} ៖ </span>
