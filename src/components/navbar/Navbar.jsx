@@ -8,12 +8,13 @@ import { logOut } from "../../features/auth/authSlice";
 import { auth } from "../firebase/firebase-config";
 import SignUp from "../../pages/SignUp";
 import Login from "../../pages/LogIn";
+import logoImage from "../../assets/jomnorncode_logo.png";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(
-    () => localStorage.getItem("darkMode") === "true"
+    () => localStorage.getItem("darkMode") === "true",
   );
 
   const { user } = useSelector((state) => state.auth);
@@ -86,11 +87,10 @@ export default function Navbar() {
   return (
     <nav className="w-full bg-white dark:bg-[#0f172a] relative z-100 shadow-sm">
       <div className="max-w-420 mx-auto px-6 lg:px-12 py-4 flex items-center justify-between">
-
         {/* LOGO */}
         <Link to="/" className="flex items-center">
           <img
-            src="/src/assets/jomnorncode_logo.png"
+            src={logoImage}
             alt="Logo"
             className="w-18 h-18 object-contain"
           />
@@ -98,27 +98,49 @@ export default function Navbar() {
 
         {/* DESKTOP MENU */}
         <ul className="hidden md:flex items-center space-x-10">
-          <li><NavLink to="/" end className={navLinkClass}>ទំព័រដើម</NavLink></li>
-          <li><NavLink to="/learn" className={navLinkClass}>ចូលរៀន</NavLink></li>
-          <li><NavLink to="/course" className={navLinkClass}>វគ្គសិក្សា</NavLink></li>
-          <li><NavLink to="/document" className={navLinkClass}>ឯកសារ</NavLink></li>
-          <li><NavLink to="/about" className={navLinkClass}>អំពីយើង</NavLink></li>
+          <li>
+            <NavLink to="/" end className={navLinkClass}>
+              ទំព័រដើម
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/learn" className={navLinkClass}>
+              ចូលរៀន
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/course" className={navLinkClass}>
+              វគ្គសិក្សា
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/document" className={navLinkClass}>
+              ឯកសារ
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/about" className={navLinkClass}>
+              អំពីយើង
+            </NavLink>
+          </li>
         </ul>
 
         {/* RIGHT SIDE */}
         <div className="flex items-center space-x-4">
-
           {/* DARK MODE */}
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
             className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
           >
-            {isDarkMode ? <IoSunnyOutline size={22}/> : <IoMoonOutline size={22}/>}
+            {isDarkMode ? (
+              <IoSunnyOutline size={22} />
+            ) : (
+              <IoMoonOutline size={22} />
+            )}
           </button>
 
           {/* PROFILE */}
           <div className="relative" ref={dropdownRef}>
-
             <button
               onClick={() => setUserOpen(!userOpen)}
               className="flex items-center gap-2 rounded-full border px-1 py-1 pr-3 hover:bg-gray-50"
@@ -146,9 +168,18 @@ export default function Navbar() {
                 </>
               ) : (
                 <div className="p-2 bg-gray-100 rounded-full">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
                   </svg>
                 </div>
               )}
@@ -156,7 +187,6 @@ export default function Navbar() {
 
             {userOpen && (
               <div className="absolute right-0 mt-3 w-60 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border py-2">
-
                 {user ? (
                   <>
                     <div className="px-4 py-4 border-b dark:border-gray-700">
@@ -204,11 +234,9 @@ export default function Navbar() {
                     </button>
                   </>
                 )}
-
               </div>
             )}
           </div>
-
         </div>
       </div>
 

@@ -15,6 +15,8 @@ import LeaderCard from "../components/navbar/card/LeaderCard.jsx";
 import MemberCard from "../components/navbar/card/MemberCard.jsx";
 
 import { leaders, members, features } from "../data/aboutData.js";
+import learningImage from "../assets/Learning.png";
+import teamLogo from "../assets/jomnorncode_logo.png";
 
 export default function About() {
   return (
@@ -89,7 +91,7 @@ export default function About() {
           >
             <div className="overflow-hidden rounded-xl bg-slate-100">
               <img
-                src="src/assets/Learning.png"
+                src={learningImage}
                 alt="learning"
                 className="h-56 w-full object-cover sm:h-64 md:h-72"
               />
@@ -196,7 +198,7 @@ export default function About() {
               >
                 <div className="h-40 w-40 md:h-44 md:w-44 rounded-full border-4 border-slate-200 bg-slate-50 flex items-center justify-center">
                   <img
-                    src="src/assets/jomnorncode_logo (2).png"
+                    src={teamLogo}
                     alt="Team Logo"
                     className="h-full w-full object-contain p-3"
                   />

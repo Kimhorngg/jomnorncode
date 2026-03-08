@@ -1,4 +1,14 @@
 import { Settings, Users, BookOpen, Heart } from "lucide-react";
+import teacher1Image from "../assets/teacher1.png";
+import teacher2Image from "../assets/teacher2.png";
+import kimhorngImage from "../assets/Kimhorng.png";
+import moeunImage from "../assets/Moeun Kimhour.png";
+import phearumImage from "../assets/Phearum.png";
+import manethImage from "../assets/Maneth.png";
+import chovornImage from "../assets/chovorn.jpg";
+import lisaImage from "../assets/Lisa.png";
+import philipImage from "../assets/Philip.png";
+import vathImage from "../assets/Vath.png";
 
 export const leaders = [
   {
@@ -6,14 +16,14 @@ export const leaders = [
     highlight: "ស្រ៊ង",
     lastName: "សុខជាតិ",
     desc: "នៅពីក្រោយដំណើរការទាំងអស់គឺមានអ្នកគ្រូជាអ្នកដឹកនាំឆ្លាតវៃដែលបម្លែងប្រព័ន្ធBackendដ៏ស្មុគស្មាញឲ្យក្លាយទៅជាដំណើរការដែលរលូននិងមានប្រសិទ្ធភាព។",
-    img: "src/assets/teacher1.png",
+    img: teacher1Image,
   },
   {
     firstName: "លោគគ្រូ",
     highlight: "គិត",
     lastName: "តារា",
     desc: "នៅពីក្រោយដំណើរការទាំងអស់គឺមានអ្នកគ្រូជាអ្នកដឹកនាំឆ្លាតវៃដែលបម្លែងប្រព័ន្ធBackendដ៏ស្មុគស្មាញឲ្យក្លាយទៅជាដំណើរការដែលរលូននិងមានប្រសិទ្ធភាព។",
-    img: "src/assets/teacher2.png",
+    img: teacher2Image,
   },
 ];
 
@@ -21,58 +31,58 @@ export const members = [
   {
     name: "យ៉ាង គីមហ័ង",
     role: "ប្រធាន",
-    img: "src/assets/Kimhorng.png",
+    img: kimhorngImage,
     quote: "ពេលនោះ ដាក់ធ្វើការលើនេះ",
   },
   {
     name: "មឿន គឹមហ៊ួ",
     role: "អនុប្រធាន",
-    img: "src/assets/Moeun Kimhour.png",
+    img: moeunImage,
     quote: "ពេលនោះ ដាក់ធ្វើការលើនេះ",
   },
   {
     name: "ជា​ ភីរម្យ",
     role: "សមាជិក",
-    img: "src/assets/Phearum.png",
+    img: phearumImage,
     quote: "ពេលនោះ ដាក់ធ្វើការលើនេះ",
   },
   {
     name: "លាង​ ម៉ាណែត",
     role: "សមាជិក​",
-    img: "src/assets/Maneth.png",
+    img: manethImage,
     quote: "ពេលនោះ ដាក់ធ្វើការលើនេះ",
   },
   {
     name: "ស៊ន ឆវ័ន",
     role: "សមាជិក",
-    img:"src/assets/chovorn.jpg",
+    img: chovornImage,
     quote: "ពេលនោះ ដាក់ធ្វើការលើនេះ",
   },
   {
     name: "សារុន​ លីសា",
     role: "សមាជិក",
-    img: "src/assets/Lisa.png",
+    img: lisaImage,
     quote: "ពេលនោះ ដាក់ធ្វើការលើនេះ",
   },
   {
     name: "ឆាន់ ហ្វីលីប",
     role: "សមាជិក",
-    img: "src/assets/Philip.png",
+    img: philipImage,
     quote: "ពេលនោះ ដាក់ធ្វើការលើនេះ",
   },
   {
     name: "កើត វ៉ាត់",
     role: "សមាជិក",
-    img: "src/assets/Vath.png",
+    img: vathImage,
     quote: "ពេលនោះ ដាក់ធ្វើការលើនេះ",
-  }, 
+  },
 ];
 
 export const features = [
   {
     title: "ភាពងាយស្រួលចូលប្រើប្រាស់",
     desc: "ការអប់រំបច្ចេកវិទ្យាគួរតែឥតគិតថ្លៃ និងអាចរកបានសម្រាប់មនុស្សគ្រប់គ្នា",
-    icon: Settings,   // ✅ replaced
+    icon: Settings, // ✅ replaced
   },
   {
     title: "សហគមន៍",

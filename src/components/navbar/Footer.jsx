@@ -5,6 +5,8 @@ import {
   FaInstagram,
   FaEnvelope,
 } from "react-icons/fa";
+import istadLogo from "../../assets/logo-square-01.png";
+import jomnornLogo from "../../assets/jomnorncode_logo.png";
 
 const Footer = () => {
   return (
@@ -13,7 +15,7 @@ const Footer = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         {/* Column 1 */}
         <div>
-          <img src="src/assets/logo-square-01.png" alt="ISTAD Logo" className="w-28 mb-4" />
+          <img src={istadLogo} alt="ISTAD Logo" className="w-28 mb-4" />
           <p className="text-gray-300 text-sm leading-6">
             Institute of Science and Technology <br />
             Advanced Development
@@ -56,11 +58,7 @@ const Footer = () => {
 
         {/* Column 4 */}
         <div>
-          <img
-            src="/src/assets/jomnorncode_logo (2).png"
-            alt="Technology Logo"
-            className="w-28 mb-4"
-          />
+          <img src={jomnornLogo} alt="Technology Logo" className="w-28 mb-4" />
           <p className="text-gray-300 text-sm leading-6">
             អភិវឌ្ឍជំនាញរបស់អ្នកជាមួយវគ្គសិក្សាជំនាន់កូដ ដើម្បីអនាគតដ៏ភ្លឺស្វាង
           </p>

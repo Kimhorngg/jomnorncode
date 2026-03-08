@@ -12,6 +12,7 @@ import WhyChooseUs from "./components/navbar/homepage/WhyChooseUs";
 import Roadmap from "./components/navbar/homepage/Roadmap";
 import StudentFeedback from "./components/navbar/homepage/StudentFeedback";
 import ConfirmCard from "./components/navbar/homepage/ConfirmCard";
+import heroImage from "./assets/image.png";
 
 export default function App() {
   // const [courses, setCourses] = useState([]);
@@ -98,7 +99,7 @@ export default function App() {
                 data-aos="fade-left"
               >
                 <img
-                  src="/src/assets/image.png"
+                  src={heroImage}
                   alt="Online Course Illustration"
                   className="w-full max-w-[320px] sm:max-w-[420px] md:max-w-[480px] lg:max-w-[520px] xl:max-w-[600px] drop-shadow-2xl"
                 />

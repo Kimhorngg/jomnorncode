@@ -1,4 +1,6 @@
 import React from "react";
+import chovornImage from "../../../assets/chovorn.jpg";
+import manethImage from "../../../assets/Maneth.png";
 
 export default function StudentFeedback() {
   return (
@@ -18,7 +20,7 @@ export default function StudentFeedback() {
           <div className="bg-white p-8 rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] relative border border-gray-100 dark:bg-[#111827] dark:border-slate-800">
             <div className="flex items-center gap-4 mb-6">
               <img
-                src="/src/assets/chovorn.jpg"
+                src={chovornImage}
                 alt="Profile"
                 className="w-14 h-14 rounded-full border-2 border-blue-500 object-cover"
               />
@@ -53,7 +55,7 @@ export default function StudentFeedback() {
           <div className="bg-white p-8 rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] relative border border-gray-100 dark:bg-[#111827] dark:border-slate-800">
             <div className="flex items-center gap-4 mb-6">
               <img
-                src="/src/assets/Maneth.png"
+                src={manethImage}
                 alt="Profile"
                 className="w-14 h-14 rounded-full border-2 border-blue-500 object-cover"
               />
