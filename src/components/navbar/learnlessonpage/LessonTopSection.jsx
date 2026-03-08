@@ -105,19 +105,32 @@ export default function LessonTopSection() {
           lessons.find((item) => String(item.lessonId) === String(lessonId)) ||
           lessons.find((item) => String(item.id) === String(lessonId)) ||
           lessons.find((item) => String(item.lesson_id) === String(lessonId)) ||
-          lessons.find((item) => toNumber(item.sequenceNumber) === numericLessonId) ||
+          lessons.find(
+            (item) => toNumber(item.sequenceNumber) === numericLessonId,
+          ) ||
           lessons.find((item) => toNumber(item.sequence) === numericLessonId) ||
           lessons.find((item) => toNumber(item.order) === numericLessonId);
 
-        if (!currentLesson && Number.isFinite(numericLessonId) && numericLessonId > 0) {
+        if (
+          !currentLesson &&
+          Number.isFinite(numericLessonId) &&
+          numericLessonId > 0
+        ) {
           const byOrder = [...lessons].sort((a, b) => {
             const aOrder =
-              toNumber(a.sequenceNumber) ?? toNumber(a.sequence) ?? toNumber(a.order) ?? 0;
+              toNumber(a.sequenceNumber) ??
+              toNumber(a.sequence) ??
+              toNumber(a.order) ??
+              0;
             const bOrder =
-              toNumber(b.sequenceNumber) ?? toNumber(b.sequence) ?? toNumber(b.order) ?? 0;
+              toNumber(b.sequenceNumber) ??
+              toNumber(b.sequence) ??
+              toNumber(b.order) ??
+              0;
             return aOrder - bOrder;
           });
-          currentLesson = byOrder[numericLessonId - 1] || lessons[numericLessonId - 1];
+          currentLesson =
+            byOrder[numericLessonId - 1] || lessons[numericLessonId - 1];
         }
 
         if (currentLesson) {
@@ -169,7 +182,6 @@ export default function LessonTopSection() {
   return (
     <div className="w-full bg-[#f2f2f2]">
       <div className="max-w-420 mx-auto px-6 lg:px-12 pt-10 pb-4 text-slate-800">
-
         {/* Back */}
         <Link
           to={`/coursedetail/${courseId}`}
@@ -196,10 +208,7 @@ export default function LessonTopSection() {
         </h1>
 
         {/* Description */}
-        <p className="text-gray-500 mb-2">
-          {lesson.description}
-        </p>
-
+        <p className="text-gray-500 mb-2">{lesson.description}</p>
       </div>
     </div>
   );

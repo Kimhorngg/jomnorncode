@@ -55,12 +55,19 @@ export default function Carocel() {
                     <div className="flex gap-6 items-start">
                       <div className="w-3 h-26 bg-[#ffbf48] rounded" />
                       <p className="text-lg font-bold md:text-xl font-bold text-[#112d51] dark:text-slate-100 mt-5 leading-relaxed">
-                        ខ្ញុំបានរៀន C++ នៅ <span className="text-[#ffbf48]"> ជំនាន់កូដ</span> ហើយឈានដល់ការយល់ដឹងល្អពី OOP និងគោលការណ៍មូលដ្ឋាន។ ខ្ញុំចូលចិត្តការបង្ហាញសាកល្បងពិតប្រាកដ!
+                        ខ្ញុំបានរៀន C++ នៅ{" "}
+                        <span className="text-[#ffbf48]"> ជំនាន់កូដ</span>{" "}
+                        ហើយឈានដល់ការយល់ដឹងល្អពី OOP និងគោលការណ៍មូលដ្ឋាន។
+                        ខ្ញុំចូលចិត្តការបង្ហាញសាកល្បងពិតប្រាកដ!
                       </p>
                     </div>
                     <div className="border-b border-[#3F72AF] mt-8 mb-6" />
-                    <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">សារុន លីសា</h2>
-                    <p className="text-gray-500 dark:text-slate-300 mt-2">និស្សិតឆ្នាំទី២</p>
+                    <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
+                      សារុន លីសា
+                    </h2>
+                    <p className="text-gray-500 dark:text-slate-300 mt-2">
+                      និស្សិតឆ្នាំទី២
+                    </p>
                   </div>
                 </div>
               </div>
@@ -81,12 +88,19 @@ export default function Carocel() {
                     <div className="flex gap-6 items-start">
                       <div className="w-3 h-24 bg-[#ffbf48] rounded" />
                       <p className="text-lg font-bold md:text-xl font-bold text-[#112d51] dark:text-slate-100 mt-5 leading-relaxed">
-                        ខ្ញុំបានរៀន HTML នៅ<span className="text-[#ffbf48]"> ជំនាន់កូដ </span>ហើយឈានដល់ការចេះធ្វេីវេបសាយមួយខ្លួនឯងបានហើយ។ ខ្ញុំចូលចិត្តការបង្ហាញសាកល្បងពិតប្រាកដ!
+                        ខ្ញុំបានរៀន HTML នៅ
+                        <span className="text-[#ffbf48]"> ជំនាន់កូដ </span>
+                        ហើយឈានដល់ការចេះធ្វេីវេបសាយមួយខ្លួនឯងបានហើយ។
+                        ខ្ញុំចូលចិត្តការបង្ហាញសាកល្បងពិតប្រាកដ!
                       </p>
                     </div>
                     <div className="border-b border-blue-400 mt-8 mb-6" />
-                    <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">លាង ម៉ាណេត</h2>
-                    <p className="text-gray-500 dark:text-slate-300 mt-2">និស្សិតឆ្នាំទី២</p>
+                    <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
+                      លាង ម៉ាណេត
+                    </h2>
+                    <p className="text-gray-500 dark:text-slate-300 mt-2">
+                      និស្សិតឆ្នាំទី២
+                    </p>
                   </div>
                 </div>
               </div>
@@ -107,12 +121,20 @@ export default function Carocel() {
                     <div className="flex gap-6 items-start">
                       <div className="w-3 h-24 bg-[#ffbf48] rounded" />
                       <p className="text-lg font-bold md:text-xl font-bold text-[#112d51] dark:text-slate-100 mt-5 leading-relaxed">
-                        ដោយសារតែបានរៀននៅ <span className="text-[#ffbf48]"> ជំនាន់កូដ</span> ទេីបធ្វេីឲ្យខ្ញុំដឹងថាការរៀនកូដមិនមែនជារឿងពិបាកទេ។ ខ្ញុំបានចាប់ផ្តើមពីសូន្យ ហើយឥឡូវនេះខ្ញុំអាចបង្កើតគេហទំព័រមួយបានហើយ។
+                        ដោយសារតែបានរៀននៅ{" "}
+                        <span className="text-[#ffbf48]"> ជំនាន់កូដ</span>{" "}
+                        ទេីបធ្វេីឲ្យខ្ញុំដឹងថាការរៀនកូដមិនមែនជារឿងពិបាកទេ។
+                        ខ្ញុំបានចាប់ផ្តើមពីសូន្យ
+                        ហើយឥឡូវនេះខ្ញុំអាចបង្កើតគេហទំព័រមួយបានហើយ។
                       </p>
                     </div>
                     <div className="border-b border-blue-400 mt-8 mb-6" />
-                    <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">សន ឆវ័ន</h2>
-                    <p className="text-gray-500 dark:text-slate-300 mt-2">និស្សិតឆ្នាំទី១</p>
+                    <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
+                      សន ឆវ័ន
+                    </h2>
+                    <p className="text-gray-500 dark:text-slate-300 mt-2">
+                      និស្សិតឆ្នាំទី១
+                    </p>
                   </div>
                 </div>
               </div>
