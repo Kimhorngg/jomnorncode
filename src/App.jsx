@@ -32,7 +32,7 @@ export default function App() {
   // }
 
   return (
-    <>
+    <div className="dark:bg-[#0e172b] transition-colors duration-300">
       <div className="min-h-screen bg-[#112d4f] text-white dark:bg-[#0e172b] font-sans">
         <div className="relative py-16 md:py-20 lg:py-28 overflow-hidden">
           <div className="max-w-420 mx-auto px-6 lg:px-12">
@@ -112,13 +112,11 @@ export default function App() {
         <RenderPopularHomepageCard />
       </div>
       <RenderCourseForBeginner />
-      <>{/* Grid container */}</>
-      {/* second section */}
       <WhyChooseUs />
       <Carocel />
       <Roadmap />
       <StudentFeedback />
       <ConfirmCard />
-    </>
+    </div>
   );
 }

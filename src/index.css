@@ -23,53 +23,53 @@ html.dark body {
   color: #e2e8f0;
 }
 
+/* Apply dark backgrounds for common containers */
 html.dark .bg-white {
   background-color: #111827;
 }
 
-html.dark .bg-gray-50 {
-  background-color: #0f172a;
-}
-
-html.dark .bg-gray-100 {
+html.dark .bg-gray-50,
+html.dark .bg-gray-100,
+html.dark .bg-slate-50,
+html.dark .bg-slate-100,
+html.dark .bg-\[\#f2f2f2\],
+html.dark .bg-\[\#f3f4f6\] {
   background-color: #0b1220;
 }
 
-html.dark .bg-gray-200 {
-  background-color: #111827;
-}
-
-html.dark .bg-[#f3f4f6] {
-  background-color: #0e172b;
-}
-
-html.dark .bg-[#fafafa] {
-  background-color: #0e172b;
-}
-
-html.dark .bg-[#f2f2f2] {
-  background-color: #0e172b;
-}
-
-html.dark .text-gray-400,
-html.dark .text-gray-500,
-html.dark .text-gray-600,
+html.dark .text-gray-900,
+html.dark .text-slate-900,
+html.dark .text-gray-800,
+html.dark .text-slate-800,
 html.dark .text-gray-700,
-html.dark .text-slate-400,
-html.dark .text-slate-500,
+html.dark .text-slate-700,
+html.dark .text-gray-600,
 html.dark .text-slate-600,
-html.dark .text-slate-700 {
+html.dark .text-gray-500,
+html.dark .text-slate-500 {
   color: #cbd5e1;
 }
 
-html.dark .text-slate-800,
-html.dark .text-slate-900,
-html.dark .text-gray-800,
-html.dark .text-gray-900 {
-  color: #e2e8f0;
+html.dark .border-gray-100,
+html.dark .border-gray-200,
+html.dark .border-gray-300,
+html.dark .border-slate-200,
+html.dark .border-slate-300 {
+  border-color: #1f2937;
 }
 
-html.dark .text-[#112d4f],
+html.dark .shadow,
+html.dark .shadow-md,
+html.dark .shadow-lg,
+html.dark .shadow-xl {
+  box-shadow: 0 10px 25px rgba(2, 6, 23, 0.35);
+}
+
+html.dark .light-card-scope .bg-white {
+  background-color: #ffffff;
+}
+
+/* html.dark .text-[#112d4f],
 html.dark .text-[#102e50],
 html.dark .text-[#1e293b],
 html.dark .text-[#112d51],
@@ -83,11 +83,4 @@ html.dark .text-[#6c7180],
 html.dark .text-[#555555],
 html.dark .text-[#999da0] {
   color: #94a3b8;
-}
-
-html.dark .border-gray-100,
-html.dark .border-gray-200,
-html.dark .border-gray-300,
-html.dark .border-slate-200 {
-  border-color: #1f2937;
-}
+} */

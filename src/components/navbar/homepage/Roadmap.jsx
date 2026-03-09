@@ -134,7 +134,7 @@ export default function Roadmap() {
               </div>
 
               {/* Card Content - Force Full Width Alignment */}
-              <div className="w-full bg-white border border-slate-100 p-8 rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-xl transition-all duration-300 flex flex-col justify-center dark:bg-[#111827] dark:border-slate-800">
+              <div className="w-full bg-white border border-slate-100 p-8 rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-xl transition-all duration-300 flex flex-col justify-center dark:bg-white dark:border-slate-200">
                 <h3 className="text-xl md:text-2xl font-bold text-blue-600 mb-2">
                   {step.title}
                 </h3>

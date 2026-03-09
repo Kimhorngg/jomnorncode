@@ -6,6 +6,7 @@ import KeyPointsCard from "../components/navbar/learnlessonpage/KeyPointCard";
 import LessonProgressCard from "../components/navbar/learnlessonpage/LessonProgressCard";
 import ExampleEditor from "../components/navbar/learnlessonpage/ExampleEditor";
 import DefinitionCard from "../components/navbar/learnlessonpage/DefinitionCard";
+import PracticeEditor from "../components/navbar/learnlessonpage/PracticeEditor";
 
 export default function LearnLesson() {
   const { lessonId } = useParams();
@@ -40,6 +41,9 @@ export default function LearnLesson() {
 
       <div data-aos="fade-up" data-aos-delay="200">
         <ExampleEditor />
+      </div>
+      <div data-aos="fade-up" data-aos-delay="250">
+        <PracticeEditor />
       </div>
     </>
   );

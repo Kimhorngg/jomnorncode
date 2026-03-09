@@ -48,7 +48,13 @@ const normalizeAuthResponse = (res, fallbackUser = null) => {
 
   if (!data || data.success === false) return null;
 
-  const token = data?.token || null;
+  const token =
+    data?.token ||
+    data?.accessToken ||
+    data?.jwt ||
+    data?.data?.token ||
+    data?.data?.accessToken ||
+    null;
   const user = data?.user
     ? { ...(fallbackUser || {}), ...data.user }
     : fallbackUser;

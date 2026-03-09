@@ -162,10 +162,10 @@ export default function RenderPopularHomepageCard() {
   const displayedCourses = showAll ? courses : courses.slice(0, 3);
 
   return (
-    <div className="bg-gray-100 pt-16 pb-8">
+    <div className="bg-gray-100 dark:bg-[#0b1220] pt-16 pb-8 transition-colors duration-300">
       <div className="max-w-420 mx-auto px-6 lg:px-12">
         <div className="text-center mb-16" data-aos="fade-up">
-          <h1 className="text-4xl font-bold text-[#112d4f]">
+          <h1 className="text-4xl font-bold text-[#112d4f] dark:text-white">
             វគ្គសិក្សាដែលពេញនិយម
           </h1>
         </div>
@@ -176,9 +176,9 @@ export default function RenderPopularHomepageCard() {
               key={course.id}
               data-aos="fade-up"
               data-aos-delay={index * 100}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300"
+              className="bg-white dark:bg-[#111827] rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300"
             >
-              <div className="h-72 flex items-center justify-center bg-gray-100">
+              <div className="h-72 flex items-center justify-center bg-gray-100 dark:bg-[#0f172a]">
                 <img
                   src={course.image}
                   alt={course.title}
@@ -190,15 +190,15 @@ export default function RenderPopularHomepageCard() {
               </div>
 
               <div className="p-6 text-center">
-                <h2 className="text-lg font-bold text-gray-800 mb-3 line-clamp-1">
+                <h2 className="text-lg font-bold text-gray-800 dark:text-white mb-3 line-clamp-1">
                   {course.title}
                 </h2>
 
-                <p className="text-gray-600 mb-4 text-sm line-clamp-2">
+                <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm line-clamp-2">
                   {(course.description || "គ្មានការពិពណ៌នា").slice(0, 80)}...
                 </p>
 
-                <p className="font-bold text-blue-600 mb-4">
+                <p className="font-bold text-blue-600 dark:text-blue-400 mb-4">
                   {course.lessonCount || 10} មេរៀន
                 </p>
 

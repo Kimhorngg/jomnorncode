@@ -97,7 +97,7 @@ export default function Navbar() {
         </Link>
 
         {/* DESKTOP MENU */}
-        <ul className="hidden md:flex items-center space-x-10">
+        <ul className="hidden lg:flex items-center space-x-10">
           <li>
             <NavLink to="/" end className={navLinkClass}>
               ទំព័រដើម
@@ -127,10 +127,45 @@ export default function Navbar() {
 
         {/* RIGHT SIDE */}
         <div className="flex items-center space-x-4">
+          {/* MOBILE MENU BUTTON */}
+          <button
+            onClick={() => setMobileOpen((open) => !open)}
+            className="lg:hidden p-2 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? (
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-5 h-5"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            ) : (
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-5 h-5"
+              >
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            )}
+          </button>
           {/* DARK MODE */}
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
-            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-slate-200"
           >
             {isDarkMode ? (
               <IoSunnyOutline size={22} />
@@ -143,7 +178,7 @@ export default function Navbar() {
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setUserOpen(!userOpen)}
-              className="flex items-center gap-2 rounded-full border px-1 py-1 pr-3 hover:bg-gray-50"
+              className="flex items-center gap-2 rounded-full border px-1 py-1 pr-3 hover:bg-gray-50 dark:border-slate-700 dark:hover:bg-slate-800"
             >
               {user ? (
                 <>
@@ -167,7 +202,7 @@ export default function Navbar() {
                   </span>
                 </>
               ) : (
-                <div className="p-2 bg-gray-100 rounded-full">
+                <div className="p-2 bg-gray-100 rounded-full dark:bg-slate-800">
                   <svg
                     className="w-5 h-5"
                     fill="none"
@@ -240,6 +275,59 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* MOBILE MENU */}
+      {mobileOpen && (
+        <div className="lg:hidden bg-white dark:bg-[#0f172a] border-t border-slate-200 dark:border-slate-800">
+          <ul className="px-6 py-4 space-y-2">
+            <li>
+              <NavLink
+                to="/"
+                end
+                className={navLinkClass}
+                onClick={() => setMobileOpen(false)}
+              >
+                ទំព័រដើម
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/learn"
+                className={navLinkClass}
+                onClick={() => setMobileOpen(false)}
+              >
+                ចូលរៀន
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/course"
+                className={navLinkClass}
+                onClick={() => setMobileOpen(false)}
+              >
+                វគ្គសិក្សា
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/document"
+                className={navLinkClass}
+                onClick={() => setMobileOpen(false)}
+              >
+                ឯកសារ
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/about"
+                className={navLinkClass}
+                onClick={() => setMobileOpen(false)}
+              >
+                អំពីយើង
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      )}
       {/* LOGIN MODALS */}
       <Login
         isOpen={isLoginOpen}

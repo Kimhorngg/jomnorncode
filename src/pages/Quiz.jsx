@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
+
+const API_BASE = "https://jomnorncode-api.cheat.casa/api";
 
 export default function Quiz() {
   const reduxToken = useSelector((state) => state?.auth?.token);
+  const authUser = useSelector((state) => state?.auth?.user);
   const { lessonId, courseId } = useParams();
   const navigate = useNavigate();
 
@@ -14,6 +18,11 @@ export default function Quiz() {
   const [loading, setLoading] = useState(true);
   const [showResult, setShowResult] = useState(false);
   const [fetchError, setFetchError] = useState(null);
+  const [enrollModalOpen, setEnrollModalOpen] = useState(false);
+  const [enrollStatus, setEnrollStatus] = useState(null);
+  const [enrollLoading, setEnrollLoading] = useState(false);
+  const [enrollError, setEnrollError] = useState(null);
+  const [enrollmentId, setEnrollmentId] = useState(null);
 
   const shuffle = (arr) => arr.sort(() => Math.random() - 0.5);
 
@@ -39,6 +48,268 @@ export default function Quiz() {
   };
 
   const authToken = getAuthToken();
+
+  const resolveUserId = (user) =>
+    user?.userId || user?.id || user?._id || user?.uid || user?.uuid || null;
+
+  const extractUser = (payload) => {
+    if (!payload) return null;
+    if (payload?.data) return payload.data;
+    if (payload?.user) return payload.user;
+    return payload;
+  };
+
+  const parseEnrollments = (payload) => {
+    if (Array.isArray(payload)) return payload;
+    if (Array.isArray(payload?.data)) return payload.data;
+    if (Array.isArray(payload?.data?.content)) return payload.data.content;
+    if (Array.isArray(payload?.content)) return payload.content;
+    if (Array.isArray(payload?.items)) return payload.items;
+    if (Array.isArray(payload?.result)) return payload.result;
+    return [];
+  };
+
+  const isEnrollmentComplete = (enrollment) => {
+    const status = String(enrollment?.status || "").toLowerCase();
+    const progress =
+      enrollment?.progress ??
+      enrollment?.progressPercent ??
+      enrollment?.progressPercentage ??
+      0;
+    return (
+      enrollment?.completed === true ||
+      enrollment?.isCompleted === true ||
+      status === "completed" ||
+      Number(progress) >= 100
+    );
+  };
+
+  const loadCourseLessonIds = async (headers) => {
+    const endpoints = [
+      `${API_BASE}/api/lessons/course/${courseId}/ordered`,
+      `${API_BASE}/lessons/course/${courseId}/ordered`,
+    ];
+
+    for (const url of endpoints) {
+      try {
+        const res = await fetch(url, { headers });
+        if (!res.ok) continue;
+        const data = await res.json();
+        const list =
+          (Array.isArray(data) && data) ||
+          (Array.isArray(data?.data) && data.data) ||
+          (Array.isArray(data?.content) && data.content) ||
+          (Array.isArray(data?.items) && data.items) ||
+          [];
+
+        const ids = list
+          .map((lesson) => lesson?.lessonId ?? lesson?.id ?? lesson?.lesson_id)
+          .filter(Boolean);
+
+        if (ids.length) return ids;
+      } catch {
+        // try next endpoint
+      }
+    }
+
+    return [];
+  };
+
+  const handleCertificateClick = async () => {
+    if (!authToken) {
+      toast.error("សូមចូលគណនីជាមុនសិន");
+      navigate("/login");
+      return;
+    }
+
+    const headers = {
+      Accept: "application/json",
+      ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+    };
+
+    const lessonIds = await loadCourseLessonIds(headers);
+    if (!lessonIds.length) {
+      toast.error("មិនអាចពិនិត្យមេរៀនបាន");
+      return;
+    }
+
+    const lessonsDone = lessonIds.every(
+      (id) => localStorage.getItem(`lesson-${id}-lessonCompleted`) === "true",
+    );
+    const quizzesDone = lessonIds.every(
+      (id) => localStorage.getItem(`lesson-${id}-quizCompleted`) === "true",
+    );
+
+    if (!lessonsDone || !quizzesDone) {
+      toast.error("សូមបញ្ចប់មេរៀនទាំងអស់ជាមុនសិន");
+      return;
+    }
+
+    let userId = resolveUserId(authUser);
+    if (!userId) {
+      try {
+        const meRes = await fetch(`${API_BASE}/users/me`, {
+          headers: { Authorization: `Bearer ${authToken}` },
+        });
+        if (meRes.ok) {
+          const mePayload = extractUser(await meRes.json());
+          userId = resolveUserId(mePayload);
+        }
+      } catch {
+        // ignore and fall through
+      }
+    }
+
+    if (!userId) {
+      toast.error("សូមចូលគណនីជាមុនសិន");
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_BASE}/enrollments/user/${userId}`, {
+        headers,
+      });
+
+      if (!response.ok) {
+        setEnrollStatus("error");
+        setEnrollError("មិនអាចពិនិត្យការចុះឈ្មោះបាន");
+        setEnrollModalOpen(true);
+        return;
+      }
+
+      const payload = await response.json();
+      const enrollments = parseEnrollments(payload);
+      const matched = enrollments.find((enrollment) => {
+        const enrolledCourseId =
+          enrollment?.courseId ||
+          enrollment?.course?.courseId ||
+          enrollment?.course?.id ||
+          enrollment?.course_id;
+        const enrolledUserId =
+          enrollment?.userId || enrollment?.user?.id || enrollment?.student?.id;
+        if (String(enrolledUserId) !== String(userId)) return false;
+        return String(enrolledCourseId) === String(courseId);
+      });
+
+      if (!matched) {
+        setEnrollStatus("not-enrolled");
+        setEnrollError(null);
+        setEnrollmentId(null);
+        setEnrollModalOpen(true);
+        return;
+      }
+
+      if (!isEnrollmentComplete(matched)) {
+        setEnrollStatus("incomplete");
+        setEnrollError(null);
+        setEnrollmentId(matched?.id || matched?.enrollmentId || null);
+        setEnrollModalOpen(true);
+        return;
+      }
+
+      setEnrollmentId(matched?.id || matched?.enrollmentId || null);
+
+      navigate(`/certificate/${courseId}`);
+    } catch {
+      setEnrollStatus("error");
+      setEnrollError("មិនអាចពិនិត្យការចុះឈ្មោះបាន");
+      setEnrollModalOpen(true);
+    }
+  };
+
+  const handleCompleteEnrollment = async () => {
+    if (!authToken) {
+      toast.error("សូមចូលគណនីជាមុនសិន");
+      navigate("/login");
+      return;
+    }
+
+    setEnrollLoading(true);
+    setEnrollError(null);
+
+    let userId = resolveUserId(authUser);
+    if (!userId) {
+      try {
+        const meRes = await fetch(`${API_BASE}/users/me`, {
+          headers: { Authorization: `Bearer ${authToken}` },
+        });
+        if (meRes.ok) {
+          const mePayload = extractUser(await meRes.json());
+          userId = resolveUserId(mePayload);
+        }
+      } catch {
+        // ignore
+      }
+    }
+
+    const payloads = [
+      { courseId },
+      { courseId: Number(courseId) },
+      userId ? { userId, courseId } : null,
+      userId ? { userId: Number(userId), courseId: Number(courseId) } : null,
+    ].filter(Boolean);
+
+    try {
+      let currentEnrollmentId = enrollmentId;
+
+      if (!currentEnrollmentId) {
+        for (const payload of payloads) {
+          const res = await fetch(`${API_BASE}/api/enrollments`, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${authToken}`,
+            },
+            body: JSON.stringify(payload),
+          });
+
+          if (res.ok) {
+            const created = await res.json();
+            currentEnrollmentId =
+              created?.data?.id || created?.id || created?.enrollmentId || null;
+            break;
+          }
+        }
+      }
+
+      if (!currentEnrollmentId) {
+        setEnrollError("បញ្ចូលការចុះឈ្មោះមិនបានជោគជ័យ");
+        return;
+      }
+
+      const completeEndpoints = [
+        `${API_BASE}/api/enrollments/${currentEnrollmentId}/complete`,
+        `${API_BASE}/enrollments/${currentEnrollmentId}/complete`,
+      ];
+
+      let completed = false;
+      for (const url of completeEndpoints) {
+        const res = await fetch(url, {
+          method: "PATCH",
+          headers: { Authorization: `Bearer ${authToken}` },
+        });
+        if (res.ok) {
+          completed = true;
+          break;
+        }
+      }
+
+      if (!completed) {
+        setEnrollError("បញ្ចប់ការចុះឈ្មោះមិនបានជោគជ័យ");
+        return;
+      }
+
+      toast.success("បានចុះឈ្មោះរួចរាល់");
+      setEnrollModalOpen(false);
+      navigate(`/certificate/${courseId}`);
+    } catch {
+      setEnrollError("បញ្ចូលការចុះឈ្មោះមិនបានជោគជ័យ");
+    } finally {
+      setEnrollLoading(false);
+    }
+  };
 
   useEffect(() => {
     const fetchQuiz = async () => {
@@ -84,16 +355,27 @@ export default function Quiz() {
         if (!questionsRes.ok) throw new Error(`HTTP ${questionsRes.status}`);
         const data = await questionsRes.json();
 
+        const cleanAnswer = (value) =>
+          String(value || "")
+            .replace(/<[^>]*>/g, " ")
+            .replace(/&nbsp;/gi, " ")
+            .trim();
+
         const formatted = (data?.content || [])
           .map((q) => {
-            const baseChoices = (q.choices || []).filter(Boolean);
+            const baseChoices = (q.choices || [])
+              .filter((choice) => cleanAnswer(choice))
+              .map((choice) => String(choice));
+            const correctAnswer = cleanAnswer(q.correctAnswer)
+              ? String(q.correctAnswer)
+              : "";
             const uniqueAnswers = Array.from(
-              new Set([...baseChoices, q.correctAnswer].filter(Boolean)),
+              new Set([...baseChoices, correctAnswer].filter(Boolean)),
             );
             if (!uniqueAnswers.length) return null;
             return {
               question: q.question || "",
-              correct: q.correctAnswer || "",
+              correct: correctAnswer,
               answers: shuffle([...uniqueAnswers]),
             };
           })
@@ -230,19 +512,69 @@ export default function Quiz() {
             )}
 
             {passed && (
-              <button
-                onClick={() =>
-                  navigate(
-                    `/coursedetail/${courseId}/lesson/${parseInt(lessonId) + 1}`,
-                  )
-                }
-                className="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600"
-              >
-                ទៅមេរៀនបន្ទាប់
-              </button>
+              <>
+                <button
+                  onClick={() =>
+                    navigate(
+                      `/coursedetail/${courseId}/lesson/${parseInt(lessonId) + 1}`,
+                    )
+                  }
+                  className="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600"
+                >
+                  ទៅមេរៀនបន្ទាប់
+                </button>
+                <button
+                  onClick={handleCertificateClick}
+                  className="bg-[#1f3a5f] text-white px-6 py-3 rounded-lg hover:bg-[#162a44]"
+                >
+                  ទទួលវិញ្ញាបនបត្រ
+                </button>
+              </>
             )}
           </div>
         </div>
+        {enrollModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div
+              className="absolute inset-0 bg-black/40"
+              onClick={() => setEnrollModalOpen(false)}
+            />
+            <div className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-xl">
+              <h3 className="text-lg font-semibold text-[#1f3a5f]">
+                ចង់ទទួលវិញ្ញាបនបត្រមែនទេ?
+              </h3>
+              <p className="mt-2 text-sm text-slate-600">
+                {enrollStatus === "error" &&
+                  "មិនអាចពិនិត្យការចុះឈ្មោះបាន។ សូមសាកល្បងម្ដងទៀត"}
+                {enrollStatus === "not-enrolled" &&
+                  "សូមបញ្ចប់ការចុះឈ្មោះជាមុនសិន។ ចុចខាងក្រោមដើម្បីបំពេញការចុះឈ្មោះ។"}
+                {enrollStatus === "incomplete" &&
+                  "ការចុះឈ្មោះរបស់អ្នកមិនទាន់បញ្ចប់។ ចុចខាងក្រោមដើម្បីបញ្ចប់វា។"}
+              </p>
+              {enrollError && (
+                <p className="mt-2 text-sm text-red-600">{enrollError}</p>
+              )}
+              <div className="mt-5 flex flex-wrap gap-3 justify-end">
+                <button
+                  onClick={() => setEnrollModalOpen(false)}
+                  className="px-4 py-2 text-sm rounded-lg border border-slate-200 text-slate-600"
+                >
+                  បិទ
+                </button>
+                {(enrollStatus === "not-enrolled" ||
+                  enrollStatus === "incomplete") && (
+                  <button
+                    onClick={handleCompleteEnrollment}
+                    disabled={enrollLoading}
+                    className="px-4 py-2 text-sm rounded-lg bg-[#1f3a5f] text-white disabled:opacity-50"
+                  >
+                    {enrollLoading ? "កំពុងចុះឈ្មោះ..." : "បំពេញការចុះឈ្មោះ"}
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
