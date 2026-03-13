@@ -1,0 +1,11 @@
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #f3f4f6;
+}
+
+html.dark #root {
+  background-color: #0e172b;
+  color:whitesmoke;
+}
