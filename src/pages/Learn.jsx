@@ -186,7 +186,9 @@ const isQuizCompleted = (lessonId) =>
 export default function Learn() {
   const storedUser = useMemo(() => loadStoredUser(), []);
   const [userEnrollment, setUserEnrollment] = useState([]);
-  const [startedCourses, setStartedCourses] = useState(() => loadStartedCourses());
+  const [startedCourses, setStartedCourses] = useState(() =>
+    loadStartedCourses(),
+  );
   const [userId, setUserId] = useState(
     () => storedUser?.userId ?? storedUser?.id ?? 0,
   );
@@ -230,16 +232,16 @@ export default function Learn() {
         return knownUserIds.includes(String(item?.userId || "guest"));
       })
       .forEach((item) => {
-      const courseId =
-        item?.courseId ?? item?.course?.id ?? item?.course?.courseId;
-      if (!courseId || map.has(String(courseId))) return;
+        const courseId =
+          item?.courseId ?? item?.course?.id ?? item?.course?.courseId;
+        if (!courseId || map.has(String(courseId))) return;
 
-      map.set(String(courseId), {
-        id: `local-${courseId}`,
-        courseId,
-        status: item?.status || "IN_PROGRESS",
-        source: "local-started-course",
-      });
+        map.set(String(courseId), {
+          id: `local-${courseId}`,
+          courseId,
+          status: item?.status || "IN_PROGRESS",
+          source: "local-started-course",
+        });
       });
 
     return Array.from(map.values());
@@ -264,7 +266,9 @@ export default function Learn() {
         }
 
         const data = await response.json();
-        setUserId(data?.userId ?? data?.id ?? data?.data?.userId ?? data?.data?.id ?? 0);
+        setUserId(
+          data?.userId ?? data?.id ?? data?.data?.userId ?? data?.data?.id ?? 0,
+        );
       } catch (error) {
         console.error("Error fetching user info:", error);
       }
@@ -444,7 +448,9 @@ export default function Learn() {
     const fetchLessonIds = async (courseId) => {
       const existingLessons = courseLessonsById?.[courseId];
       if (Array.isArray(existingLessons) && existingLessons.length) {
-        return existingLessons.map((lesson) => getLessonId(lesson)).filter(Boolean);
+        return existingLessons
+          .map((lesson) => getLessonId(lesson))
+          .filter(Boolean);
       }
 
       const endpoints = [
@@ -463,7 +469,9 @@ export default function Learn() {
 
           const payload = await response.json();
           const lessons = extractList(payload);
-          const ids = lessons.map((lesson) => getLessonId(lesson)).filter(Boolean);
+          const ids = lessons
+            .map((lesson) => getLessonId(lesson))
+            .filter(Boolean);
 
           if (ids.length) return ids;
         } catch {
@@ -731,91 +739,91 @@ export default function Learn() {
       : [];
   }, [activityLog, selectedDayYmd]);
 
- const learningPlanItems = useMemo(() => {
-  const todayYmd = toYmd(new Date());
-  const isViewingToday = selectedDayYmd === todayYmd;
+  const learningPlanItems = useMemo(() => {
+    const todayYmd = toYmd(new Date());
+    const isViewingToday = selectedDayYmd === todayYmd;
 
-  if (!isViewingToday) {
-    return selectedDayActivities.map((item, index) => ({
-      id: `${item.courseId}-${item.lessonId}-${item.type}-${index}`,
-      title: `${item.courseTitle || "Course"} - ${item.lessonTitle || "Lesson"}`,
-      time: "បានបញ្ចប់",
-      duration: item.type === "quiz" ? "Quiz" : "Lesson",
-      done: true,
-      nextLessonLink: null,
-    }));
-  }
+    if (!isViewingToday) {
+      return selectedDayActivities.map((item, index) => ({
+        id: `${item.courseId}-${item.lessonId}-${item.type}-${index}`,
+        title: `${item.courseTitle || "Course"} - ${item.lessonTitle || "Lesson"}`,
+        time: "បានបញ្ចប់",
+        duration: item.type === "quiz" ? "Quiz" : "Lesson",
+        done: true,
+        nextLessonLink: null,
+      }));
+    }
 
-  const timeSlots = ["09:00", "11:00", "15:00", "17:00", "19:00"];
+    const timeSlots = ["09:00", "11:00", "15:00", "17:00", "19:00"];
 
-  return mergedEnrollments
-    .map((enrollment, index) => {
-      const courseId =
-        enrollment?.courseId ??
-        enrollment?.course?.id ??
-        enrollment?.course?.courseId;
+    return mergedEnrollments
+      .map((enrollment, index) => {
+        const courseId =
+          enrollment?.courseId ??
+          enrollment?.course?.id ??
+          enrollment?.course?.courseId;
 
-      if (!courseId) return null;
+        if (!courseId) return null;
 
-      const course = coursesById?.[courseId];
-      const lessons = Array.isArray(courseLessonsById?.[courseId])
-        ? courseLessonsById[courseId]
-        : [];
-      const progress = courseProgressById?.[courseId];
+        const course = coursesById?.[courseId];
+        const lessons = Array.isArray(courseLessonsById?.[courseId])
+          ? courseLessonsById[courseId]
+          : [];
+        const progress = courseProgressById?.[courseId];
 
-      if (!lessons.length) {
+        if (!lessons.length) {
+          return {
+            id: `empty-${courseId}`,
+            title: `${course?.courseTitle || course?.title || "Course"} - No lessons found`,
+            time: timeSlots[index] || "10:00",
+            duration: "មិនមានមេរៀន",
+            done: false,
+            nextLessonLink: null,
+          };
+        }
+
+        const completedLessonCount = Math.max(
+          0,
+          Math.min(Number(progress?.completedLessons || 0), lessons.length),
+        );
+
+        if (completedLessonCount >= lessons.length) {
+          return {
+            id: `done-${courseId}`,
+            title: course?.courseTitle || course?.title || "Completed Course",
+            time: timeSlots[index] || "10:00",
+            duration: "បានបញ្ចប់រួចរាល់",
+            done: true,
+            nextLessonLink: null,
+          };
+        }
+
+        const nextLessonIndex = completedLessonCount;
+        const nextLesson = lessons[nextLessonIndex];
+        const nextLessonId = getLessonId(nextLesson);
+        const nextLessonTitle = getLessonTitle(nextLesson, nextLessonIndex);
+
+        if (!nextLessonId) return null;
+
         return {
-          id: `empty-${courseId}`,
-          title: `${course?.courseTitle || course?.title || "Course"} - No lessons found`,
+          id: `${courseId}-${nextLessonId}`,
+          title: `${course?.courseTitle || course?.title || "Course"} - ${nextLessonTitle}`,
           time: timeSlots[index] || "10:00",
-          duration: "មិនមានមេរៀន",
+          duration: "បន្តមេរៀនបន្ទាប់",
           done: false,
-          nextLessonLink: null,
+          nextLessonLink: `/coursedetail/${courseId}/lesson/${nextLessonId}`,
         };
-      }
-
-      const completedLessonCount = Math.max(
-        0,
-        Math.min(Number(progress?.completedLessons || 0), lessons.length),
-      );
-
-      if (completedLessonCount >= lessons.length) {
-        return {
-          id: `done-${courseId}`,
-          title: course?.courseTitle || course?.title || "Completed Course",
-          time: timeSlots[index] || "10:00",
-          duration: "បានបញ្ចប់រួចរាល់",
-          done: true,
-          nextLessonLink: null,
-        };
-      }
-
-      const nextLessonIndex = completedLessonCount;
-      const nextLesson = lessons[nextLessonIndex];
-      const nextLessonId = getLessonId(nextLesson);
-      const nextLessonTitle = getLessonTitle(nextLesson, nextLessonIndex);
-
-      if (!nextLessonId) return null;
-
-      return {
-        id: `${courseId}-${nextLessonId}`,
-        title: `${course?.courseTitle || course?.title || "Course"} - ${nextLessonTitle}`,
-        time: timeSlots[index] || "10:00",
-        duration: "បន្តមេរៀនបន្ទាប់",
-        done: false,
-        nextLessonLink: `/coursedetail/${courseId}/lesson/${nextLessonId}`,
-      };
-    })
-    .filter(Boolean)
-    .slice(0, 5);
-}, [
-  selectedDayYmd,
-  selectedDayActivities,
-  mergedEnrollments,
-  coursesById,
-  courseLessonsById,
-  courseProgressById,
-]);
+      })
+      .filter(Boolean)
+      .slice(0, 5);
+  }, [
+    selectedDayYmd,
+    selectedDayActivities,
+    mergedEnrollments,
+    coursesById,
+    courseLessonsById,
+    courseProgressById,
+  ]);
 
   return (
     <div className="min-h-screen bg-[#fcfcfc] dark:bg-[#091220] px-4 sm:px-6 md:px-10 lg:px-20  xl:px-32 py-8 sm:py-12">
@@ -1058,17 +1066,15 @@ export default function Learn() {
             <button className="bg-[#4476cd] text-[#ffffff] border hover:bg-[#3f72af] border-[#3f72af] px-6 py-2 rounded-lg font-medium">
               កំពុងដំណេីរការ
             </button>
-
-            
           </div>
 
           <div className="mb-6 rounded-xl bg-slate-50 border  border-slate-200 px-4 py-3">
-                <p className="text-sm text-slate-600">
-                  វគ្គសិក្សាកំពុងដំណើរការ:{" "}
-                  <span className="font-bold text-slate-800">
-                    {mergedEnrollments.length}
-                  </span>
-                </p>
+            <p className="text-sm text-slate-600">
+              វគ្គសិក្សាកំពុងដំណើរការ:{" "}
+              <span className="font-bold text-slate-800">
+                {mergedEnrollments.length}
+              </span>
+            </p>
           </div>
 
           {mergedEnrollments.length === 0 ? (
