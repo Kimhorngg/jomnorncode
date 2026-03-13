@@ -28,29 +28,30 @@ export const leaders = [
 ];
 
 export const members = [
-  {
-    name: "យ៉ាង គីមហ័ង",
-    role: "ប្រធាន",
-    img: kimhorngImage,
-    quote: "ពេលនោះ ដាក់ធ្វើការលើនេះ",
-  },
+  
   {
     name: "មឿន គឹមហ៊ួ",
     role: "អនុប្រធាន",
     img: moeunImage,
-    quote: "ពេលនោះ ដាក់ធ្វើការលើនេះ",
+    quote: "ទោះយេីងដើរយឺត​ តែយេីងមិនឈប់ដើរ",
+  },
+  {
+    name: "យ៉ាង គីមហ័ង",
+    role: "ប្រធាន",
+    img: kimhorngImage,
+    quote: "ហត់ពេលនេះ ដោយមិនវេទនាពេលក្រោយ",
   },
   {
     name: "ជា​ ភីរម្យ",
     role: "សមាជិក",
     img: phearumImage,
-    quote: "ពេលនោះ ដាក់ធ្វើការលើនេះ",
+    quote: "​និយាយបែបណាធ្វេីបែបនឹង",
   },
   {
     name: "លាង​ ម៉ាណែត",
     role: "សមាជិក​",
     img: manethImage,
-    quote: "ពេលនោះ ដាក់ធ្វើការលើនេះ",
+    quote: "ការរីកចម្រើន ចាប់ផ្តើមនៅកន្លែងដែលភាពសុខស្រួលបញ្ចប់",
   },
   {
     name: "ស៊ន ឆវ័ន",
@@ -62,7 +63,7 @@ export const members = [
     name: "សារុន​ លីសា",
     role: "សមាជិក",
     img: lisaImage,
-    quote: "ពេលនោះ ដាក់ធ្វើការលើនេះ",
+    quote: "ទង្វេីអោយសមនឹងសម្តី",
   },
   {
     name: "ឆាន់ ហ្វីលីប",

@@ -18,7 +18,8 @@ import Document from "./pages/Document";
 import LearnBeforeLogin from "./pages/LearnBeforeLogin";
 import { Toaster } from "react-hot-toast";
 import CertificatePage from "./pages/CertificatePage";
-
+import Profile from "./pages/Profile";
+import Enrollment from "./pages/Enrollment";
 
 const router = createBrowserRouter([
   {
@@ -66,10 +67,17 @@ const router = createBrowserRouter([
         element: <LearnBeforeLogin />,
       },
       {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/enrollment/:courseId",
+        element: <Enrollment />,
+      },
+      {
         path: "/certificate/:courseId",
         element: <CertificatePage />,
-      }
-     
+      },
     ],
   },
   {

@@ -85,10 +85,10 @@ export default function Roadmap() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#f3f4f6] p-6 md:p-12 font-sans dark:bg-[#0e172b]">
+    <div className="min-h-screen bg-[#fcfcfc] p-6 md:p-12 font-sans dark:bg-[#091220]">
       {/* Header */}
       <div className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold text-[#1e293b] dark:text-slate-100 mb-4 tracking-tight">
+        <h1 className="text-3xl md:text-4xl font-bold text-[#1e293b] dark:text-white mb-4 tracking-tight">
           ផែនទីអាជីពបច្ចេកវិទ្យា
         </h1>
         <div className="w-24 h-1.5 bg-[#ffbf48] mx-auto rounded-full mb-6"></div>
@@ -105,7 +105,7 @@ export default function Roadmap() {
             onClick={() => setActiveTab(tab.id)}
             className={`px-8 py-3.5 rounded-2xl text-sm font-bold transition-all duration-300 transform ${
               activeTab === tab.id
-                ? "bg-[#1e293b] text-white shadow-2xl shadow-slate-400 -translate-y-1"
+                ? "bg-[#1e293b] text-white shadow-xl shadow-slate-400 -translate-y-1"
                 : "bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 hover:text-[#1e293b] dark:bg-[#111827] dark:text-slate-300 dark:border-slate-700 dark:hover:bg-[#0f172a] dark:hover:text-white"
             }`}
           >
@@ -115,7 +115,7 @@ export default function Roadmap() {
       </div>
 
       {/* Roadmap Container */}
-      <div className="max-w-5xl mx-auto relative">
+      <div className="max-w-5xl mx-auto relative ">
         {/* The Vertical Line (Centered to the dots) */}
         <div className="absolute left-5 md:left-6 top-2 bottom-2 w-0.5 border-l-2 border-dashed border-blue-200 dark:border-blue-900 z-0"></div>
 
@@ -123,22 +123,22 @@ export default function Roadmap() {
           {roadmapData[activeTab].steps.map((step, index) => (
             <div
               key={`${activeTab}-${step.id}`}
-              className="relative flex items-stretch gap-8 z-10 transition-all duration-500 animate-in fade-in slide-in-from-left-4"
+              className=" relative flex items-stretch gap-8 z-10 transition-all duration-500 animate-in fade-in slide-in-from-left-4"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Number Circle Holder */}
-              <div className="flex flex-col items-center">
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-black text-lg shadow-lg shadow-blue-100 ring-4 ring-white dark:ring-[#0e172b] shrink-0">
+              <div className="flex  flex-col items-center">
+                <div className="w-10  h-10 md:w-12 md:h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-black text-lg shadow-lg shadow-blue-100 ring-4 ring-white dark:ring-[#0e172b] shrink-0">
                   {step.id}
                 </div>
               </div>
 
               {/* Card Content - Force Full Width Alignment */}
-              <div className="w-full bg-white border border-slate-100 p-8 rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-xl transition-all duration-300 flex flex-col justify-center dark:bg-white dark:border-slate-200">
-                <h3 className="text-xl md:text-2xl font-bold text-blue-600 mb-2">
+              <div className="w-full bg-white dark:border dark:border-[#314057] dark:bg-[#1c293d]  p-8 rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-xl transition-all duration-300 flex flex-col justify-center">
+                <h3 className="text-xl md:text-2xl font-bold text-blue-600 dark:-text-[#112d52] mb-2">
                   {step.title}
                 </h3>
-                <p className="text-slate-500 dark:text-slate-300 text-base md:text-lg leading-relaxed">
+                <p className="text-slate-500 dark:text-white text-base md:text-lg leading-relaxed">
                   {step.desc}
                 </p>
               </div>

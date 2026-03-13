@@ -26,10 +26,10 @@ export default function LessonProgressCard() {
 
   return (
     <div className="flex-1">
-      <div className="bg-white p-6 rounded-xl shadow-sm space-y-4">
-        <h3 className="text-lg font-bold text-[#102d4f]">ដំណើរការមេរៀន</h3>
+      <div className="bg-white dark:bg-[#1c293f] p-6 rounded-xl shadow-sm space-y-4">
+        <h3 className="text-lg font-bold text-[#102d4f] dark:text-white">ដំណើរការមេរៀន</h3>
 
-        <ul className="space-y-2 text-gray-700">
+        <ul className="space-y-2 text-gray-700 dark:text-gray-300">
           <li className="flex items-center gap-2">
             <span
               className={lessonCompleted ? "text-green-500" : "text-gray-400"}

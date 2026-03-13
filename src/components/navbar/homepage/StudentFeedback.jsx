@@ -4,7 +4,7 @@ import manethImage from "../../../assets/Maneth.png";
 
 export default function StudentFeedback() {
   return (
-    <div className="bg-[#f3f4f6] py-16 px-4 dark:bg-[#0e172b]">
+    <div className="bg-[#fcfcfc] py-16 px-4 dark:bg-[#091220]">
       <div className="max-w-5xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-16">
@@ -17,7 +17,7 @@ export default function StudentFeedback() {
         {/* Feedback Grid */}
         <div className="grid md:grid-cols-2 gap-8">
           {/* Card 1 */}
-          <div className="bg-white p-8 rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] relative border border-gray-100 dark:bg-[#111827] dark:border-slate-800">
+          <div className="bg-white dark:bg-[#1c293e] p-8 rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] relative border border-gray-100 dark:bg-[#111827] dark:border-slate-800 hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <div className="flex items-center gap-4 mb-6">
               <img
                 src={chovornImage}
@@ -44,7 +44,7 @@ export default function StudentFeedback() {
                 </svg>
               </div>
             </div>
-            <p className="text-[#6c7180] dark:text-slate-300 leading-relaxed">
+            <p className="text-[#6c7180] dark:text-white leading-relaxed">
               មេរៀនងាយយល់ណាស់
               ហើយខ្ញុំចូលចិត្តពេលវាយកូដតាមជាក់ស្តែងពីព្រោះវាធ្វេី
               ឲ្យហាត់បានភ្លាមៗ។​ខ្ញុំចូលចិត្តការបែងចែកវគ្គសិក្សាច្បាស់លាស់ងាយស្រួលក្នុងការសិក្សា។
@@ -52,7 +52,7 @@ export default function StudentFeedback() {
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white p-8 rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] relative border border-gray-100 dark:bg-[#111827] dark:border-slate-800">
+          <div className="bg-white p-8 dark:bg-[#1c293e] rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] relative border border-gray-100 dark:bg-[#111827] dark:border-slate-800 hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <div className="flex items-center gap-4 mb-6">
               <img
                 src={manethImage}
@@ -63,7 +63,7 @@ export default function StudentFeedback() {
                 <h4 className="khmer-font font-bold text-[#112d50] dark:text-slate-100 text-lg">
                   ជា ភីរម្យ
                 </h4>
-                <p className="text-gray-400 dark:text-slate-400 text-sm">
+                <p className="text-gray-400 dark:text-white text-sm">
                   Project Manager
                 </p>
               </div>
@@ -79,7 +79,7 @@ export default function StudentFeedback() {
                 </svg>
               </div>
             </div>
-            <p className="text-[#6c7180] dark:text-slate-300 leading-relaxed">
+            <p className="text-[#6c7180] dark:text-white leading-relaxed">
               វេបសាយមាន Editor ដែលខ្ញុំអាចវាយកូដ និងមើលលទ្ធផលភ្លាមៗ។ទាំងស្រុង
               វេបសាយនេះធ្វើឲ្យការរៀនកូដក្លាយជារឿងងាយស្រួល សប្បាយ
               និងអាចប្រើបានទាំងពីរភាសា។

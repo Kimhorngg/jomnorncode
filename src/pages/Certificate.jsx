@@ -1,34 +1,154 @@
-import React from 'react'
-import jsPDF from 'jspdf'
-import img from '../assets/Certificate.png'
+import jsPDF from "jspdf";
+import {
+  IoCheckmarkCircle,
+  IoDownloadOutline,
+  IoRibbonOutline,
+} from "react-icons/io5";
+import img from "../assets/Certificate.png";
 
 const generateCertificate = (name, course) => {
-  // Create a new jsPDF instance
   const doc = new jsPDF();
 
-  // Add background image
-  doc.addImage(img, 'PNG', 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight());
+  doc.addImage(
+    img,
+    "PNG",
+    0,
+    0,
+    doc.internal.pageSize.getWidth(),
+    doc.internal.pageSize.getHeight(),
+  );
 
-  // Add recipient name
   doc.setFontSize(36);
-  doc.setFont('helvetica'); // Change the font family and style
-  doc.text(name, 105, 150, { align: 'center' }); // put the nick name 
+  doc.setFont("helvetica");
+  doc.text(name, 105, 150, { align: "center" });
 
-  // Add course name
   doc.setFontSize(20);
-  doc.text(course, 105, 185, { align: 'center' }); // put the course name
+  doc.text(course, 105, 185, { align: "center" });
 
-  // Save the PDF
   doc.save(`${name}-${course}.pdf`);
 };
 
-function Certificate(props) {
-    return (
-      <div>
-        <button onClick={() => generateCertificate(props.name, props.course)}>Generate Certificate</button>
-      </div>
-    );
-  }
-  
+export default function Certificate({ name, course, certificate }) {
+  const issuedAt = certificate?.issuedAt || certificate?.createdAt || null;
+  const displayDate = issuedAt
+    ? new Date(issuedAt).toLocaleDateString("en-CA", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : new Date().toLocaleDateString("en-CA", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
 
-export default Certificate;
+  return (
+    <div className="min-h-screen bg-[linear-gradient(180deg,#f5f7fb_0%,#e9eef8_100%)] px-6 py-10 sm:py-14 dark:bg-none dark:bg-[#101827]">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-8 text-center">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#17345f]  text-white shadow-lg">
+            <IoRibbonOutline className="text-3xl" />
+          </div>
+          <h1 className="text-2xl sm:text-5xl font-bold tracking-tight text-[#112d4f]">
+            វិញ្ញាបនបត្ររបស់អ្នកបានរួចរាល់!
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-sm sm:text-lg dark:text-gray-200 text-slate-600">
+            អបអរសាទរ។ អ្នកបានបញ្ចប់វគ្គសិក្សារួចរាល់
+            ហើយអាចទាញយកវិញ្ញាបនបត្ររបស់អ្នកបានឥឡូវនេះ។
+          </p>
+        </div>
+
+        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="overflow-hidden rounded-[28px] border  border-slate-200 bg-white shadow-[0_24px_60px_rgba(15,23,42,0.10)]">
+            <div className="border-b border-slate-200 bg-[linear-gradient(135deg,#17345f_0%,#244a86_100%)] px-6 py-5 text-white sm:px-8">
+              <div className="flex items-center gap-3">
+                <IoCheckmarkCircle className="text-2xl text-emerald-300" />
+                <div>
+                  <p className="text-sm uppercase  text-blue-100">ការបញ្ចប់</p>
+                  <h2 className="text-xl sm:text-2xl font-bold">
+                    វិញ្ញាបនបត្រ​នៃ​សមិទ្ធផល
+                  </h2>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-6 sm:p-8 mt-5 ">
+              <div className="overflow-hidden rounded-3xl border border-[#d6deed] bg-[#f7f9fd]">
+                <div className="relative aspect-[0.707/1] w-full overflow-hidden bg-white">
+                  <img
+                    src={img}
+                    alt="Certificate preview"
+                    className="h-full w-full object-contain"
+                  />
+
+                  <div className="pointer-events-none absolute inset-0 text-center">
+                    {/* <p className="absolute left-1/2 top-[40%] -translate-x-1/2 text-[clamp(12px,1.2vw,18px)] font-semibold italic text-[#6f84a8]">
+                      proudly presented to
+                    </p> */}
+                    {/* <h3 className="absolute  left-1/2 top-[45%] w-[70%] -translate-x-1/2 text-[clamp(28px,4vw,64px)] font-black text-[#17345f]">
+                      {name}
+                    </h3>
+                    <p className="absolute left-1/2 top-[61%] -translate-x-1/2 text-[clamp(12px,1.2vw,18px)] font-semibold italic text-[#6f84a8]">
+                      for completing the course
+                    </p>
+                    <p className="absolute left-1/2 top-[66%] w-[70%] -translate-x-1/2 text-[clamp(18px,2vw,32px)] font-bold text-[#1f3a5f]">
+                      {course}
+                    </p>
+                    <p className="absolute left-1/2 top-[81%] -translate-x-1/2 text-[clamp(12px,1.1vw,18px)] font-medium text-slate-500">
+                      {displayDate}
+                    </p> */}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-6">
+            <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-[0_20px_45px_rgba(15,23,42,0.08)] sm:p-8">
+              <p className="text-md font-semibold uppercase  text-[#3f72af]">
+                ព័ត៌មានលម្អិតអំពីវិញ្ញាបនបត្រ
+              </p>
+              <div className="mt-6 space-y-5">
+                <div>
+                  <p className="text-sm text-slate-500">អ្នកទទួល</p>
+                  <p className="mt-1 text-xl font-bold text-[#112d4f]">
+                    {name}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-slate-500">វគ្គសិក្សា</p>
+                  <p className="mt-1 text-lg font-semibold text-slate-800">
+                    {course}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-slate-500">
+                    កាលបរិច្ឆេទចេញវិញ្ញាបនបត្រ
+                  </p>
+                  <p className="mt-1 text-lg font-semibold text-slate-800">
+                    {displayDate}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-[28px] bg-[linear-gradient(135deg,#17345f_0%,#1f4b8f_100%)] p-6 text-white shadow-[0_24px_60px_rgba(23,52,95,0.28)] sm:p-8">
+              <h2 className="text-2xl font-black">ទាញយកវិញ្ញាបនបត្ររបស់អ្នក</h2>
+              <p className="mt-3 text-sm sm:text-base text-blue-100">
+                ទាញយកជា PDF ដើម្បីរក្សាទុក ឬចែករំលែកការសម្រេចរបស់អ្នក។
+              </p>
+
+              <button
+                onClick={() => generateCertificate(name, course)}
+                className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-[#f59e0c] px-6 py-4 text-base font-bold text-white transition hover:bg-[#d97706]"
+              >
+                <IoDownloadOutline className="text-xl" />
+                បង្កើតវិញ្ញាបនបត្ររបស់អ្នកជា PDF
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

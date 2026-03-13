@@ -20,9 +20,8 @@ export default function Quiz() {
   const [fetchError, setFetchError] = useState(null);
   const [enrollModalOpen, setEnrollModalOpen] = useState(false);
   const [enrollStatus, setEnrollStatus] = useState(null);
-  const [enrollLoading, setEnrollLoading] = useState(false);
   const [enrollError, setEnrollError] = useState(null);
-  const [enrollmentId, setEnrollmentId] = useState(null);
+  const [nextLessonPath, setNextLessonPath] = useState(null);
 
   const shuffle = (arr) => arr.sort(() => Math.random() - 0.5);
 
@@ -84,7 +83,7 @@ export default function Quiz() {
     );
   };
 
-  const loadCourseLessonIds = async (headers) => {
+  const loadCourseLessons = async (headers) => {
     const endpoints = [
       `${API_BASE}/api/lessons/course/${courseId}/ordered`,
       `${API_BASE}/lessons/course/${courseId}/ordered`,
@@ -102,17 +101,29 @@ export default function Quiz() {
           (Array.isArray(data?.items) && data.items) ||
           [];
 
-        const ids = list
-          .map((lesson) => lesson?.lessonId ?? lesson?.id ?? lesson?.lesson_id)
-          .filter(Boolean);
+        const normalizedLessons = list
+          .map((lesson, index) => ({
+            id: lesson?.lessonId ?? lesson?.id ?? lesson?.lesson_id ?? null,
+            title:
+              lesson?.lessonTitle ??
+              lesson?.title ??
+              lesson?.lesson_name ??
+              `Lesson ${index + 1}`,
+          }))
+          .filter((lesson) => lesson.id != null);
 
-        if (ids.length) return ids;
+        if (normalizedLessons.length) return normalizedLessons;
       } catch {
         // try next endpoint
       }
     }
 
     return [];
+  };
+
+  const loadCourseLessonIds = async (headers) => {
+    const lessons = await loadCourseLessons(headers);
+    return lessons.map((lesson) => lesson.id).filter(Boolean);
   };
 
   const handleCertificateClick = async () => {
@@ -148,12 +159,17 @@ export default function Quiz() {
     let userId = resolveUserId(authUser);
     if (!userId) {
       try {
-        const meRes = await fetch(`${API_BASE}/users/me`, {
-          headers: { Authorization: `Bearer ${authToken}` },
-        });
-        if (meRes.ok) {
-          const mePayload = extractUser(await meRes.json());
-          userId = resolveUserId(mePayload);
+        const meEndpoints = [`${API_BASE}/api/users/me`, `${API_BASE}/users/me`];
+
+        for (const url of meEndpoints) {
+          const meRes = await fetch(url, {
+            headers: { Authorization: `Bearer ${authToken}` },
+          });
+          if (meRes.ok) {
+            const mePayload = extractUser(await meRes.json());
+            userId = resolveUserId(mePayload);
+            if (userId) break;
+          }
         }
       } catch {
         // ignore and fall through
@@ -167,18 +183,31 @@ export default function Quiz() {
     }
 
     try {
-      const response = await fetch(`${API_BASE}/enrollments/user/${userId}`, {
-        headers,
-      });
+      const enrollmentEndpoints = [
+        `${API_BASE}/api/enrollments/user/${userId}?page=0&size=10&sortBy=createdAt&direction=desc`,
+        `${API_BASE}/enrollments/user/${userId}?page=0&size=10&sortBy=createdAt&direction=desc`,
+        `${API_BASE}/api/enrollments/user/${userId}`,
+        `${API_BASE}/enrollments/user/${userId}`,
+      ];
 
-      if (!response.ok) {
+      let payload = null;
+      let matchedResponse = false;
+
+      for (const url of enrollmentEndpoints) {
+        const response = await fetch(url, { headers });
+        if (!response.ok) continue;
+        payload = await response.json();
+        matchedResponse = true;
+        break;
+      }
+
+      if (!matchedResponse) {
         setEnrollStatus("error");
         setEnrollError("មិនអាចពិនិត្យការចុះឈ្មោះបាន");
         setEnrollModalOpen(true);
         return;
       }
 
-      const payload = await response.json();
       const enrollments = parseEnrollments(payload);
       const matched = enrollments.find((enrollment) => {
         const enrolledCourseId =
@@ -195,7 +224,6 @@ export default function Quiz() {
       if (!matched) {
         setEnrollStatus("not-enrolled");
         setEnrollError(null);
-        setEnrollmentId(null);
         setEnrollModalOpen(true);
         return;
       }
@@ -203,14 +231,13 @@ export default function Quiz() {
       if (!isEnrollmentComplete(matched)) {
         setEnrollStatus("incomplete");
         setEnrollError(null);
-        setEnrollmentId(matched?.id || matched?.enrollmentId || null);
         setEnrollModalOpen(true);
         return;
       }
 
-      setEnrollmentId(matched?.id || matched?.enrollmentId || null);
-
-      navigate(`/certificate/${courseId}`);
+      setEnrollStatus("ready");
+      setEnrollError(null);
+      setEnrollModalOpen(true);
     } catch {
       setEnrollStatus("error");
       setEnrollError("មិនអាចពិនិត្យការចុះឈ្មោះបាន");
@@ -218,97 +245,14 @@ export default function Quiz() {
     }
   };
 
-  const handleCompleteEnrollment = async () => {
-    if (!authToken) {
-      toast.error("សូមចូលគណនីជាមុនសិន");
-      navigate("/login");
-      return;
-    }
+  const handleCompleteEnrollment = () => {
+    setEnrollModalOpen(false);
+    navigate(`/enrollment/${courseId}`);
+  };
 
-    setEnrollLoading(true);
-    setEnrollError(null);
-
-    let userId = resolveUserId(authUser);
-    if (!userId) {
-      try {
-        const meRes = await fetch(`${API_BASE}/users/me`, {
-          headers: { Authorization: `Bearer ${authToken}` },
-        });
-        if (meRes.ok) {
-          const mePayload = extractUser(await meRes.json());
-          userId = resolveUserId(mePayload);
-        }
-      } catch {
-        // ignore
-      }
-    }
-
-    const payloads = [
-      { courseId },
-      { courseId: Number(courseId) },
-      userId ? { userId, courseId } : null,
-      userId ? { userId: Number(userId), courseId: Number(courseId) } : null,
-    ].filter(Boolean);
-
-    try {
-      let currentEnrollmentId = enrollmentId;
-
-      if (!currentEnrollmentId) {
-        for (const payload of payloads) {
-          const res = await fetch(`${API_BASE}/api/enrollments`, {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${authToken}`,
-            },
-            body: JSON.stringify(payload),
-          });
-
-          if (res.ok) {
-            const created = await res.json();
-            currentEnrollmentId =
-              created?.data?.id || created?.id || created?.enrollmentId || null;
-            break;
-          }
-        }
-      }
-
-      if (!currentEnrollmentId) {
-        setEnrollError("បញ្ចូលការចុះឈ្មោះមិនបានជោគជ័យ");
-        return;
-      }
-
-      const completeEndpoints = [
-        `${API_BASE}/api/enrollments/${currentEnrollmentId}/complete`,
-        `${API_BASE}/enrollments/${currentEnrollmentId}/complete`,
-      ];
-
-      let completed = false;
-      for (const url of completeEndpoints) {
-        const res = await fetch(url, {
-          method: "PATCH",
-          headers: { Authorization: `Bearer ${authToken}` },
-        });
-        if (res.ok) {
-          completed = true;
-          break;
-        }
-      }
-
-      if (!completed) {
-        setEnrollError("បញ្ចប់ការចុះឈ្មោះមិនបានជោគជ័យ");
-        return;
-      }
-
-      toast.success("បានចុះឈ្មោះរួចរាល់");
-      setEnrollModalOpen(false);
-      navigate(`/certificate/${courseId}`);
-    } catch {
-      setEnrollError("បញ្ចូលការចុះឈ្មោះមិនបានជោគជ័យ");
-    } finally {
-      setEnrollLoading(false);
-    }
+  const handleOpenCertificate = () => {
+    setEnrollModalOpen(false);
+    navigate(`/certificate/${courseId}`);
   };
 
   useEffect(() => {
@@ -330,6 +274,20 @@ export default function Quiz() {
         Accept: "application/json",
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
       };
+
+      const orderedLessons = await loadCourseLessons(headers);
+      const currentLessonIndex = orderedLessons.findIndex(
+        (lesson) => String(lesson.id) === String(lessonId),
+      );
+      const nextLesson = currentLessonIndex >= 0
+        ? orderedLessons[currentLessonIndex + 1] ?? null
+        : null;
+
+      setNextLessonPath(
+        nextLesson
+          ? `/coursedetail/${courseId}/lesson/${nextLesson.id}`
+          : null,
+      );
 
       // fetch("https://opentdb.com/api.php?amount=5&type=multiple")
 
@@ -515,13 +473,11 @@ export default function Quiz() {
               <>
                 <button
                   onClick={() =>
-                    navigate(
-                      `/coursedetail/${courseId}/lesson/${parseInt(lessonId) + 1}`,
-                    )
+                    navigate(nextLessonPath || `/coursedetail/${courseId}`)
                   }
                   className="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600"
                 >
-                  ទៅមេរៀនបន្ទាប់
+                  {nextLessonPath ? "ទៅមេរៀនបន្ទាប់" : "ត្រឡប់ទៅវគ្គសិក្សា"}
                 </button>
                 <button
                   onClick={handleCertificateClick}
@@ -540,16 +496,18 @@ export default function Quiz() {
               onClick={() => setEnrollModalOpen(false)}
             />
             <div className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-xl">
-              <h3 className="text-lg font-semibold text-[#1f3a5f]">
+              <h3 className="text-lg font-semibold text-[#1f3a5f] dark:text-white">
                 ចង់ទទួលវិញ្ញាបនបត្រមែនទេ?
               </h3>
-              <p className="mt-2 text-sm text-slate-600">
+              <p className="mt-2 text-sm text-slate-600 dark:text-gray-300">
+                {enrollStatus === "ready" &&
+                  "អ្នកបានបញ្ចប់វគ្គសិក្សារួចរាល់ហើយ។ អ្នកអាចបន្តទៅកាន់វិញ្ញាបនបត្ររបស់អ្នកបាន។"}
                 {enrollStatus === "error" &&
                   "មិនអាចពិនិត្យការចុះឈ្មោះបាន។ សូមសាកល្បងម្ដងទៀត"}
                 {enrollStatus === "not-enrolled" &&
-                  "សូមបញ្ចប់ការចុះឈ្មោះជាមុនសិន។ ចុចខាងក្រោមដើម្បីបំពេញការចុះឈ្មោះ។"}
+                  "បើអ្នកចង់ទទួលវិញ្ញាបនបត្រ អ្នកត្រូវបំពេញការចុះឈ្មោះជាមុនសិន។ ចុចខាងក្រោមដើម្បីទៅកាន់ទំព័រ Enrollment។"}
                 {enrollStatus === "incomplete" &&
-                  "ការចុះឈ្មោះរបស់អ្នកមិនទាន់បញ្ចប់។ ចុចខាងក្រោមដើម្បីបញ្ចប់វា។"}
+                  "បើអ្នកចង់ទទួលវិញ្ញាបនបត្រ អ្នកត្រូវបំពេញ Enrollment ជាមុនសិន។ ចុចខាងក្រោមដើម្បីបន្ត។"}
               </p>
               {enrollError && (
                 <p className="mt-2 text-sm text-red-600">{enrollError}</p>
@@ -557,18 +515,25 @@ export default function Quiz() {
               <div className="mt-5 flex flex-wrap gap-3 justify-end">
                 <button
                   onClick={() => setEnrollModalOpen(false)}
-                  className="px-4 py-2 text-sm rounded-lg border border-slate-200 text-slate-600"
+                  className="px-4 py-2 text-sm rounded-lg border border-slate-200 dark:border-white text-slate-600 dark:text-white"
                 >
                   បិទ
                 </button>
+                {enrollStatus === "ready" && (
+                  <button
+                    onClick={handleOpenCertificate}
+                    className="px-4 py-2 text-sm rounded-lg bg-[#1f3a5f] text-white"
+                  >
+                    ទៅកាន់វិញ្ញាបនបត្រ
+                  </button>
+                )}
                 {(enrollStatus === "not-enrolled" ||
                   enrollStatus === "incomplete") && (
                   <button
                     onClick={handleCompleteEnrollment}
-                    disabled={enrollLoading}
                     className="px-4 py-2 text-sm rounded-lg bg-[#1f3a5f] text-white disabled:opacity-50"
                   >
-                    {enrollLoading ? "កំពុងចុះឈ្មោះ..." : "បំពេញការចុះឈ្មោះ"}
+                    ទៅកាន់ Enrollment
                   </button>
                 )}
               </div>
@@ -589,14 +554,14 @@ export default function Quiz() {
       <div>
         <Link
           to={`/coursedetail/${courseId}/lesson/${lessonId}`}
-          className="text-blue-900 font-medium hover:underline"
+          className="text-blue-900 font-medium hover:underline dark:text-white"
         >
           &lt; ត្រឡប់ទៅក្រោយ
         </Link>
       </div>
 
       <div className="flex flex-col items-center justify-center flex-1">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-3">
+        <h1 className="text-2xl sm:text-3xl​​​ text-[#112d51] lg:text-4xl font-bold text-center mb-3">
           សំណួរ<span className="text-[#ffa500]">តេស្តមេរៀន</span>
         </h1>
 
@@ -605,9 +570,9 @@ export default function Quiz() {
         </p>
 
         {/* Progress */}
-        <div className="bg-white w-full max-w-2xl rounded-xl shadow px-15 py-8 mb-6">
+        <div className="bg-white dark:bg-[#1c293f] w-full max-w-2xl rounded-xl shadow px-15 py-8 mb-6">
           <div className="flex justify-between text-sm font-medium mb-2">
-            <span className="text-[#102e50]">
+            <span className="text-[#102e50] dark:text-white">
               សំណួរ {currentIndex + 1} ចំនួន {questions.length}
             </span>
             <span className="text-[#ffa500]">{progress}%</span>
@@ -622,9 +587,9 @@ export default function Quiz() {
         </div>
 
         {/* Question */}
-        <div className="bg-white w-full max-w-2xl rounded-xl shadow p-15">
+        <div className="bg-white w-full max-w-2xl rounded-xl shadow p-15 dark:bg-[#1c293f]">
           <h2
-            className="text-lg text-[#102e50] sm:text-xl font-semibold mb-6"
+            className="text-lg dark:text-white text-[#102e50] sm:text-xl font-semibold mb-6"
             dangerouslySetInnerHTML={{ __html: current.question }}
           />
 
@@ -634,7 +599,7 @@ export default function Quiz() {
                 key={i}
                 onClick={() => handleAnswer(answer)}
                 dangerouslySetInnerHTML={{ __html: answer }}
-                className={`w-full border border-[#d9d9d9] text-[#6c7080] rounded-lg py-3 transition
+                className={`w-full border border-[#d9d9d9] dark:text-white dark:focus:text-[#6c7080] hover:text-[#6c7080] text-[#6c7080] rounded-lg py-3 transition
                   ${
                     selectedAnswer === answer
                       ? "bg-blue-100 border-blue-400"

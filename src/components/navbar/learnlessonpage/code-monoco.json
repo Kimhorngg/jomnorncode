@@ -2,122 +2,150 @@
   "data": [
     {
       "codeId": 11,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<body>\n\n<h1>My First Heading</h1>\n<p>My first paragraph.</p>\n\n<h2>About HTML</h2>\n<p>HTML stands for HyperText Markup Language.</p>\n<p>It is used to create web pages.</p>\n\n<h2>My Favorite Subjects</h2>\n<ul>\n<li>HTML</li>\n<li>CSS</li>\n<li>JavaScript</li>\n</ul>\n\n<h2>Simple List</h2>\n<ol>\n<li>Learn HTML</li>\n<li>Practice Coding</li>\n<li>Create Websites</li>\n</ol>\n\n<p>This is a simple HTML example for beginners.</p>\n\n</body>\n</html>"
     },
     {
       "codeId": 12,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>HTML Elements and Attributes</title>\n</head>\n<body>\n\n<h1 id=\"mainTitle\">HTML Elements Example</h1>\n<p class=\"text\">This is a paragraph element in HTML.</p>\n\n<h2 style=\"color:blue;\">Heading with Style Attribute</h2>\n<p>This paragraph shows how HTML elements display content.</p>\n\n<a href=\"https://www.google.com\">Visit Google</a>\n<br>\n\n<hr>\n\n<ul>\n<li>HTML</li>\n<li>CSS</li>\n<li>JavaScript</li>\n</ul>\n\n</body>\n</html>"
     },
     {
       "codeId": 13,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>HTML Lists and Tables</title>\n</head>\n<body>\n\n<h1>HTML Lists Example</h1>\n\n<h2>Unordered List</h2>\n<ul>\n<li>HTML</li>\n<li>CSS</li>\n<li>JavaScript</li>\n</ul>\n\n<h2>Ordered List</h2>\n<ol>\n<li>Learn HTML</li>\n<li>Practice Coding</li>\n<li>Create Website</li>\n</ol>\n\n<hr>\n\n<h1>HTML Table Example</h1>\n\n<table border=\"1\">\n<tr>\n<th>Name</th>\n<th>Age</th>\n<th>Country</th>\n</tr>\n\n<tr>\n<td>Sok</td>\n<td>20</td>\n<td>Cambodia</td>\n</tr>\n\n<tr>\n<td>John</td>\n<td>25</td>\n<td>USA</td>\n</tr>\n\n</table>\n\n</body>\n</html>"
     },
     {
       "codeId": 14,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>HTML Links and Images</title>\n</head>\n<body>\n\n<h1>HTML Links Example</h1>\n<p>Click the link below to visit Google:</p>\n<a href=\"https://www.google.com\">Visit Google</a>\n\n<br><br>\n\n<h1>HTML Images Example</h1>\n<p>This is an example of an image in HTML:</p>\n<img src=\"https://i.pinimg.com/736x/b4/6d/ef/b46def9121e54551ca467e1ecf149311.jpg\" alt=\"Sample Image\" width=\"150\" height=\"150\">\n\n<p>You can also use an image as a link:</p>\n<a href=\"https://www.wikipedia.org\">\n</a>\n\n</body>\n</html>"
     },
     {
       "codeId": 15,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>HTML Forms and Input Fields</title>\n</head>\n<body>\n\n<h1>HTML Form Example</h1>\n\n<form>\n<label for=\"name\">Name:</label><br>\n<input type=\"text\" id=\"name\" name=\"name\"><br><br>\n\n<label for=\"email\">Email:</label><br>\n<input type=\"email\" id=\"email\" name=\"email\"><br><br>\n\n<label for=\"password\">Password:</label><br>\n<input type=\"password\" id=\"password\" name=\"password\"><br><br>\n\n<label>Gender:</label><br>\n<input type=\"radio\" name=\"gender\" value=\"male\"> Male<br>\n<input type=\"radio\" name=\"gender\" value=\"female\"> Female<br><br>\n\n<label>Skills:</label><br>\n<input type=\"checkbox\" name=\"skill\" value=\"html\"> HTML<br>\n<input type=\"checkbox\" name=\"skill\" value=\"css\"> CSS<br>\n<input type=\"checkbox\" name=\"skill\" value=\"javascript\"> JavaScript<br><br>\n\n<input type=\"submit\" value=\"Submit\">\n</form>\n\n</body>\n</html>"
     },
     {
       "codeId": 16,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>Final Project - Styled Web Page</title>\n</head>\n<body style=\"font-family:Arial; background-color:#f4f4f4; margin:0; padding:0;\">\n\n<div style=\"background-color:#333; color:white; text-align:center; padding:20px;\">\n<h1>My Styled Web Page</h1>\n<p>Welcome to my final HTML project</p>\n</div>\n\n<div style=\"padding:20px;\">\n<h2 style=\"color:darkblue;\">About Me</h2>\n<p style=\"font-size:18px; color:#444;\">Hello! My name is Student. This is my final project using HTML styling.</p>\n\n<h2 style=\"color:darkgreen;\">My Skills</h2>\n<ul style=\"background:white; padding:15px; border:1px solid #ccc; width:200px;\">\n<li>HTML</li>\n<li>CSS</li>\n<li>JavaScript</li>\n</ul>\n\n<h2 style=\"color:darkred;\">My Weekly Schedule</h2>\n<table border=\"1\" style=\"border-collapse:collapse; width:60%; background:white; text-align:center;\">\n<tr style=\"background-color:#ddd;\">\n<th>Day</th>\n<th>Activity</th>\n</tr>\n<tr>\n<td>Monday</td>\n<td>Learn HTML</td>\n</tr>\n<tr>\n<td>Tuesday</td>\n<td>Practice CSS</td>\n</tr>\n<tr>\n<td>Wednesday</td>\n<td>Build Web Page</td>\n</tr>\n</table>\n\n<h2 style=\"color:purple;\">Contact Form</h2>\n<form style=\"background:white; padding:15px; border:1px solid #ccc; width:300px;\">\n<label>Name:</label><br>\n<input type=\"text\" style=\"width:100%; padding:8px;\"><br><br>\n\n<label>Email:</label><br>\n<input type=\"email\" style=\"width:100%; padding:8px;\"><br><br>\n\n<input type=\"submit\" value=\"Send\" style=\"background-color:blue; color:white; padding:10px 20px; border:none;\">\n</form>\n</div>\n\n<div style=\"background-color:#333; color:white; text-align:center; padding:10px; margin-top:20px;\">\n<p>© 2026 My Final HTML Project</p>\n</div>\n\n</body>\n</html>"
     },
     {
       "codeId": 17,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>HTML Multimedia Elements</title>\n</head>\n<body>\n\n<h1>HTML Multimedia Elements</h1>\n\n<h2>Audio Example</h2>\n<p>Play the audio below:</p>\n<audio controls>\n<source src=\"audio.mp3\" type=\"audio/mpeg\">\nYour browser does not support the audio element.\n</audio>\n\n<br><br>\n\n<h2>Video Example</h2>\n<p>Watch the video below:</p>\n<video width=\"320\" height=\"240\" controls>\n<source src=\"video.mp4\" type=\"video/mp4\">\nYour browser does not support the video tag.\n</video>\n\n<br><br>\n\n<h2>YouTube Video Example</h2>\n<iframe width=\"420\" height=\"315\" src=\"https://www.youtube.com/embed/dQw4w9WgXcQ\">\n</iframe>\n\n</body>\n</html>"
     },
     {
       "codeId": 18,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>HTML Iframes and Embeds</title>\n</head>\n<body>\n\n<h1>HTML Iframes Example</h1>\n<p>This is an example of displaying another webpage using iframe:</p>\n\n<iframe src=\"https://www.wikipedia.org\" width=\"400\" height=\"250\"></iframe>\n\n<br><br>\n\n<h1>Embedded YouTube Video</h1>\n<p>This is an example of embedding a YouTube video:</p>\n\n<iframe width=\"420\" height=\"315\" src=\"https://www.youtube.com/embed/dQw4w9WgXcQ\"></iframe>\n\n<br><br>\n\n<h1>Embed Google Map</h1>\n<iframe width=\"400\" height=\"300\" src=\"https://maps.google.com/maps?q=phnom%20penh&t=&z=13&ie=UTF8&iwloc=&output=embed\"></iframe>\n\n</body>\n</html>"
     },
     {
       "codeId": 19,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>HTML Forms Advanced and Validation</title>\n</head>\n<body>\n\n<h1>Advanced HTML Form with Validation</h1>\n\n<form>\n<label for=\"name\">Full Name:</label><br>\n<input type=\"text\" id=\"name\" name=\"name\" required><br><br>\n\n<label for=\"email\">Email:</label><br>\n<input type=\"email\" id=\"email\" name=\"email\" required><br><br>\n\n<label for=\"age\">Age:</label><br>\n<input type=\"number\" id=\"age\" name=\"age\" min=\"1\" max=\"100\" required><br><br>\n\n<label for=\"password\">Password:</label><br>\n<input type=\"password\" id=\"password\" name=\"password\" minlength=\"6\" required><br><br>\n\n<label for=\"website\">Website:</label><br>\n<input type=\"url\" id=\"website\" name=\"website\"><br><br>\n\n<label for=\"birthday\">Birthday:</label><br>\n<input type=\"date\" id=\"birthday\" name=\"birthday\"><br><br>\n\n<label for=\"country\">Country:</label><br>\n<select id=\"country\" name=\"country\">\n<option value=\"cambodia\">Cambodia</option>\n<option value=\"usa\">USA</option>\n<option value=\"japan\">Japan</option>\n</select><br><br>\n\n<label for=\"message\">Message:</label><br>\n<textarea id=\"message\" name=\"message\" rows=\"4\" cols=\"30\"></textarea><br><br>\n\n<input type=\"submit\" value=\"Submit Form\">\n</form>\n\n</body>\n</html>"
     },
     {
       "codeId": 20,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>Final Project - Complete HTML Web Page</title>\n</head>\n<body>\n\n<h1>Welcome to My Website</h1>\n<p>This is my final HTML project web page.</p>\n\n<hr>\n\n<h2>About Me</h2>\n<p>My name is Student. I am learning HTML and building my first complete web page.</p>\n\n<h2>My Skills</h2>\n<ul>\n<li>HTML</li>\n<li>CSS</li>\n<li>JavaScript</li>\n</ul>\n\n<h2>My Weekly Study Plan</h2>\n<table border=\"1\">\n<tr>\n<th>Day</th>\n<th>Activity</th>\n</tr>\n<tr>\n<td>Monday</td>\n<td>Learn HTML Basics</td>\n</tr>\n<tr>\n<td>Tuesday</td>\n<td>Practice Lists and Tables</td>\n</tr>\n<tr>\n<td>Wednesday</td>\n<td>Study Links and Images</td>\n</tr>\n</table>\n\n<h2>Useful Link</h2>\n<p><a href=\"https://www.google.com\">Visit Google</a></p>\n\n<h2>My Image</h2>\n<img src=\"https://via.placeholder.com/150\" alt=\"Sample Image\" width=\"150\" height=\"150\">\n\n<h2>Contact Form</h2>\n<form>\n<label for=\"name\">Name:</label><br>\n<input type=\"text\" id=\"name\" name=\"name\"><br><br>\n\n<label for=\"email\">Email:</label><br>\n<input type=\"email\" id=\"email\" name=\"email\"><br><br>\n\n<input type=\"submit\" value=\"Send\">\n</form>\n\n<hr>\n\n<p>© 2026 My Complete HTML Web Page</p>\n\n</body>\n</html>"
     },
     {
       "codeId": 2,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>CSS Selectors and Properties</title>\n<style>\nbody { background-color: #f4f4f4; font-family: Arial; }\nh1 { color: blue; text-align: center; }\np { color: #333; font-size: 18px; }\n.highlight { color: red; font-weight: bold; }\n#mainBox { background-color: white; border: 2px solid black; padding: 15px; }\n</style>\n</head>\n<body>\n\n<h1>CSS Selectors Example</h1>\n\n<div id=\"mainBox\">\n<p>This paragraph uses the element selector.</p>\n<p class=\"highlight\">This paragraph uses the class selector.</p>\n<p>This is another normal paragraph.</p>\n</div>\n\n</body>\n</html>"
     },
     {
       "codeId": 3,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>Colors and Fonts Example</title>\n<style>\nbody { background-color: #f0f8ff; font-family: Arial, sans-serif; }\nh1 { color: darkblue; text-align: center; }\np { color: #333333; font-size: 18px; }\n.highlight { color: red; font-family: 'Courier New', monospace; }\n.box { background-color: lightyellow; border: 1px solid gray; padding: 15px; }\n</style>\n</head>\n<body>\n\n<h1>Colors and Fonts in CSS</h1>\n\n<div class=\"box\">\n<p>This paragraph shows the default font and color.</p>\n<p class=\"highlight\">This text uses a different font and color.</p>\n<p style=\"color: green; font-size: 20px;\">This paragraph uses inline color and font size.</p>\n</div>\n\n</body>\n</html>"
     },
     {
       "codeId": 4,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>CSS Box Model and Spacing</title>\n<style>\nbody { font-family: Arial; background-color: #f5f5f5; }\n.box { width: 300px; border: 3px solid blue; padding: 20px; margin: 30px; background-color: lightyellow; }\nh1 { text-align: center; color: darkblue; }\np { font-size: 16px; }\n</style>\n</head>\n<body>\n\n<h1>CSS Box Model Example</h1>\n\n<div class=\"box\">\n<p>This box demonstrates the CSS Box Model.</p>\n<p>It includes margin, border, padding, and content.</p>\n</div>\n\n</body>\n</html>"
     },
     {
       "codeId": 5,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>CSS Flexbox Layout</title>\n<style>\nbody { font-family: Arial; background-color: #f5f5f5; }\n.container { display: flex; justify-content: space-around; background-color: lightgray; padding: 20px; }\n.box { background-color: steelblue; color: white; padding: 20px; margin: 10px; width: 100px; text-align: center; }\nh1 { text-align: center; }\n</style>\n</head>\n<body>\n\n<h1>Flexbox Layout Example</h1>\n\n<div class=\"container\">\n<div class=\"box\">Box 1</div>\n<div class=\"box\">Box 2</div>\n<div class=\"box\">Box 3</div>\n</div>\n\n</body>\n</html>"
     },
     {
       "codeId": 6,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>Final Project - Complete Styled HTML Web Page</title>\n<style>\nbody { margin: 0; font-family: Arial, sans-serif; background: linear-gradient(to right, #e0f2fe, #fae8ff); color: #333; }\n.header { background: linear-gradient(to right, #2563eb, #9333ea); color: white; text-align: center; padding: 40px 20px; }\n.header h1 { margin: 0; font-size: 38px; }\n.header p { font-size: 18px; margin-top: 10px; }\n.container { width: 90%; max-width: 1000px; margin: 30px auto; }\n.section { background-color: white; margin-bottom: 25px; padding: 25px; border-radius: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }\n.section h2 { color: #2563eb; margin-top: 0; }\nul { padding-left: 20px; }\nli { margin: 8px 0; }\ntable { width: 100%; border-collapse: collapse; margin-top: 10px; background-color: #fff; }\nth, td { border: 1px solid #ccc; padding: 12px; text-align: center; }\nth { background-color: #dbeafe; }\na { color: #7c3aed; text-decoration: none; font-weight: bold; }\na:hover { color: #2563eb; }\nimg { display: block; margin: 15px auto; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }\nform { margin-top: 15px; }\ninput, textarea { width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box; }\ninput[type=\"submit\"] { background: linear-gradient(to right, #2563eb, #9333ea); color: white; border: none; font-size: 16px; cursor: pointer; }\ninput[type=\"submit\"]:hover { opacity: 0.9; }\n.footer { background-color: #1e1b4b; color: white; text-align: center; padding: 18px; }\n</style>\n</head>\n<body>\n\n<div class=\"header\">\n<h1>Welcome to My Complete Web Page</h1>\n<p>This is my final HTML project with beautiful styling</p>\n</div>\n\n<div class=\"container\">\n<div class=\"section\">\n<h2>About Me</h2>\n<p>Hello! My name is Student. I am learning HTML and building my first complete styled web page.</p>\n</div>\n\n<div class=\"section\">\n<h2>My Favorite Subjects</h2>\n<ul>\n<li>HTML</li>\n<li>CSS</li>\n<li>JavaScript</li>\n</ul>\n</div>\n\n<div class=\"section\">\n<h2>My Study Schedule</h2>\n<table>\n<tr>\n<th>Day</th>\n<th>Activity</th>\n</tr>\n<tr>\n<td>Monday</td>\n<td>Learn HTML Basics</td>\n</tr>\n<tr>\n<td>Tuesday</td>\n<td>Practice CSS</td>\n</tr>\n<tr>\n<td>Wednesday</td>\n<td>Build Web Pages</td>\n</tr>\n</table>\n</div>\n\n<div class=\"section\">\n<h2>Useful Link</h2>\n<p><a href=\"https://www.google.com\">Visit Google</a></p>\n</div>\n\n<div class=\"section\">\n<h2>Sample Image</h2>\n<img src=\"https://via.placeholder.com/200\" alt=\"Sample Image\" width=\"200\" height=\"200\">\n</div>\n\n<div class=\"section\">\n<h2>Contact Form</h2>\n<form>\n<label for=\"name\">Name:</label>\n<input type=\"text\" id=\"name\" name=\"name\">\n\n<label for=\"email\">Email:</label>\n<input type=\"email\" id=\"email\" name=\"email\">\n\n<label for=\"message\">Message:</label>\n<textarea id=\"message\" name=\"message\" rows=\"4\"></textarea>\n\n<input type=\"submit\" value=\"Send Message\">\n</form>\n</div>\n</div>\n\n<div class=\"footer\">\n<p>© 2026 My Complete Styled HTML Web Page</p>\n</div>\n\n</body>\n</html>"
     },
     {
       "codeId": 7,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>CSS Transitions and Animations</title>\n<style>\nbody { font-family: Arial; text-align: center; background-color: #f4f4f4; }\n\n.box { width: 150px; height: 150px; background-color: blue; margin: 40px auto; transition: all 0.5s; }\n\n.box:hover { background-color: red; transform: scale(1.2); }\n\n.animate { width: 100px; height: 100px; background-color: green; position: relative; animation: move 4s infinite; }\n\n@keyframes move {\n0% { left: 0px; }\n50% { left: 200px; }\n100% { left: 0px; }\n}\n</style>\n</head>\n<body>\n\n<h1>CSS Transitions and Animations</h1>\n\n<p>Hover the box below to see the transition effect.</p>\n<div class=\"box\"></div>\n\n<p>The box below uses CSS animation.</p>\n<div class=\"animate\"></div>\n\n</body>\n</html>"
     },
     {
       "codeId": 8,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>Responsive Design with Media Queries</title>\n<style>\nbody { font-family: Arial; margin: 0; background-color: #f4f4f4; }\n\n.header { background-color: darkblue; color: white; text-align: center; padding: 20px; }\n\n.container { display: flex; }\n\n.box { flex: 1; padding: 20px; background-color: lightblue; margin: 10px; text-align: center; }\n\n@media (max-width: 600px) {\n.container { flex-direction: column; }\n.box { background-color: lightgreen; }\n}\n</style>\n</head>\n<body>\n\n<div class=\"header\">\n<h1>Responsive Web Page</h1>\n<p>Resize the browser to see the layout change.</p>\n</div>\n\n<div class=\"container\">\n<div class=\"box\">Box 1</div>\n<div class=\"box\">Box 2</div>\n<div class=\"box\">Box 3</div>\n</div>\n\n</body>\n</html>"
     },
     {
       "codeId": 9,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>Pseudo-classes and Pseudo-elements</title>\n<style>\nbody { font-family: Arial; background-color: #f4f4f4; padding: 20px; }\n\nbutton { padding: 10px 20px; background-color: blue; color: white; border: none; }\n\nbutton:hover { background-color: red; }\n\na:visited { color: purple; }\n\np::first-letter { font-size: 30px; color: darkblue; }\n\np::first-line { font-weight: bold; }\n</style>\n</head>\n<body>\n\n<h1>Pseudo-classes and Pseudo-elements</h1>\n\n<p>This paragraph demonstrates pseudo-elements in CSS.</p>\n\n<button>Hover Over Me</button>\n\n<br><br>\n\n<a href=\"https://www.google.com\">Visit Google</a>\n\n</body>\n</html>"
     },
     {
       "codeId": 10,
+      "practice": "",
       "sample": " <!DOCTYPE html>\n<html>\n<head>\n<title>Final Project - Beautiful Styled Web Page</title>\n<style>\nbody { margin: 0; font-family: Arial, sans-serif; background: linear-gradient(to right, #dbeafe, #fce7f3); color: #333; }\n.header { background: linear-gradient(to right, #2563eb, #7c3aed); color: white; text-align: center; padding: 50px 20px; }\n.header h1 { margin: 0; font-size: 40px; }\n.header p { font-size: 18px; margin-top: 10px; }\n.nav { background-color: rgba(0, 0, 0, 0.8); text-align: center; padding: 15px; }\n.nav a { color: white; text-decoration: none; margin: 0 20px; font-size: 18px; }\n.nav a:hover { color: #facc15; }\n.container { width: 90%; max-width: 1100px; margin: 30px auto; }\n.section { background-color: white; padding: 30px; margin-bottom: 25px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }\n.section h2 { color: #2563eb; margin-top: 0; }\n.cards { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }\n.card { flex: 1; min-width: 200px; background: linear-gradient(to bottom, #eff6ff, #ffffff); border: 1px solid #bfdbfe; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }\n.card h3 { color: #7c3aed; }\nbutton { background: linear-gradient(to right, #2563eb, #7c3aed); color: white; border: none; padding: 12px 24px; border-radius: 30px; font-size: 16px; cursor: pointer; }\nbutton:hover { opacity: 0.9; }\n.footer { background-color: #1e1b4b; color: white; text-align: center; padding: 20px; margin-top: 30px; }\n</style>\n</head>\n<body>\n\n<div class=\"header\">\n<h1>My Beautiful Website</h1>\n<p>A fully styled web page using HTML and CSS</p>\n</div>\n\n<div class=\"nav\">\n<a href=\"#home\">Home</a>\n<a href=\"#about\">About</a>\n<a href=\"#services\">Services</a>\n<a href=\"#contact\">Contact</a>\n</div>\n\n<div class=\"container\">\n<div class=\"section\" id=\"about\">\n<h2>About Me</h2>\n<p>Hello! I am a student learning web design. This page shows a modern and colorful website using HTML and CSS styling.</p>\n</div>\n\n<div class=\"section\" id=\"services\">\n<h2>My Services</h2>\n<div class=\"cards\">\n<div class=\"card\">\n<h3>Web Design</h3>\n<p>Create beautiful and simple website layouts.</p>\n</div>\n<div class=\"card\">\n<h3>HTML & CSS</h3>\n<p>Build structured and styled web pages.</p>\n</div>\n<div class=\"card\">\n<h3>Responsive Design</h3>\n<p>Make websites look good on all devices.</p>\n</div>\n</div>\n</div>\n\n<div class=\"section\" id=\"contact\">\n<h2>Contact Me</h2>\n<p>Email: student@example.com</p>\n<button>Send Message</button>\n</div>\n</div>\n\n<div class=\"footer\">\n<p>© 2026 My Beautiful Styled Web Page</p>\n</div>\n\n</body>\n</html>"
     },
     {
         "codeId": 22,
         "language":"cpp",
+        "practice": "",
         "sample": "#include <iostream>\n#include <fstream>\nusing namespace std;\n\nint main() {\n\n    try {\n        // File Output (Write to file)\n        ofstream outFile(\"data.txt\");\n\n        if (!outFile) {\n            throw \"Error opening file for writing\";\n        }\n\n        outFile << \"Hello from C++ File I/O!\" << endl;\n        outFile << \"This file was created using ofstream.\" << endl;\n\n        outFile.close();\n\n        // File Input (Read from file)\n        ifstream inFile(\"data.txt\");\n\n        if (!inFile) {\n            throw \"Error opening file for reading\";\n        }\n\n        string line;\n        cout << \"Reading from file:\" << endl;\n\n        while (getline(inFile, line)) {\n            cout << line << endl;\n        }\n\n        inFile.close();\n    }\n    catch (const char* error) {\n        cout << \"Exception: \" << error << endl;\n    }\n\n    return 0;\n}"
     },
     {
       "codeId": 23,
       "language": "cpp",
+      "practice": "",
       "sample": " #include <iostream>\nusing namespace std;\n\nint main() {\n\n    // Variables and Data Types\n    int age = 20;\n    float height = 1.75;\n    double weight = 65.5;\n    char grade = 'A';\n    bool isStudent = true;\n    string name = \"Sok\";\n\n    // Display values\n    cout << \"Name: \" << name << endl;\n    cout << \"Age: \" << age << endl;\n    cout << \"Height: \" << height << endl;\n    cout << \"Weight: \" << weight << endl;\n    cout << \"Grade: \" << grade << endl;\n    cout << \"Student Status: \" << isStudent << endl;\n\n    return 0;\n}"
     },
     {
       "codeId": 24,
       "language": "cpp",
+      "practice": "",
       "sample": " #include <iostream>\nusing namespace std;\n\nint main() {\n\n    int a = 10;\n    int b = 5;\n\n    // Arithmetic Operators\n    cout << \"Addition: \" << a + b << endl;\n    cout << \"Subtraction: \" << a - b << endl;\n    cout << \"Multiplication: \" << a * b << endl;\n    cout << \"Division: \" << a / b << endl;\n\n    // Relational Operators\n    cout << \"a > b: \" << (a > b) << endl;\n    cout << \"a < b: \" << (a < b) << endl;\n    cout << \"a == b: \" << (a == b) << endl;\n\n    // Logical Operators\n    cout << \"(a > 5 && b < 10): \" << (a > 5 && b < 10) << endl;\n    cout << \"(a < 5 || b < 10): \" << (a < 5 || b < 10) << endl;\n\n    return 0;\n}"
     },
     {
       "codeId": 25,
       "language": "cpp",
+      "practice": "",
       "sample": " #include <iostream>\nusing namespace std;\n\nint main() {\n\n    int number = 10;\n\n    // if statement\n    if (number > 0) {\n        cout << \"The number is positive\" << endl;\n    }\n\n    // if-else statement\n    if (number % 2 == 0) {\n        cout << \"The number is even\" << endl;\n    } else {\n        cout << \"The number is odd\" << endl;\n    }\n\n    // switch statement\n    int day = 2;\n\n    switch(day) {\n        case 1:\n            cout << \"Monday\" << endl;\n            break;\n        case 2:\n            cout << \"Tuesday\" << endl;\n            break;\n        case 3:\n            cout << \"Wednesday\" << endl;\n            break;\n        default:\n            cout << \"Other day\" << endl;\n    }\n\n    return 0;\n}"
     },
     {
       "codeId": 26,
       "language": "cpp",
+      "practice": "",
       "sample": " #include <iostream>\nusing namespace std;\n\nint main() {\n\n    // for loop\n    cout << \"For Loop:\" << endl;\n    for(int i = 1; i <= 5; i++) {\n        cout << i << endl;\n    }\n\n    // while loop\n    cout << \"While Loop:\" << endl;\n    int j = 1;\n    while(j <= 5) {\n        cout << j << endl;\n        j++;\n    }\n\n    // do-while loop\n    cout << \"Do-While Loop:\" << endl;\n    int k = 1;\n    do {\n        cout << k << endl;\n        k++;\n    } while(k <= 5);\n\n    return 0;\n}"
     },
     {
       "codeId": 27,
       "language": "cpp",
+      "practice": "",
       "sample": " #include <iostream>\nusing namespace std;\n\n// Function definition\nvoid greet() {\n    cout << \"Hello, welcome to C++ Functions!\" << endl;\n}\n\n// Function with parameters\nint add(int a, int b) {\n    return a + b;\n}\n\nint main() {\n\n    // Calling the greet function\n    greet();\n\n    // Calling the add function\n    int result = add(5, 3);\n    cout << \"Sum: \" << result << endl;\n\n    return 0;\n}"
     },
     {
       "codeId": 28,
       "language": "cpp",
+      "practice": "",
       "sample": " #include <iostream>\nusing namespace std;\n\nint main() {\n\n    // Array example\n    int numbers[5] = {10, 20, 30, 40, 50};\n\n    cout << \"Array Elements:\" << endl;\n    for(int i = 0; i < 5; i++) {\n        cout << numbers[i] << endl;\n    }\n\n    // String example\n    string name = \"Sok\";\n\n    cout << \"\\nString Example:\" << endl;\n    cout << \"Name: \" << name << endl;\n\n    return 0;\n}"
     },
     {
       "codeId": 29,
+      "practice": "",
       "language": "cpp",
       "sample": " #include <iostream>\nusing namespace std;\n\nint main() {\n\n    int number = 10;\n\n    // Pointer declaration\n    int* ptr = &number;\n\n    cout << \"Value of number: \" << number << endl;\n    cout << \"Address of number: \" << &number << endl;\n    cout << \"Pointer value (address): \" << ptr << endl;\n    cout << \"Value using pointer: \" << *ptr << endl;\n\n    // Dynamic memory allocation\n    int* dynamicNumber = new int;\n    *dynamicNumber = 25;\n\n    cout << \"\\nDynamic Memory Value: \" << *dynamicNumber << endl;\n\n    // Free allocated memory\n    delete dynamicNumber;\n\n    return 0;\n}"
     },
     {
       "codeId": 30,
+      "practice": "",
       "language": "cpp",
       "sample": " #include <iostream>\nusing namespace std;\n\n// Class definition\nclass Student {\npublic:\n    string name;\n    int age;\n\n    // Member function\n    void display() {\n        cout << \"Name: \" << name << endl;\n        cout << \"Age: \" << age << endl;\n    }\n};\n\nint main() {\n\n    // Creating object\n    Student s1;\n\n    // Assign values\n    s1.name = \"Sok\";\n    s1.age = 20;\n\n    // Calling function\n    s1.display();\n\n    return 0;\n}"
     },

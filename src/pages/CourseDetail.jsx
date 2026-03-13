@@ -313,13 +313,14 @@ export default function CourseDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fafafa] pb-12">
+    <div className="min-h-screen bg-[#fafafa] dark:bg-[#091220] pb-12">
       <div data-aos="fade-up">
         <HeroSectionCourseDetail
           title={courseData?.title}
           description={courseData?.description}
           image={courseData?.image}
           onStartLearning={handleStartLearning}
+          onBackToCourses={() => navigate("/course")}
         />
       </div>
 

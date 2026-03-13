@@ -20,25 +20,25 @@ export default function Carocel() {
   };
 
   return (
-    <section className="py-20 bg-[#f3f4f6] dark:bg-[#0e172b] transition-colors duration-300">
+    <section className="py-20  bg-[#fcfcfc] dark:bg-[#091220] transition-colors duration-300">
       {/* Title */}
-      <div className="text-center mb-14">
+      <div className="text-center mb-14 ">
         <h1 className="text-3xl md:text-4xl font-bold text-[#112d4f] dark:text-white">
-          សិស្សដែលទទួលបានលទ្ធផលជោគជ័យ
+          សិស្សដែលទទួលបានលទ្ធផល<span className="text-[#ffbf48]">ជោគជ័យ</span>
         </h1>
         <p className="text-xl text-gray-500 dark:text-gray-400 mt-3">
           អាចឃេីញសមិទ្ធផលសិស្សច្បាស់លាស់
         </p>
       </div>
       {/* Slider */}
-      <div className="relative max-w-6xl mx-auto overflow-hidden light-card-scope">
+      <div className="relative max-w-6xl mx-auto  overflow-hidden light-card-scope">
         <div
-          className="flex transition-transform duration-700 ease-in-out"
+          className="flex transition-transform duration-700 ease-in-out "
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {/* Slide 1 */}
-          <div className="min-w-full px-6">
-            <div className="bg-white rounded-3xl shadow-md px-10 py-12 md:px-16 md:py-14 transition-colors duration-300">
+          <div className="min-w-full px-6 ">
+            <div className="bg-white dark:bg-[#1c293d] border-[#e4e4e4] dark:border-[#314057] border-1  rounded-3xl  px-10 py-12 md:px-16 md:py-14 transition-all duration-300 hover:shadow-xl hover:scale-105 cursor-pointer">
               <div className="flex flex-col md:flex-row items-center gap-12">
                 <div className="w-72 h-72 rounded-full p-2 border-2 border-[#ffbf48]">
                   <img
@@ -51,7 +51,7 @@ export default function Carocel() {
                 <div className="flex-1">
                   <div className="flex gap-6 items-start">
                     <div className="w-3 h-26 bg-[#ffbf48] rounded shrink-0" />
-                    <p className="text-lg font-bold md:text-xl text-[#112d51] dark:text-slate-100 mt-5 leading-relaxed">
+                    <p className="text-lg font-bold md:text-xl text-[#112d51] dark:text-white mt-5 leading-relaxed">
                       ខ្ញុំបានរៀន C++ នៅ{" "}
                       <span className="text-[#ffbf48]"> ជំនាន់កូដ</span>{" "}
                       ហើយឈានដល់ការយល់ដឹងល្អពី OOP និងគោលការណ៍មូលដ្ឋាន។
@@ -59,10 +59,10 @@ export default function Carocel() {
                     </p>
                   </div>
                   <div className="border-b border-[#3F72AF] mt-8 mb-6" />
-                  <h2 className="text-2xl font-bold text-slate-800 dark:text-white">
+                  <h2 className="text-2xl font-bold text-[#1e293b] dark:text-white">
                     សារុន លីសា
                   </h2>
-                  <p className="text-gray-500 dark:text-gray-400 mt-2">
+                  <p className="text-gray-500 dark:text-white mt-2">
                     និស្សិតឆ្នាំទី២
                   </p>
                 </div>
@@ -71,7 +71,7 @@ export default function Carocel() {
           </div>
           {/* Slide 2 */}
           <div className="min-w-full px-6">
-            <div className="bg-white rounded-3xl shadow-md px-10 py-12 md:px-16 md:py-14 transition-colors duration-300">
+            <div className="bg-white rounded-3xl dark:bg-[#1c293d]  border-[#e4e4e4] dark:border-[#314057] border-1  px-10 py-12 md:px-16 md:py-14 transition-all duration-300 hover:shadow-xl hover:scale-105 cursor-pointer">
               <div className="flex flex-col md:flex-row items-center gap-12">
                 <div className="w-72 h-72 rounded-full p-2 border-2 border-[#ffbf48]">
                   <img
@@ -84,7 +84,7 @@ export default function Carocel() {
                 <div className="flex-1">
                   <div className="flex gap-6 items-start">
                     <div className="w-3 h-24 bg-[#ffbf48] rounded shrink-0" />
-                    <p className="text-lg font-bold md:text-xl text-[#112d51] dark:text-slate-100 mt-5 leading-relaxed">
+                    <p className="text-lg font-bold md:text-xl text-[#112d51] dark:text-white mt-5 leading-relaxed">
                       ខ្ញុំបានរៀន HTML នៅ
                       <span className="text-[#ffbf48]"> ជំនាន់កូដ </span>
                       ហើយឈានដល់ការចេះធ្វេីវេបសាយមួយខ្លួនឯងបានហើយ។
@@ -95,7 +95,7 @@ export default function Carocel() {
                   <h2 className="text-2xl font-bold text-slate-800 dark:text-white">
                     លាង ម៉ាណេត
                   </h2>
-                  <p className="text-gray-500 dark:text-gray-400 mt-2">
+                  <p className="text-gray-500 dark:text-white mt-2">
                     និស្សិតឆ្នាំទី២
                   </p>
                 </div>
@@ -104,7 +104,7 @@ export default function Carocel() {
           </div>
           {/* Slide 3 */}
           <div className="min-w-full px-6">
-            <div className="bg-white rounded-3xl shadow-md px-10 py-12 md:px-16 md:py-14 transition-colors duration-300">
+            <div className="bg-white rounded-3xl dark:bg-[#1c293d]  border-[#e4e4e4] dark:border-[#314057] border-1  px-10 py-12 md:px-16 md:py-14 transition-all duration-300 hover:shadow-xl hover:scale-105 cursor-pointer">
               <div className="flex flex-col md:flex-row items-center gap-12">
                 <div className="w-72 h-72 rounded-full p-2 border-2 border-[#ffbf48]">
                   <img
@@ -117,7 +117,7 @@ export default function Carocel() {
                 <div className="flex-1">
                   <div className="flex gap-6 items-start">
                     <div className="w-3 h-24 bg-[#ffbf48] rounded shrink-0" />
-                    <p className="text-lg font-bold md:text-xl text-[#112d51] dark:text-slate-100 mt-5 leading-relaxed">
+                    <p className="text-lg font-bold md:text-xl text-[#112d51] dark:text-white mt-5 leading-relaxed">
                       ដោយសារតែបានរៀននៅ{" "}
                       <span className="text-[#ffbf48]"> ជំនាន់កូដ</span>{" "}
                       ទេីបធ្វេីឲ្យខ្ញុំដឹងថាការរៀនកូដមិនមែនជារឿងពិបាកទេ។
@@ -129,7 +129,7 @@ export default function Carocel() {
                   <h2 className="text-2xl font-bold text-slate-800 dark:text-white">
                     សន ឆវ័ន
                   </h2>
-                  <p className="text-gray-500 dark:text-gray-400 mt-2">
+                  <p className="text-gray-500 dark:text-white mt-2">
                     និស្សិតឆ្នាំទី១
                   </p>
                 </div>

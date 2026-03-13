@@ -107,12 +107,12 @@ export default function DefinitionCard() {
   }
 
   return (
-    <div className="bg-white p-6 md:p-10 rounded-xl shadow-sm">
-      <h3 className="text-lg font-bold mb-3 text-[#102d4f]">
+    <div className="bg-white dark:bg-[#1c293f] p-6 md:p-10 rounded-xl shadow-sm">
+      <h3 className="text-lg font-bold mb-3 text-[#102d4f] dark:text-white">
         {lesson?.lessonTitle || lesson?.title || "មិនមានចំណងជើង"}
       </h3>
 
-      <p className="text-gray-600 leading-relaxed whitespace-pre-line">
+      <p className="text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-line">
         {lesson?.content || lesson?.description || "គ្មានមាតិកាមេរៀន"}
       </p>
     </div>

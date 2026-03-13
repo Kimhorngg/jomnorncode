@@ -12,11 +12,11 @@ export default function Course() {
        This ensures that if the content is short, the whole page 
        still shows the dark background.
     */
-    <div className="min-h-screen  dark:bg-[#0f172a] transition-colors duration-300">
+    <div className="min-h-screen bg-[#fcfcfc] dark:bg-[#0f172a] transition-colors duration-300">
       <div data-aos="fade-up">
         <HeroSection />
       </div>
-      <div data-aos="fade-up" data-aos-delay="100">
+      <div className="relative z-30" data-aos="fade-up" data-aos-delay="100">
         <SearchBar
           courses={courses}
           onTyping={(term) => {
@@ -25,7 +25,11 @@ export default function Course() {
           onExecuteSearch={(val) => setFinalSearch(val)}
         />
       </div>
-      <div className="pb-20" data-aos="fade-up" data-aos-delay="200">
+      <div
+        className="relative z-10 bg-[#fcfcfc] pb-20 dark:bg-[#0f172a]"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
         {" "}
         {/* Added padding bottom for better spacing */}
         <RenderCourse searchTerm={finalSearch} />

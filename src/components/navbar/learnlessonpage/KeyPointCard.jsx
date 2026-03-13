@@ -44,9 +44,9 @@ export default function KeyPointsCard() {
   }, [lessonId]);
 
   return (
-    <div className="bg-white max-w-[1610px] p-6 rounded-xl shadow-sm">
+    <div className="bg-white dark:bg-[#1c293f] dark:text-white max-w-[1610px] p-6 rounded-xl shadow-sm">
       <h3 className="text-lg font-semibold mb-3">🔑 ចំណុចសំខាន់ៗ</h3>
-      <ul className="list-disc pl-5 space-y-2 text-gray-600">
+      <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
         {keyPoints.length ? (
           keyPoints.map((point, index) => <li key={index}>{point}</li>)
         ) : (

@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Hanuman:wght@100;300;400;700;900&display=swap");
 
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --font-hanuman: "Hanuman", serif;
@@ -27,6 +28,26 @@ html.dark body {
 html.dark .bg-white {
   background-color: #111827;
 }
+html.dark .text-title-white {
+  color: white;
+}
+
+html.dark .text-white {
+  color: white !important;
+}
+
+html.dark .text-gray-500 {
+  color: inherit;
+}
+
+/* Override custom colors in dark mode */
+html.dark .text-\[\#112d4f\],
+html.dark .text-\[\#112d50\],
+html.dark .text-\[\#112d51\],
+html.dark .text-\[\#112d52\],
+html.dark .text-\[\#1e293b\] {
+  color: white !important;
+}
 
 html.dark .bg-gray-50,
 html.dark .bg-gray-100,
@@ -40,14 +61,8 @@ html.dark .bg-\[\#f3f4f6\] {
 html.dark .text-gray-900,
 html.dark .text-slate-900,
 html.dark .text-gray-800,
-html.dark .text-slate-800,
-html.dark .text-gray-700,
-html.dark .text-slate-700,
-html.dark .text-gray-600,
-html.dark .text-slate-600,
-html.dark .text-gray-500,
-html.dark .text-slate-500 {
-  color: #cbd5e1;
+html.dark .text-slate-800 {
+  color: #eef0f3;
 }
 
 html.dark .border-gray-100,
@@ -56,6 +71,10 @@ html.dark .border-gray-300,
 html.dark .border-slate-200,
 html.dark .border-slate-300 {
   border-color: #1f2937;
+}
+
+html.dark .border-blue-500 {
+  border-color: #3b82f6 !important;
 }
 
 html.dark .shadow,
@@ -69,6 +88,36 @@ html.dark .light-card-scope .bg-white {
   background-color: #ffffff;
 }
 
+html.dark .light-card-scope .dark\:bg-\[\#1c293d\] {
+  background-color: #1c293d !important;
+}
+
+/* Keep text white in carousel during dark mode */
+html.dark .light-card-scope .dark\:text-white {
+  color: white !important;
+}
+
+html.dark .dark\:bg-\[\#1c293d\] {
+  background-color: #1c293d !important;
+}
+html.dark .dark\:bg-\[\#1c293e\] {
+  background-color: #1c293e !important;
+}
+html.dark .dark\:bg-\[\#1c293f\] {
+  background-color: #1c293f !important;
+}
+html.dark .dark\:bg-\[\#0f172a\] {
+  background-color: #0f172a !important;
+}
+html.dark .dark\:bg-\[\#1a202c\] {
+  background-color: #1a202c !important;
+}
+html.dark .dark\:border-\[\#314057\] {
+  border-color: #314057 !important;
+}
+html.dark .dark\:ring-\[\#314057\] {
+  --tw-ring-color: #314057;
+}
 /* html.dark .text-[#112d4f],
 html.dark .text-[#102e50],
 html.dark .text-[#1e293b],

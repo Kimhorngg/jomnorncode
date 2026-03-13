@@ -180,12 +180,12 @@ export default function LessonTopSection() {
   }
 
   return (
-    <div className="w-full bg-[#f2f2f2]">
+    <div className="w-full  bg-[#f2f2f2] ">
       <div className="max-w-420 mx-auto px-6 lg:px-12 pt-10 pb-4 text-slate-800">
         {/* Back */}
         <Link
           to={`/coursedetail/${courseId}`}
-          className="inline-block text-[#102e50] font-semibold text-lg mb-4 hover:text-[#3f71af] transition-colors"
+          className="inline-block text-[#102e50] dark:text-[#f9f9f9] font-semibold text-lg mb-4 hover:text-[#3f71af] transition-colors"
         >
           {"< ត្រឡប់ទៅវគ្គសិក្សា"}
         </Link>
@@ -208,7 +208,7 @@ export default function LessonTopSection() {
         </h1>
 
         {/* Description */}
-        <p className="text-gray-500 mb-2">{lesson.description}</p>
+        <p className="text-gray-500 dark:text-gray-300 mb-2">{lesson.description}</p>
       </div>
     </div>
   );

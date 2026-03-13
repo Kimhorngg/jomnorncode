@@ -148,9 +148,10 @@ export default function RenderHomepageCards({ searchTerm }) {
     if (!resolvedCourseId) return null;
 
     return (
-      <div
+      <Link
         key={`course-${resolvedCourseId}`}
-        className="bg-white rounded-3xl overflow-hidden shadow-md flex flex-col border border-gray-200 hover:shadow-lg transition-all"
+        to={`/coursedetail/${resolvedCourseId}`}
+        className="group bg-[#fcfcfc] dark:bg-[#1c293e] rounded-3xl overflow-hidden shadow-md flex flex-col border border-gray-200 dark:border-2 dark:border-blue-500 hover:shadow-xl hover:scale-105 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4477ce] focus-visible:ring-offset-2"
       >
         <div className="relative h-52 bg-gray-100 flex items-center justify-center p-8">
           <img
@@ -194,15 +195,8 @@ export default function RenderHomepageCards({ searchTerm }) {
               <span>{formatNumber(course.students || 5000)} នាក់</span>
             </div>
           </div>
-
-          <Link
-            to={`/coursedetail/${resolvedCourseId}`}
-            className="mt-auto w-full bg-[#4477ce] text-white font-medium py-3 rounded-xl text-center hover:bg-[#3563b0] transition-colors"
-          >
-            ចូលរៀន
-          </Link>
         </div>
-      </div>
+      </Link>
     );
   };
 
@@ -210,8 +204,8 @@ export default function RenderHomepageCards({ searchTerm }) {
     if (!data.length) return null;
 
     return (
-      <div className="mb-16">
-        <h2 className="text-3xl font-bold text-[#112d4f] mb-8">{title}</h2>
+      <div className="mb-16 ">
+        <h2 className="text-3xl font-bold   text-[#112d4f] mb-8">{title}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {data.map(renderCourseCard)}
         </div>
@@ -231,7 +225,7 @@ export default function RenderHomepageCards({ searchTerm }) {
   };
 
   return (
-    <div className="w-full py-11">
+    <div className="w-full py-11 bg-[#fcfcfc] dark:bg-[#0f172a]">
       <div className="max-w-415 mx-auto px-6 lg:px-12 ">
         {renderSection("វគ្គសិក្សាពេញនិយម", popularCourses)}
         {renderSection("វគ្គសិក្សាថ្មីៗ", newCourses)}

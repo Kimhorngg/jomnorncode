@@ -85,8 +85,9 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full bg-white dark:bg-[#0f172a] relative z-100 shadow-sm">
-      <div className="max-w-420 mx-auto px-6 lg:px-12 py-4 flex items-center justify-between">
+    <>
+      <nav className="sticky top-0 z-[500] w-full bg-white/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:bg-[#0f172a]/95 dark:supports-[backdrop-filter]:bg-[#0f172a]/80">
+        <div className="max-w-420 mx-auto px-6 lg:px-12 py-4 flex items-center justify-between">
         {/* LOGO */}
         <Link to="/" className="flex items-center">
           <img
@@ -253,7 +254,7 @@ export default function Navbar() {
                         setIsSignUpOpen(true);
                         setUserOpen(false);
                       }}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-50"
+                      className="w-full text-left px-4 py-2  hover:bg-gray-50 hover:text-[#112d50] "
                     >
                       បង្កើតគណនីថ្មី
                     </button>
@@ -263,7 +264,7 @@ export default function Navbar() {
                         setIsLoginOpen(true);
                         setUserOpen(false);
                       }}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-50 font-bold"
+                      className="w-full text-left px-4 py-2  hover:bg-gray-50 hover:text-[#112d50]"
                     >
                       ចូលប្រើប្រាស់
                     </button>
@@ -275,60 +276,61 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* MOBILE MENU */}
-      {mobileOpen && (
-        <div className="lg:hidden bg-white dark:bg-[#0f172a] border-t border-slate-200 dark:border-slate-800">
-          <ul className="px-6 py-4 space-y-2">
-            <li>
-              <NavLink
-                to="/"
-                end
-                className={navLinkClass}
-                onClick={() => setMobileOpen(false)}
-              >
-                ទំព័រដើម
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/learn"
-                className={navLinkClass}
-                onClick={() => setMobileOpen(false)}
-              >
-                ចូលរៀន
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/course"
-                className={navLinkClass}
-                onClick={() => setMobileOpen(false)}
-              >
-                វគ្គសិក្សា
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/document"
-                className={navLinkClass}
-                onClick={() => setMobileOpen(false)}
-              >
-                ឯកសារ
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/about"
-                className={navLinkClass}
-                onClick={() => setMobileOpen(false)}
-              >
-                អំពីយើង
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      )}
-      {/* LOGIN MODALS */}
+        {/* MOBILE MENU */}
+        {mobileOpen && (
+          <div className="lg:hidden bg-white dark:bg-[#0f172a] border-t border-slate-200 dark:border-slate-800">
+            <ul className="px-6 py-4 space-y-2">
+              <li>
+                <NavLink
+                  to="/"
+                  end
+                  className={navLinkClass}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  ទំព័រដើម
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/learn"
+                  className={navLinkClass}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  ចូលរៀន
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/course"
+                  className={navLinkClass}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  វគ្គសិក្សា
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/document"
+                  className={navLinkClass}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  ឯកសារ
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/about"
+                  className={navLinkClass}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  អំពីយើង
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        )}
+      </nav>
+
       <Login
         isOpen={isLoginOpen}
         onClose={() => setIsLoginOpen(false)}
@@ -346,6 +348,6 @@ export default function Navbar() {
           setIsLoginOpen(true);
         }}
       />
-    </nav>
+    </>
   );
 }

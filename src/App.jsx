@@ -32,8 +32,8 @@ export default function App() {
   // }
 
   return (
-    <div className="dark:bg-[#0e172b] transition-colors duration-300">
-      <div className="min-h-screen bg-[#112d4f] text-white dark:bg-[#0e172b] font-sans">
+    <div className="dark:bg-[#112d52]  transition-colors duration-300">
+      <div className="min-h-screen bg-[#112d4f] text-white dark:bg-[#112d52] font-sans">
         <div className="relative py-16 md:py-20 lg:py-28 overflow-hidden">
           <div className="max-w-420 mx-auto px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -55,14 +55,14 @@ export default function App() {
                 <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 sm:gap-5 mb-12">
                   <Link
                     to="/course"
-                    className="inline-block bg-[#0e468b] hover:bg-[#f2f2f2] hover:text-[#112d50] text-white text-base sm:text-lg font-semibold px-8 py-4 sm:px-10 sm:py-5 rounded-xl transition-all transform hover:scale-105"
+                    className="inline-block bg-[#0e468b] dark:hover:text-[#112d53] hover:bg-[#f2f2f2] hover:text-[#112d50] text-white text-base sm:text-lg font-semibold px-8 py-4 sm:px-10 sm:py-5 rounded-xl transition-all transform hover:scale-105"
                   >
                     មេីលវគ្គសិក្សា &gt;
                   </Link>
 
                   <Link
                     to="/signup"
-                    className="inline-block bg-[#f2f2f2] border-2 border-gray-500 hover:border-gray-300 text-[#0e468b] hover:bg-[#0e468b] hover:text-white text-base sm:text-lg font-semibold px-8 py-4 sm:px-10 sm:py-5 rounded-xl transition-all"
+                    className="inline-block bg-[#f2f2f2] dark:text-white  dark:hover:bg-[#0e468b] border-2 border-gray-500 hover:border-gray-300 text-[#0e468b] hover:bg-[#0e468b] hover:text-white text-base sm:text-lg font-semibold px-8 py-4 sm:px-10 sm:py-5 rounded-xl transition-all"
                   >
                     ចុះឈ្មោះឥឡូវនេះ
                   </Link>
@@ -93,7 +93,7 @@ export default function App() {
                 </div>
               </div>
 
-              {/* RIGHT SIDE */}
+             
               <div
                 className="flex justify-center lg:justify-end"
                 data-aos="fade-left"
@@ -111,12 +111,24 @@ export default function App() {
         {/* rendering the card */}
         <RenderPopularHomepageCard />
       </div>
-      <RenderCourseForBeginner />
-      <WhyChooseUs />
-      <Carocel />
-      <Roadmap />
-      <StudentFeedback />
-      <ConfirmCard />
+      <div data-aos="fade-up" data-aos-delay="50">
+        <RenderCourseForBeginner />
+      </div>
+      <div data-aos="fade-up" data-aos-delay="100">
+        <WhyChooseUs />
+      </div>
+      <div data-aos="fade-up" data-aos-delay="150">
+        <Carocel />
+      </div>
+      <div data-aos="fade-up" data-aos-delay="200">
+        <Roadmap />
+      </div>
+      <div data-aos="fade-up" data-aos-delay="250">
+        <StudentFeedback />
+      </div>
+      <div data-aos="fade-up" data-aos-delay="300">
+        <ConfirmCard />
+      </div>
     </div>
   );
 }

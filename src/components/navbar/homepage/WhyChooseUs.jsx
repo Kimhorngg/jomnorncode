@@ -1,21 +1,21 @@
 export default function WhyChooseUs() {
   return (
-    <section className="bg-[#112d50] py-16 px-4 sm:px-6 md:px-10 lg:px-16 text-white mt-30 mb-20 dark:bg-[#0e172b]">
+    <section className="bg-[#112d50] py-16 px-4 sm:px-6 md:px-10 lg:px-16 text-white dark:bg-[#112d51]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
+          <h2 className="text-3xl sm:text-3xl md:text-4xl md:text-4xl font-bold leading-tight mb-6">
             ហេតុអ្វីគួរជ្រើសរើសយើង
           </h2>
           <div className="w-24 h-1 bg-[#ffa500] mx-auto rounded-full"></div>
         </div>
 
         {/* Three Columns / Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20 max-w-full md:max-w-9xl mx-auto">
-  {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20 max-w-full md:max-w-9xl mx-auto">
+          {/* Cards */}
 
           {/* Card 1 */}
-          <div className="flex flex-col items-center text-center">
+          <div className="flex flex-col items-center text-center hover:scale-105 transition-all duration-300 cursor-pointer">
             <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white flex items-center justify-center mb-6 border-2 border-white/20">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ export default function WhyChooseUs() {
           </div>
 
           {/* Card 2 */}
-          <div className="flex flex-col items-center text-center">
+          <div className="flex mt-4 flex-col items-center text-center hover:scale-105 transition-all duration-300 cursor-pointer">
             <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white flex items-center justify-center mb-6 border-2 border-white/20">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +59,7 @@ export default function WhyChooseUs() {
           </div>
 
           {/* Card 3 */}
-          <div className="flex flex-col items-center text-center">
+          <div className="flex  flex-col items-center text-center hover:scale-105 transition-all duration-300 cursor-pointer">
             <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white flex items-center justify-center mb-6 border-2 border-white/20">
               <svg
                 className="w-14 h-14 md:w-16 md:h-16 text-[#3f71af]"
@@ -73,7 +73,8 @@ export default function WhyChooseUs() {
               រៀនបានគ្រប់ទីកន្លែង
             </h3>
             <p className="text-gray-300 leading-relaxed text-lg">
-              អាចចូលរៀនតាមទូរស័ព្ទ កុំព្យូទ័រ ឬ Tablet ដោយត្រូវការតែអ៊ីនធឺណិតប៉ុណ្ណោះ
+              អាចចូលរៀនតាមទូរស័ព្ទ កុំព្យូទ័រ ឬ Tablet
+              ដោយត្រូវការតែអ៊ីនធឺណិតប៉ុណ្ណោះ
             </p>
           </div>
         </div>

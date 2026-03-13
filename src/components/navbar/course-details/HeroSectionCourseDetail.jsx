@@ -1,7 +1,13 @@
 import React from 'react';
 import { IoBookOutline, IoTimeOutline, IoPeopleOutline } from 'react-icons/io5';
 
-const HeroSection = ({ title, description, image, onStartLearning }) => {
+const HeroSection = ({
+  title,
+  description,
+  image,
+  onStartLearning,
+  onBackToCourses,
+}) => {
   return (
     <div className="w-full bg-gradient-to-r from-[#81aed1] via-[#3a618c] to-[#112d4f] min-h-[420px] flex items-center overflow-hidden">
       <div className="max-w-[1610px] mx-auto px-4 sm:px-6 lg:px-8 w-full py-12">
@@ -9,6 +15,15 @@ const HeroSection = ({ title, description, image, onStartLearning }) => {
           
           {/* Left Side: Text Content */}
           <div className="flex-1 text-[#0f2b4c] space-y-6 z-10">
+            <button
+              type="button"
+              onClick={onBackToCourses}
+              className="inline-flex items-center gap-2 rounded-xl border border-white/40 bg-white/15 px-4 py-2 text-sm font-bold text-white backdrop-blur-sm transition-colors hover:bg-white/25"
+            >
+              <span aria-hidden="true">←</span>
+              ត្រឡប់ក្រោយ
+            </button>
+
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
               {title}
             </h1>

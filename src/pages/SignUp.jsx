@@ -1,11 +1,12 @@
 import React, { useRef, useState } from "react";
 import {
   IoClose,
+  IoEyeOffOutline,
+  IoEyeOutline,
   IoMailOutline,
   IoLockClosedOutline,
   IoPersonOutline,
 } from "react-icons/io5";
-import { useFacebookAuth } from "../components/social-auth/FacebookAuth";
 import { useGoogleAuth } from "../components/social-auth/GoogleAuth";
 import { useRegisterMutation, useLoginMutation } from "../services/authApi";
 import { useDispatch } from "react-redux";
@@ -82,7 +83,6 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { logInWithFacebook, isPending: facebookPending } = useFacebookAuth();
   const { logInWithGoogle, isPending: googlePending } = useGoogleAuth();
 
   const [formData, setFormData] = useState({
@@ -90,6 +90,7 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const [register, { isLoading: isRegistering }] = useRegisterMutation();
   const [login] = useLoginMutation();
@@ -108,7 +109,7 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
   const showSuccessAlert = (name) => {
     Swal.fire({
       icon: "success",
-      title: "Sign up success",
+      title: "បង្កើតគណនីជោគជ័យ",
       text: `Welcome to JomnornCode, ${name}!`,
       timer: 2000,
       showConfirmButton: false,
@@ -196,25 +197,6 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
     }
   };
 
-  const handleFacebookSocial = async () => {
-    try {
-      const firebaseUser = await logInWithFacebook();
-
-      console.log("Facebook firebase user:", firebaseUser);
-
-      if (!firebaseUser?.uid) {
-        throw new Error(
-          "Facebook sign in succeeded but no Firebase user was returned",
-        );
-      }
-
-      await syncSocialUserToBackend(firebaseUser, "Facebook");
-    } catch (err) {
-      toast.error(err?.message || "Facebook sign in cancelled or failed");
-      console.error("Facebook sign in error:", err);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isRegistering) return;
@@ -236,7 +218,7 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
     const username = `${emailPrefix}_${Date.now().toString().slice(-5)}`;
 
     try {
-      const registerRes = await register({
+      await register({
         username,
         email: trimmedEmail,
         password: trimmedPassword,
@@ -245,25 +227,14 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
         profilePicture: "",
       }).unwrap();
 
-      let authPayload = normalizeAuthResponse(registerRes);
-
-      if (!authPayload?.token) {
-        const loginRes = await login({
-          email: trimmedEmail,
-          password: trimmedPassword,
-        }).unwrap();
-
-        authPayload = normalizeAuthResponse(loginRes);
-      }
-
-      if (!authPayload?.token) {
-        throw new Error("Register succeeded but login failed");
-      }
-
-      dispatch(setCredentials(authPayload));
       toast.success("Sign up success");
       showSuccessAlert(firstName);
-      finishAuthSuccess();
+      if (isModal) {
+        onClose?.();
+        openLogin?.();
+      } else {
+        navigate("/login");
+      }
     } catch (err) {
       const message = err?.data?.message || err?.message || "Register failed";
 
@@ -278,17 +249,25 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
     }
   };
 
+  const handleClose = () => {
+    if (isModal) {
+      onClose?.();
+    } else {
+      navigate(-1);
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-[#0f2f4f]/60" onClick={onClose} />
+      <div className="absolute inset-0 bg-[#0f2f4f]/60" onClick={handleClose} />
 
       <div
-        className="relative w-full max-w-[360px] rounded-3xl bg-[#f7f5f2] p-6 shadow-2xl dark:bg-[#1e293b]"
+        className="relative w-full max-w-[360px] rounded-3xl bg-[#f7f5f2] p-6 shadow-2xl dark:bg-[#111827]"
         data-aos="zoom-in"
       >
         <button
-          onClick={onClose}
-          className="absolute right-4 top-4 text-gray-400 hover:text-gray-600"
+          onClick={handleClose}
+          className="absolute right-4 top-4 text-gray-400 hover:text-gray-600 dark:text-slate-300 dark:hover:text-white"
         >
           <IoClose size={24} />
         </button>
@@ -297,7 +276,7 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
           បង្កើតគណនី
         </h1>
 
-        <p className="mb-6 text-center text-xs text-gray-500">
+        <p className="mb-6 text-center text-xs text-gray-500 dark:text-slate-300">
           មានគណនីហើយ?{" "}
           <button onClick={openLogin} className="font-bold text-[#ffa500]">
             ចូលគណនី
@@ -315,7 +294,7 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
-              className="w-full rounded-xl border py-2.5 pl-10 pr-4 text-sm outline-none focus:ring-2 focus:ring-blue-100 dark:bg-gray-700 dark:text-white"
+              className="w-full rounded-xl border border-gray-300 bg-white py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder:text-gray-400 outline-none focus:border-[#4573a7] focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-400 dark:focus:border-[#6aa1e6] dark:focus:ring-blue-900/40"
             />
           </div>
 
@@ -329,7 +308,7 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
-              className="w-full rounded-xl border py-2.5 pl-10 pr-4 text-sm outline-none focus:ring-2 focus:ring-blue-100 dark:bg-gray-700 dark:text-white"
+              className="w-full rounded-xl border border-gray-300 bg-white py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder:text-gray-400 outline-none focus:border-[#4573a7] focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-400 dark:focus:border-[#6aa1e6] dark:focus:ring-blue-900/40"
             />
           </div>
 
@@ -337,14 +316,22 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
             <IoLockClosedOutline className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               required
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="ពាក្យសម្ងាត់"
               value={formData.password}
               onChange={(e) =>
                 setFormData({ ...formData, password: e.target.value })
               }
-              className="w-full rounded-xl border py-2.5 pl-10 pr-4 text-sm outline-none focus:ring-2 focus:ring-blue-100 dark:bg-gray-700 dark:text-white"
+              className="w-full rounded-xl border border-gray-300 bg-white py-2.5 pl-10 pr-12 text-sm text-slate-900 placeholder:text-gray-400 outline-none focus:border-[#4573a7] focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-400 dark:focus:border-[#6aa1e6] dark:focus:ring-blue-900/40"
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 transition-colors hover:text-[#4573a7] dark:hover:text-[#6aa1e6]"
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              {showPassword ? <IoEyeOffOutline size={18} /> : <IoEyeOutline size={18} />}
+            </button>
           </div>
 
           <button
@@ -356,10 +343,10 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
           </button>
         </form>
 
-        <div className="my-4 flex items-center text-[10px] uppercase tracking-widest text-gray-400">
-          <div className="h-px flex-1 bg-gray-200" />
+        <div className="my-4 flex items-center text-[10px] uppercase tracking-widest text-gray-400 dark:text-slate-400">
+          <div className="h-px flex-1 bg-gray-200 dark:bg-slate-600" />
           <span className="px-2">ឬ​បន្ត​ជា​មួយ</span>
-          <div className="h-px flex-1 bg-gray-200" />
+          <div className="h-px flex-1 bg-gray-200 dark:bg-slate-600" />
         </div>
 
         <div className="space-y-2">
@@ -367,28 +354,14 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
             type="button"
             onClick={handleGoogleSocial}
             disabled={googlePending || socialSubmittingRef.current}
-            className="flex w-full items-center justify-center gap-2 rounded-xl border py-2 text-xs hover:bg-gray-50 disabled:opacity-50 dark:text-white"
+            className="flex w-full items-center justify-center gap-2 rounded-xl border border-gray-300 bg-white py-2 text-sm font-semibold text-slate-900 hover:bg-gray-50 disabled:opacity-50 dark:border-slate-400 dark:bg-slate-900 dark:text-white dark:hover:bg-slate-800"
           >
             <img
               src="https://www.svgrepo.com/show/475656/google-color.svg"
               alt="Google"
               className="h-4 w-4"
             />
-            Google
-          </button>
-
-          <button
-            type="button"
-            onClick={handleFacebookSocial}
-            disabled={facebookPending || socialSubmittingRef.current}
-            className="flex w-full items-center justify-center gap-2 rounded-xl border py-2 text-xs hover:bg-gray-50 disabled:opacity-50 dark:text-white"
-          >
-            <img
-              src="https://www.svgrepo.com/show/475647/facebook-color.svg"
-              alt="Facebook"
-              className="h-4 w-4"
-            />
-            Facebook
+            <span className="text-slate-900 dark:text-white">Google</span>
           </button>
         </div>
       </div>

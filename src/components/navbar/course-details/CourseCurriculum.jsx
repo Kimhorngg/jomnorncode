@@ -3,13 +3,17 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
+const LEARN_STARTED_COURSES_KEY = "learn-started-courses";
+
 export default function CourseCurriculum({ courseId, lessons = [] }) {
   const reduxToken = useSelector((state) => state?.auth?.token);
+  const reduxUser = useSelector((state) => state?.auth?.user);
   const navigate = useNavigate();
   const [showAll, setShowAll] = useState(false);
   const [fallbackLessons, setFallbackLessons] = useState([]);
   const [fallbackLoading, setFallbackLoading] = useState(false);
   const [fallbackError, setFallbackError] = useState(null);
+  const [completedLessonIds, setCompletedLessonIds] = useState({});
 
   const getAuthToken = () => {
     const token =
@@ -39,6 +43,19 @@ export default function CourseCurriculum({ courseId, lessons = [] }) {
     [lessons, fallbackLessons],
   );
   const visibleLessons = showAll ? effectiveLessons : effectiveLessons.slice(0, 3);
+
+  const loadCompletedLessons = () => {
+    const nextState = effectiveLessons.reduce((acc, lesson) => {
+      const lessonId = String(lesson.id);
+      acc[lessonId] =
+        localStorage.getItem(`lesson-${lessonId}-lessonCompleted`) ===
+          "true" &&
+        localStorage.getItem(`lesson-${lessonId}-quizCompleted`) === "true";
+      return acc;
+    }, {});
+
+    setCompletedLessonIds(nextState);
+  };
 
   const toKhmerNumber = (num) => {
     const khmerDigits = ["០", "១", "២", "៣", "៤", "៥", "៦", "៧", "៨", "៩"];
@@ -132,18 +149,81 @@ export default function CourseCurriculum({ courseId, lessons = [] }) {
     fetchFallbackLessons();
   }, [courseId, lessons?.length, authToken]);
 
-  const handleLearnClick = (event, lesson) => {
-    if (authToken) return;
+  useEffect(() => {
+    loadCompletedLessons();
+    window.addEventListener("lessonProgressUpdated", loadCompletedLessons);
 
+    return () => {
+      window.removeEventListener("lessonProgressUpdated", loadCompletedLessons);
+    };
+  }, [effectiveLessons]);
+
+  const handleLearnClick = (event, lesson) => {
     event.preventDefault();
-    toast.error("សូមចូលគណនីជាមុនសិន");
-    navigate("/login", {
-      state: { from: `/coursedetail/${courseId}/lesson/${lesson.id}` },
+
+    if (!authToken) {
+      toast.error("សូមចូលគណនីជាមុនសិន");
+      navigate("/login", {
+        state: { from: `/coursedetail/${courseId}/lesson/${lesson.id}` },
+      });
+      return;
+    }
+
+    const storedUser = (() => {
+      try {
+        const raw = localStorage.getItem("user");
+        return raw ? JSON.parse(raw) : null;
+      } catch {
+        return null;
+      }
+    })();
+
+    const user = reduxUser || storedUser || null;
+    const userId = user?.id || user?.userId || "guest";
+
+    try {
+      const raw = localStorage.getItem(LEARN_STARTED_COURSES_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      const list = Array.isArray(parsed) ? parsed : [];
+
+      const nextEntry = {
+        userId,
+        courseId,
+        courseTitle: lesson?.courseTitle || lesson?.courseName || "",
+        startedAt: new Date().toISOString(),
+        status: "IN_PROGRESS",
+      };
+
+      const nextList = [
+        nextEntry,
+        ...list.filter(
+          (item) =>
+            !(
+              String(item?.userId || "guest") === String(userId) &&
+              String(item?.courseId) === String(courseId)
+            ),
+        ),
+      ];
+
+      localStorage.setItem(
+        LEARN_STARTED_COURSES_KEY,
+        JSON.stringify(nextList),
+      );
+      window.dispatchEvent(new Event("learnCourseStarted"));
+    } catch {
+      // ignore local persistence failure and still continue to lesson
+    }
+
+    navigate(`/coursedetail/${courseId}/lesson/${lesson.id}`, {
+      state: {
+        lessonTitle: lesson.title,
+        sequenceNumber: lesson.sequenceNumber,
+      },
     });
   };
 
   return (
-    <div className="max-w-[1530px] mx-auto bg-white px-6 sm:px-10 md:px-14 py-8 sm:py-10 rounded-xl shadow-md space-y-6">
+    <div className="max-w-[1530px] mx-auto dark:bg-[#0e172a]  bg-white px-6 sm:px-10 md:px-14 py-8 sm:py-10 rounded-xl shadow-md space-y-6">
       <h2 className="text-2xl sm:text-3xl md:text-4xl text-[#112d4f] font-bold text-center mb-8 sm:mb-10">
         មេរៀនសម្រាប់សិក្សា
       </h2>
@@ -163,7 +243,7 @@ export default function CourseCurriculum({ courseId, lessons = [] }) {
       {visibleLessons.map((lesson, index) => (
         <div
           key={lesson.id}
-          className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-[#fafafa] rounded-xl px-4 py-5 sm:py-6 shadow-sm gap-4 sm:gap-0"
+          className="flex flex-col dark:bg-[#1c293f] sm:flex-row justify-between items-start sm:items-center bg-[#fafafa] rounded-xl px-4 py-5 sm:py-6 shadow-sm gap-4 sm:gap-0"
         >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 flex text-xl sm:text-2xl items-center justify-center bg-gray-200 text-[#ffa405] font-bold rounded-full">
@@ -171,7 +251,6 @@ export default function CourseCurriculum({ courseId, lessons = [] }) {
             </div>
             <span className="text-[#6c7180] text-lg sm:text-xl">{lesson.title}</span>
           </div>
-
           <Link
             to={`/coursedetail/${courseId}/lesson/${lesson.id}`}
             onClick={(event) => handleLearnClick(event, lesson)}
@@ -179,7 +258,11 @@ export default function CourseCurriculum({ courseId, lessons = [] }) {
               lessonTitle: lesson.title,
               sequenceNumber: lesson.sequenceNumber ?? index + 1,
             }}
-            className="mt-3 sm:mt-0 inline-block bg-[#3f71af] hover:bg-[#112d4f] text-white px-5 py-2.5 rounded-full font-medium shadow-md transition-all duration-200 hover:scale-105"
+            className={`mt-3 sm:mt-0 inline-block px-5  py-2.5 rounded-full font-medium shadow-md transition-all duration-200 hover:scale-105 ${
+              completedLessonIds[String(lesson.id)]
+                ? "bg-[#f59e0c] hover:bg-[#d97706] text-white"
+                : "bg-[#3f71af] hover:bg-[#112d4f] text-white"
+            }`}
           >
             ចូលរៀន
           </Link>

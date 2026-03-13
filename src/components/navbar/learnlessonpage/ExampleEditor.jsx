@@ -206,7 +206,7 @@ export default function ExampleEditor() {
       const headers = buildHeaders();
       const endpoints = [
         `https://jomnorncode-api.cheat.casa/api/api/lessons/course/${courseId}/ordered`,
-        `https://jomnorncode-api.cheat.casa/api/lessons/course/${courseId}/ordered`,
+        `https://jomnorncode-api.cheat.casa/api/api/lessons/course/${courseId}/ordered`,
       ];
 
       try {
@@ -543,11 +543,11 @@ export default function ExampleEditor() {
 
   return (
     <div className="bg-[#f2f2f2]">
-      <div className="max-w-[1750px] mx-auto px-6 md:px-20 pb-6">
-        <div className="bg-white rounded-2xl border border-[#d9d9d9]">
+      <div className="max-w-[1750px] mx-auto px-6 md:px-20 pb-6 ">
+        <div className="bg-white rounded-2xl border border-[#d9d9d9] dark:border[#1c293f] ">
           {/* Header */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center px-4 md:px-8 py-5 border-b border-[#d9d9d9] bg-gray-50 rounded-t-2xl gap-3 md:gap-0">
-            <h2 className="text-xl font-semibold text-gray-700">
+            <h2 className="text-xl font-semibold text-gray-700 dark:text-white">
               ឧទាហរណ៍សរសេរកូដ
             </h2>
             <button

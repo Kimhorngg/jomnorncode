@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { IoBookOutline, IoPeopleOutline, IoTimeOutline } from "react-icons/io5";
+import { AiFillStar } from "react-icons/ai";
 
 const PUBLIC_API_CANDIDATES = [
   "https://jomnorncode-api.cheat.casa/api/courses/public?all=true&page=0&size=20",
@@ -36,6 +38,9 @@ const normalizeCourses = (rawCourses) =>
         image:
           course.thumbnailUrl ?? course.image ?? "/default-course-image.jpg",
         lessonCount: course.lessonCount ?? 0,
+        duration: course.duration ?? 0,
+        students: course.students ?? 0,
+        rating: course.rating ?? null,
         categoryId: course.category?.id ?? course.categoryId,
         categoryName: course.category?.name ?? course.categoryName ?? "",
       };
@@ -49,6 +54,11 @@ const isPopularCourse = (course) => {
     categoryName.includes("ពេញនិយម") ||
     categoryName.includes("popular")
   );
+};
+
+const formatNumber = (num) => {
+  if (!num) return "០";
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
 export default function RenderPopularHomepageCard() {
@@ -162,54 +172,66 @@ export default function RenderPopularHomepageCard() {
   const displayedCourses = showAll ? courses : courses.slice(0, 3);
 
   return (
-    <div className="bg-gray-100 dark:bg-[#0b1220] pt-16 pb-8 transition-colors duration-300">
+    <div className="bg-[#fcfcfc] dark:bg-[#091220] pt-16 pb-8 transition-colors duration-300">
       <div className="max-w-420 mx-auto px-6 lg:px-12">
         <div className="text-center mb-16" data-aos="fade-up">
-          <h1 className="text-4xl font-bold text-[#112d4f] dark:text-white">
+          <h1 className="text-3xl sm:text-3xl md:text-4xl font-bold text-[#112d4f] dark:text-white">
             វគ្គសិក្សាដែលពេញនិយម
           </h1>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {displayedCourses.map((course, index) => (
-            <div
+            <Link
               key={course.id}
+              to={`/coursedetail/${course.id}`}
               data-aos="fade-up"
               data-aos-delay={index * 100}
-              className="bg-white dark:bg-[#111827] rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300"
+              className="group bg-white dark:bg-[#111827] rounded-3xl overflow-hidden shadow-md flex flex-col border border-gray-200 hover:shadow-xl hover:scale-105 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4477ce] focus-visible:ring-offset-2"
             >
-              <div className="h-72 flex items-center justify-center bg-gray-100 dark:bg-[#0f172a]">
+              <div className="relative h-52 bg-gray-100 dark:bg-[#0f172a] flex items-center justify-center p-8">
                 <img
                   src={course.image}
                   alt={course.title}
-                  className="w-56 h-56 object-cover rounded-xl"
+                  className="h-full w-full object-contain"
                   onError={(e) => {
                     e.currentTarget.src = "/default-course-image.jpg";
                   }}
                 />
+
+                <div className="absolute top-4 right-4 bg-white/90 px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+                  <AiFillStar className="text-yellow-400" />
+                  <span className="text-xs font-bold text-gray-700">
+                    {(course.rating?.rate || 0).toFixed(1)}
+                  </span>
+                </div>
               </div>
 
-              <div className="p-6 text-center">
-                <h2 className="text-lg font-bold text-gray-800 dark:text-white mb-3 line-clamp-1">
+              <div className="p-6 flex flex-col flex-grow dark:bg-[#1c293d]">
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-1">
                   {course.title}
                 </h2>
 
-                <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm line-clamp-2">
-                  {(course.description || "គ្មានការពិពណ៌នា").slice(0, 80)}...
+                <p className="text-gray-500 dark:text-gray-400 text-sm mb-6 line-clamp-2">
+                  {course.description || "គ្មានការពិពណ៌នា"}
                 </p>
 
-                <p className="font-bold text-blue-600 dark:text-blue-400 mb-4">
-                  {course.lessonCount || 10} មេរៀន
-                </p>
-
-                <Link
-                  to={`/coursedetail/${course.id}`}
-                  className="block w-full bg-[#3f72af] hover:bg-[#112d50] text-white py-3 px-5 rounded-lg transition duration-300"
-                >
-                  ចុចដើម្បីរៀន
-                </Link>
+                <div className="mt-auto flex items-center justify-between text-gray-500 dark:text-gray-400 text-sm">
+                  <div className="flex items-center gap-1.5">
+                    <IoBookOutline className="text-orange-400 text-lg" />
+                    <span>{course.lessonCount || 10} មេរៀន</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <IoTimeOutline className="text-orange-400 text-lg" />
+                    <span>{course.duration || 15} ម៉ោង</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <IoPeopleOutline className="text-orange-400 text-lg" />
+                    <span>{formatNumber(course.students || 5000)} នាក់</span>
+                  </div>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

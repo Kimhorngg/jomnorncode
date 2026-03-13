@@ -10,11 +10,11 @@ import jomnornLogo from "../../assets/jomnorncode_logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0f2b4c] text-white pt-14 pb-6 px-2 md:px-16  ">
+    <footer className="bg-[#0f2b4c] dark:bg-[#0e172a] text-white pt-14 pb-6 px-2 md:px-16  ">
       {/* Top Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         {/* Column 1 */}
-        <div>
+        <div className="flex flex-col items-center text-center">
           <img src={istadLogo} alt="ISTAD Logo" className="w-28 mb-4" />
           <p className="text-gray-300 text-sm leading-6">
             Institute of Science and Technology <br />
@@ -57,7 +57,7 @@ const Footer = () => {
         </div>
 
         {/* Column 4 */}
-        <div>
+        <div className="flex flex-col items-center text-center">
           <img src={jomnornLogo} alt="Technology Logo" className="w-28 mb-4" />
           <p className="text-gray-300 text-sm leading-6">
             អភិវឌ្ឍជំនាញរបស់អ្នកជាមួយវគ្គសិក្សាជំនាន់កូដ ដើម្បីអនាគតដ៏ភ្លឺស្វាង

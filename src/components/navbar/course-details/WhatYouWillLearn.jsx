@@ -3,7 +3,7 @@ import React from 'react';
 
 const WhatYouWillLearn = ({ title, description }) => {
   return (
-    <div className="w-full bg-[#fafafa] py-16">
+    <div className="w-full bg-[#fafafa] dark:bg-[#091220] py-16">
       <div className="max-w-[1610px] mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="mb-8">
@@ -13,7 +13,7 @@ const WhatYouWillLearn = ({ title, description }) => {
         </div>
 
         <div className="max-w-7xl">
-          <p className="text-gray-600 text-sm md:text-xl leading-relaxed text-justify md:text-left">
+          <p className="text-gray-600 dark:text-[#939ca7] text-sm md:text-xl leading-relaxed text-justify md:text-left">
             {description}
           </p>
         </div>
