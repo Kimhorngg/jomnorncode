@@ -14,6 +14,7 @@ const API_BASE = "https://jomnorncode-api.cheat.casa/api";
 
 const WEEK_DAYS = ["ច", "អ", "ព", "ព្រ", "សុ", "ស", "អា"];
 const LEARN_ACTIVITY_DAYS_KEY = "learn-activity-days";
+const getUserActivityDaysKey = (userId) => `learn-activity-days-${userId}`;
 const LEARN_ACTIVITY_LOG_KEY = "learn-activity-log";
 const LEARN_STARTED_COURSES_KEY = "learn-started-courses";
 
@@ -87,7 +88,9 @@ const formatDisplayDate = (ymd) => {
 
 const loadActivityDays = () => {
   try {
-    const raw = localStorage.getItem(LEARN_ACTIVITY_DAYS_KEY);
+    const storedUser = loadStoredUser();
+    const userId = storedUser?.userId || storedUser?.id || "guest";
+    const raw = localStorage.getItem(getUserActivityDaysKey(userId));
     const parsed = raw ? JSON.parse(raw) : [];
     if (!Array.isArray(parsed)) return [];
     return parsed.filter(Boolean).map(String);
@@ -97,10 +100,12 @@ const loadActivityDays = () => {
 };
 
 const saveActivityDay = (ymd) => {
+  const storedUser = loadStoredUser();
+  const userId = storedUser?.userId || storedUser?.id || "guest";
   const existing = loadActivityDays();
   if (existing.includes(ymd)) return existing;
   const next = [...existing, ymd].sort();
-  localStorage.setItem(LEARN_ACTIVITY_DAYS_KEY, JSON.stringify(next));
+  localStorage.setItem(getUserActivityDaysKey(userId), JSON.stringify(next));
   return next;
 };
 
@@ -190,6 +195,7 @@ export default function Learn() {
   const [courseLessonsById, setCourseLessonsById] = useState({});
   const [progressRefreshKey, setProgressRefreshKey] = useState(0);
 
+  // Track activity days per user
   const [activityDays, setActivityDays] = useState(() => loadActivityDays());
   const [activityLog, setActivityLog] = useState(() => loadActivityLog());
   const [selectedDayYmd, setSelectedDayYmd] = useState(() => toYmd(new Date()));
@@ -645,7 +651,16 @@ export default function Learn() {
       window.removeEventListener("storage", handleStorage);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, []);
+    // Reset streak when user changes
+    const handleUserChange = () => {
+      setActivityDays(loadActivityDays());
+      setActivityLog(loadActivityLog());
+    };
+    window.addEventListener("storage", handleUserChange);
+    return () => {
+      window.removeEventListener("storage", handleUserChange);
+    };
+  }, [userId]);
 
   const courseProgressList = useMemo(
     () => Object.values(courseProgressById || {}),
