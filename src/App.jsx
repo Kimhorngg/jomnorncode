@@ -12,9 +12,14 @@ import WhyChooseUs from "./components/navbar/homepage/WhyChooseUs";
 import Roadmap from "./components/navbar/homepage/Roadmap";
 import StudentFeedback from "./components/navbar/homepage/StudentFeedback";
 import ConfirmCard from "./components/navbar/homepage/ConfirmCard";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/LogIn";
 import heroImage from "./assets/image.png";
 
 export default function App() {
+  const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
   // const [courses, setCourses] = useState([]);
   // const [loading, setLoading] = useState(true);
 
@@ -60,12 +65,12 @@ export default function App() {
                     មេីលវគ្គសិក្សា &gt;
                   </Link>
 
-                  <Link
-                    to="/signup"
+                  <button
+                    onClick={() => setIsSignUpOpen(true)}
                     className="inline-block bg-[#f2f2f2] dark:text-white  dark:hover:bg-[#0e468b] border-2 border-gray-500 hover:border-gray-300 text-[#0e468b] hover:bg-[#0e468b] hover:text-white text-base sm:text-lg font-semibold px-8 py-4 sm:px-10 sm:py-5 rounded-xl transition-all"
                   >
                     ចុះឈ្មោះឥឡូវនេះ
-                  </Link>
+                  </button>
                 </div>
 
                 {/* Stats */}
@@ -93,7 +98,6 @@ export default function App() {
                 </div>
               </div>
 
-             
               <div
                 className="flex justify-center lg:justify-end"
                 data-aos="fade-left"
@@ -129,6 +133,24 @@ export default function App() {
       <div data-aos="fade-up" data-aos-delay="300">
         <ConfirmCard />
       </div>
+
+      <SignUp
+        isOpen={isSignUpOpen}
+        onClose={() => setIsSignUpOpen(false)}
+        openLogin={() => {
+          setIsSignUpOpen(false);
+          setIsLoginOpen(true);
+        }}
+      />
+
+      <Login
+        isOpen={isLoginOpen}
+        onClose={() => setIsLoginOpen(false)}
+        openSignUp={() => {
+          setIsLoginOpen(false);
+          setIsSignUpOpen(true);
+        }}
+      />
     </div>
   );
 }

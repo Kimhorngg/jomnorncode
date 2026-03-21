@@ -114,6 +114,8 @@ async function getUserEnrollmentByCourse({ courseId, userId, token }) {
   );
 }
 
+
+
 async function createEnrollment({ courseId, userId, token }) {
   const payloads = [
     { courseId },
@@ -241,8 +243,38 @@ export default function EnrollmentPage() {
     }));
   };
 
+  const tokenAdmin = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb21ub3JuY29kZUBnbWFpbC5jb20iLCJpYXQiOjE3NzQwODI5OTMsImV4cCI6MTc3NDE2OTM5M30.37dYAD8UPYhoMjlmUT-hj6fy5xH3ei7TOLWTZm3ryaY'"
+// function for create the certificate
+const createCertificate = async () => {
+  // alert("Creating certificate...");
+  const res = await fetch(`${API_BASE}/api/certificates`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${tokenAdmin}`,
+    },
+    body: JSON.stringify({
+     userId: userId ,
+     courseId: parseInt(courseId),
+      fileUrl:" "
+    }),
+  });
+
+  console.log( await res.json());
+
+  if (!res.ok) {
+    const errorText = await res.text();
+    throw new Error(errorText || "Failed to create certificate");
+  }
+};
+
+
+
   const handleSubmit = async (event) => {
+
     event.preventDefault();
+    createCertificate();
+    
 
     if (!token || !userId) {
       toast.error("សូមចូលគណនីជាមុនសិន");
@@ -291,9 +323,34 @@ export default function EnrollmentPage() {
         throw new Error("Cannot resolve enrollment id");
       }
 
+      // Update enrollment progress to 100 before completing
+      const progressEndpoints = [
+        `${API_BASE}/api/enrollments/${enrollmentId}/progress?progressPercentage=100`,
+        `${API_BASE}/enrollments/${enrollmentId}/progress?progressPercentage=100`,
+      ];
+
+      let progressUpdated = false;
+      for (const url of progressEndpoints) {
+        try {
+          await fetch(url, {
+            method: "PATCH",
+            headers: {
+              Accept: "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          progressUpdated = true;
+          break;
+        } catch {
+          // try next endpoint
+        }
+      }
+
+      // Then complete the enrollment
       await completeEnrollment({ enrollmentId, token });
       toast.success("Enrollment completed");
       navigate(`/certificate/${courseId}`);
+      
     } catch (err) {
       setError(err?.message || "មិនអាច complete enrollment បាន");
     } finally {
@@ -305,7 +362,9 @@ export default function EnrollmentPage() {
     return (
       <div className="min-h-screen bg-[#f3f4f6] px-6 py-12">
         <div className="mx-auto max-w-2xl rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm">
-          <h1 className="text-3xl font-bold text-[#112d4f]">Complete Enrollment</h1>
+          <h1 className="text-3xl font-bold text-[#112d4f]">
+            បំពេញព័ត៌មានរួចរាល់
+          </h1>
           <p className="mt-4 text-slate-500">សូមចូលគណនីជាមុនសិន ដើម្បីបន្ត</p>
           <Link
             to="/login"
@@ -323,19 +382,19 @@ export default function EnrollmentPage() {
       <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-[#112d51]">
-           បំពេញព័ត៌មានសម្រាប់វិញ្ញាបនបត្រ (Certificate)
+            បំពេញព័ត៌មានសម្រាប់វិញ្ញាបនបត្រ (Certificate)
           </h1>
           <p className="mt-3 text-slate-500">
             បំពេញព័ត៌មានរបស់អ្នកសិនមុនទទួលបាន Certificate។
           </p>
-          <p className="mt-2 text-sm font-medium text-slate-700">
+          <p className="mt-2 text-sm font-medium dark:text-white text-slate-700">
             មុខវិជ្ជា: {loadingCourse ? "កំពុងផ្ទុក..." : courseTitle}
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="grid gap-5 md:grid-cols-2">
           <label className="block">
-            <span className="mb-2 block text-sm font-medium text-slate-700">
+            <span className="mb-2 block text-sm font-medium  dark:text-slate-500 text-slate-700">
               ឈ្មោះ (First Name)
             </span>
             <input
@@ -349,7 +408,7 @@ export default function EnrollmentPage() {
           </label>
 
           <label className="block">
-            <span className="mb-2 block text-sm font-medium text-slate-700">
+            <span className="mb-2 block text-sm font-medium dark:text-slate-500 text-slate-700">
               នាមត្រកូល (Last Name)
             </span>
             <input
@@ -357,13 +416,13 @@ export default function EnrollmentPage() {
               name="lastName"
               value={form.lastName}
               onChange={handleChange}
-              className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-[#4477ce]"
+              className="w-full rounded-xl border  border-slate-300 px-4 py-3 outline-none focus:border-[#4477ce]"
               placeholder="Last name"
             />
           </label>
 
           <label className="block md:col-span-2">
-            <span className="mb-2 block text-sm font-medium text-slate-700">
+            <span className="mb-2 block text-sm dark:text-slate-500 font-medium text-slate-700">
               Email
             </span>
             <input
@@ -377,7 +436,7 @@ export default function EnrollmentPage() {
           </label>
 
           <label className="block md:col-span-2">
-            <span className="mb-2 block text-sm font-medium text-slate-700">
+            <span className="mb-2 block text-sm dark:text-slate-500 font-medium text-slate-700">
               Phone Number
             </span>
             <input
@@ -398,16 +457,17 @@ export default function EnrollmentPage() {
 
           <div className="md:col-span-2 flex flex-wrap gap-3 pt-2">
             <button
+              // onClick={createCertificate}xx
               type="submit"
               disabled={submitting}
               className="rounded-xl bg-emerald-600 px-6 py-3 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {submitting ? "កំពុងដំណើរការ..." : "Complete Enrollment"}
+              {submitting ? "កំពុងដំណើរការ..." : "បំពេញព័ត៌មានរួចរាល់"}
             </button>
 
             <Link
               to={`/coursedetail/${courseId}`}
-              className="rounded-xl border border-slate-300 px-6 py-3 font-semibold text-slate-700"
+              className="rounded-xl border dark:text-white dark:border-white border-slate-300 px-6 py-3 font-semibold text-slate-700"
             >
               ត្រឡប់ទៅ Course
             </Link>

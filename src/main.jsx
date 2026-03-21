@@ -20,6 +20,9 @@ import { Toaster } from "react-hot-toast";
 import CertificatePage from "./pages/CertificatePage";
 import Profile from "./pages/Profile";
 import Enrollment from "./pages/Enrollment";
+import Dashboard from "./pages/Dashboard";
+import AdminRoute from "./components/AdminRoute";
+import FullscreenEditor from "./pages/FullscreenEditor";
 
 const router = createBrowserRouter([
   {
@@ -88,6 +91,18 @@ const router = createBrowserRouter([
     path: "/login",
     element: <LogIn />,
   },
+  {
+    path: "/dashboard",
+    element: (
+      <AdminRoute>
+        <Dashboard />
+      </AdminRoute>
+    ),
+  },
+  {
+    path: "/fullscreen-editor",
+    element: <FullscreenEditor />,
+  },
 ]);
 
 const root = document.getElementById("root");
@@ -96,7 +111,13 @@ ReactDOM.createRoot(root).render(
   <Provider store={store}>
     <>
       <RouterProvider router={router} />
-      <Toaster position="top-right" />
+      <Toaster
+        position="top-right"
+        containerStyle={{ zIndex: 4000 }}
+        toastOptions={{
+          style: { zIndex: 4000 },
+        }}
+      />
     </>
   </Provider>,
 );

@@ -384,13 +384,17 @@
 //   );
 // }
 
-
-
 import React, { useMemo, useRef, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Editor from "@monaco-editor/react";
+import { Maximize2, Minimize2 } from "lucide-react";
 
 import CodeData from "./code-monoco.json";
+import {
+  isLessonCompletedForUser,
+  isQuizCompletedForUser,
+  setLessonCompletedForUser,
+} from "../../../utils/lessonProgress";
 
 const LANGUAGE_ALIASES = {
   js: "javascript",
@@ -460,6 +464,7 @@ export default function PracticEditor() {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [lessons, setLessons] = useState([]);
   const [lessonsLoading, setLessonsLoading] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const inferLanguage = (item) => {
     const declared = normalizeLanguage(item?.language || item?.lang);
@@ -521,15 +526,12 @@ export default function PracticEditor() {
   }, [exampleCode]);
 
   useEffect(() => {
-    const saved = localStorage.getItem(`lesson-${lessonId}-lessonCompleted`);
-    if (saved === "true") setExampleHasRun(true);
+    if (isLessonCompletedForUser(lessonId)) setExampleHasRun(true);
   }, [lessonId]);
 
   useEffect(() => {
     const loadQuizProgress = () => {
-      setQuizCompleted(
-        localStorage.getItem(`lesson-${lessonId}-quizCompleted`) === "true",
-      );
+      setQuizCompleted(isQuizCompletedForUser(lessonId));
     };
 
     loadQuizProgress();
@@ -722,7 +724,7 @@ export default function PracticEditor() {
       setRunMode("html");
       setExampleRunCode(styledCode);
       setExampleHasRun(true);
-      localStorage.setItem(`lesson-${lessonId}-lessonCompleted`, "true");
+      setLessonCompletedForUser(lessonId, true);
       window.dispatchEvent(new Event("lessonProgressUpdated"));
       return;
     }
@@ -745,7 +747,7 @@ export default function PracticEditor() {
         setRunMode("html");
         setExampleRunCode(styledHtml);
         setExampleHasRun(true);
-        localStorage.setItem(`lesson-${lessonId}-lessonCompleted`, "true");
+        setLessonCompletedForUser(lessonId, true);
         window.dispatchEvent(new Event("lessonProgressUpdated"));
         return;
       }
@@ -787,7 +789,7 @@ export default function PracticEditor() {
       setRunMode("html");
       setExampleRunCode(jsPreviewDoc);
       setExampleHasRun(true);
-      localStorage.setItem(`lesson-${lessonId}-lessonCompleted`, "true");
+      setLessonCompletedForUser(lessonId, true);
       window.dispatchEvent(new Event("lessonProgressUpdated"));
       return;
     }
@@ -917,7 +919,7 @@ export default function PracticEditor() {
       setRunMode("text");
       setTextOutput(output);
       setExampleHasRun(true);
-      localStorage.setItem(`lesson-${lessonId}-lessonCompleted`, "true");
+      setLessonCompletedForUser(lessonId, true);
       window.dispatchEvent(new Event("lessonProgressUpdated"));
     } catch (error) {
       setRunMode("text");
@@ -930,7 +932,7 @@ export default function PracticEditor() {
   };
 
   return (
-    <div className="bg-[#f2f2f2]">
+    <div className="bg-[#f2f2f2]" style={{ zoom: "100%" }}>
       <div className="max-w-[1750px] mx-auto px-6 md:px-20 pb-6">
         <div className="bg-white rounded-2xl border border-[#d9d9d9]">
           {/* Header */}
@@ -938,13 +940,32 @@ export default function PracticEditor() {
             <h2 className="text-xl font-semibold dark:text-white text-gray-700">
               អនុវត្តជាមួយកូដ
             </h2>
-            <button
-              onClick={runExampleCode}
-              disabled={running}
-              className="px-5 py-2 bg-[#3f72af] hover:bg-[#112d4f] text-white rounded-lg transition shadow-sm"
-            >
-              {running ? "កំពុងដំណើរការ..." : "▶ ដំណើរការកូដ"}
-            </button>
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  const currentCode =
+                    editorRef.current?.getValue() || exampleCode;
+                  navigate("/fullscreen-editor", {
+                    state: {
+                      code: currentCode,
+                      language: editorLanguage,
+                    },
+                  });
+                }}
+                className="px-3 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition shadow-sm flex items-center gap-2"
+                title="Open full-screen editor"
+              >
+                <Maximize2 size={18} />
+                <span className="hidden md:inline text-sm">ពង្រីក</span>
+              </button>
+              <button
+                onClick={runExampleCode}
+                disabled={running}
+                className="px-5 py-2 bg-[#3f72af] hover:bg-[#112d4f] text-white rounded-lg transition shadow-sm"
+              >
+                {running ? "កំពុងដំណើរការ..." : "▶ ដំណើរការកូដ"}
+              </button>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 md:h-[600px]">
@@ -981,7 +1002,7 @@ export default function PracticEditor() {
                     className="w-full h-full bg-[#0e172a]"
                   />
                 ) : (
-                  <div className="w-full h-full overflow-auto p-4 text-green-300 bg-[#0e172a]">
+                  <div className="w-full h-full overflow-auto p-4 text-white bg-[#0e172a]">
                     {runError ? (
                       <p className="text-red-400 whitespace-pre-wrap">
                         {runError}
@@ -995,42 +1016,83 @@ export default function PracticEditor() {
             </div>
           </div>
         </div>
-
-        {(prevLesson || nextLesson) && !lessonsLoading && (
-          <div className="px-4 md:px-8 pb-6 pt-4 flex flex-col sm:flex-row gap-3 justify-end">
-            {prevLesson && (
-              <button
-                type="button"
-                onClick={() => handleNavigate(prevLesson)}
-                disabled={!quizCompleted}
-                className={`px-6 py-3 rounded-lg text-center font-medium transition
-                  ${
-                    quizCompleted
-                      ? "border border-blue-500 bg-blue-50 text-blue-600 hover:bg-blue-100"
-                      : "border border-gray-300 bg-gray-100 text-gray-400 cursor-not-allowed"
-                  }`}
-              >
-                ត្រឡប់ទៅវីញ
-              </button>
-            )}
-            {nextLesson && (
-              <button
-                type="button"
-                onClick={() => handleNavigate(nextLesson)}
-                disabled={!quizCompleted}
-                className={`px-6 py-3 rounded-lg text-center font-medium transition
-                  ${
-                    quizCompleted
-                      ? "border border-indigo-500 bg-indigo-50 text-indigo-600 hover:bg-indigo-100"
-                      : "border border-gray-300 bg-gray-100 text-gray-400 cursor-not-allowed"
-                  }`}
-              >
-                មេរៀនបន្ទាប់
-              </button>
-            )}
-          </div>
-        )}
       </div>
+
+      {/* Fullscreen Modal - Full Viewport Coverage */}
+      {isFullscreen && (
+        <div className="fixed inset-0 z-50 bg-white flex flex-col w-screen h-screen overflow-hidden">
+          {/* Fullscreen Header */}
+          <div className="flex justify-between items-center px-8 py-4 border-b border-gray-300 bg-gray-50 flex-shrink-0">
+            <h3 className="text-lg font-semibold text-gray-700">
+              អនុវត្តជាមួយកូដ - ឡើងលើអាកាស
+            </h3>
+            <div className="flex gap-3 items-center">
+              <button
+                onClick={runExampleCode}
+                disabled={running}
+                className="px-5 py-2 bg-[#3f72af] hover:bg-[#112d4f] text-white rounded-lg transition shadow-sm"
+              >
+                {running ? "កំពុងដំណើរការ..." : "▶ ដំណើរការកូដ"}
+              </button>
+              <button
+                onClick={() => setIsFullscreen(false)}
+                className="px-3 py-2 bg-gray-300 hover:bg-gray-400 text-gray-700 rounded-lg transition"
+              >
+                <Minimize2 size={20} />
+              </button>
+            </div>
+          </div>
+
+          {/* Fullscreen Content - Fill Remaining Space */}
+          <div className="flex-1 grid grid-cols-2 overflow-hidden gap-0">
+            {/* Editor */}
+            <div className="overflow-hidden bg-gray-100 border-r border-gray-300">
+              <Editor
+                height="100%"
+                language={editorLanguage}
+                value={exampleCode}
+                onMount={handleEditorDidMount}
+                options={{
+                  fontSize: 16,
+                  minimap: { enabled: false },
+                  automaticLayout: true,
+                  readOnly: false,
+                }}
+              />
+            </div>
+
+            {/* Preview */}
+            <div className="overflow-hidden bg-gray-100">
+              <div className="relative w-full h-full bg-[#0e172a] flex items-center justify-center">
+                {!exampleHasRun ? (
+                  <div className="flex items-center justify-center text-[#6c7180] text-lg px-6 text-center">
+                    ចុចបុតុង "ដំណើរការកូដ" ដើម្បីឃើញលទ្ធផល...
+                  </div>
+                ) : runMode === "html" ? (
+                  <iframe
+                    title="practice-preview-fullscreen"
+                    srcDoc={exampleRunCode}
+                    sandbox="allow-scripts"
+                    className="w-full h-full bg-[#0e172a]"
+                  />
+                ) : (
+                  <div className="w-full h-full overflow-auto p-6 text-white bg-[#0e172a]">
+                    {runError ? (
+                      <p className="text-red-400 whitespace-pre-wrap">
+                        {runError}
+                      </p>
+                    ) : (
+                      <pre className="whitespace-pre-wrap text-sm">
+                        {textOutput}
+                      </pre>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

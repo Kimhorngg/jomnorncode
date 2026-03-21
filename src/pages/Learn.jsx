@@ -2,6 +2,12 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import CourseProgress from "../components/navbar/course/CourseProgress";
 import {
+  isLessonCompletedForUser,
+  isQuizCompletedForUser,
+} from "../utils/lessonProgress";
+import SignUp from "./SignUp";
+import Login from "./LogIn";
+import {
   IoBookOutline,
   IoCheckmarkCircle,
   IoEllipseOutline,
@@ -177,13 +183,13 @@ const getLessonTitle = (lesson, index) =>
   lesson?.lesson_name ??
   `Lesson ${index + 1}`;
 
-const isLessonCompleted = (lessonId) =>
-  localStorage.getItem(`lesson-${lessonId}-lessonCompleted`) === "true";
+const isLessonCompleted = (lessonId) => isLessonCompletedForUser(lessonId);
 
-const isQuizCompleted = (lessonId) =>
-  localStorage.getItem(`lesson-${lessonId}-quizCompleted`) === "true";
+const isQuizCompleted = (lessonId) => isQuizCompletedForUser(lessonId);
 
 export default function Learn() {
+  const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
   const storedUser = useMemo(() => loadStoredUser(), []);
   const [userEnrollment, setUserEnrollment] = useState([]);
   const [startedCourses, setStartedCourses] = useState(() =>
@@ -527,31 +533,53 @@ export default function Learn() {
             const lessonIds = await fetchLessonIds(courseId);
 
             const totalLessons = lessonIds.length;
-            const completedLessons = lessonIds.filter((lessonId) =>
+            let completedLessons = lessonIds.filter((lessonId) =>
               isLessonCompleted(lessonId),
             ).length;
 
-            const completedQuizzes = lessonIds.filter((lessonId) =>
+            let completedQuizzes = lessonIds.filter((lessonId) =>
               isQuizCompleted(lessonId),
             ).length;
 
             const totalUnits = totalLessons * 2;
-            const localPercent =
+            let localPercent =
               totalUnits > 0
                 ? Math.round(
                     ((completedLessons + completedQuizzes) / totalUnits) * 100,
                   )
                 : null;
 
+            // If local data shows 0% but backend shows progress, sync backend data
+            // This handles case where user logs back in and localStorage is reset
+            if (
+              totalUnits > 0 &&
+              completedLessons === 0 &&
+              completedQuizzes === 0 &&
+              backendPercent > 0
+            ) {
+              const completedUnits = Math.round(
+                (backendPercent / 100) * totalUnits,
+              );
+              completedLessons = Math.min(
+                Math.ceil(completedUnits / 2),
+                totalLessons,
+              );
+              completedQuizzes = Math.min(
+                completedUnits - completedLessons,
+                totalLessons,
+              );
+              localPercent = backendPercent;
+            }
+
             const progressPercent =
-              localPercent == null
-                ? backendPercent
-                : Math.max(localPercent, backendPercent);
+              localPercent != null
+                ? Math.max(localPercent, backendPercent)
+                : backendPercent;
 
             const shouldSync =
               enrollmentId &&
               localPercent != null &&
-              progressPercent > backendPercent;
+              localPercent > backendPercent;
 
             if (shouldSync) {
               await syncEnrollmentProgress(enrollmentId, progressPercent);
@@ -774,7 +802,7 @@ export default function Learn() {
         if (!lessons.length) {
           return {
             id: `empty-${courseId}`,
-            title: `${course?.courseTitle || course?.title || "Course"} - No lessons found`,
+            title: `${course?.courseTitle || course?.title || "Course"} - មិនមានទិន្នន័យទេ`,
             time: timeSlots[index] || "10:00",
             duration: "មិនមានមេរៀន",
             done: false,
@@ -827,6 +855,26 @@ export default function Learn() {
 
   return (
     <div className="min-h-screen bg-[#fcfcfc] dark:bg-[#091220] px-4 sm:px-6 md:px-10 lg:px-20  xl:px-32 py-8 sm:py-12">
+      {isSignUpOpen && (
+        <SignUp
+          isOpen={isSignUpOpen}
+          onClose={() => setIsSignUpOpen(false)}
+          openLogin={() => {
+            setIsSignUpOpen(false);
+            setIsLoginOpen(true);
+          }}
+        />
+      )}
+      {isLoginOpen && (
+        <Login
+          isOpen={isLoginOpen}
+          onClose={() => setIsLoginOpen(false)}
+          openSignUp={() => {
+            setIsLoginOpen(false);
+            setIsSignUpOpen(true);
+          }}
+        />
+      )}
       <div className="mb-10" data-aos="fade-up">
         <h1 className="text-3xl md:text-4xl font-bold text-[#1e293b]">
           មកធ្វើឲ្យថ្ងៃនេះមាន<span className="text-[#ffa500]">លទ្ធផល</span>
@@ -844,7 +892,11 @@ export default function Learn() {
         <p className="text-[#1e293b]​ dark:text-white  font-medium text-base sm:text-lg text-center md:text-left">
           ចាប់ផ្តេីមចូលរៀនឥឡូវនេះជាឱកាសល្អសម្រាប់អ្នក
         </p>
-        <button className="bg-green-200 text-green-700  px-6 sm:px-8 py-2 sm:py-3 rounded-xl hover:bg-green-300 transition-all font-semibold w-full md:w-auto inline-block text-center">
+        <button
+          type="button"
+          onClick={() => setIsSignUpOpen(true)}
+          className="bg-green-200 text-green-700 px-6 sm:px-8 py-2 sm:py-3 rounded-xl hover:bg-green-300 transition-all font-semibold w-full md:w-auto inline-block text-center"
+        >
           ចុះឈ្មោះ
         </button>
       </div>
@@ -946,86 +998,94 @@ export default function Learn() {
             </h3>
 
             <div className="space-y-3 ">
-              {learningPlanItems.length === 0 && (
+              {!userId || userId === 0 ? (
                 <div className="rounded-2xl border border-dashed  border-slate-300 bg-slate-50 p-4 text-sm text-slate-500">
-                  {selectedDayYmd === toYmd(new Date())
-                    ? "មិនទាន់មានវគ្គសិក្សាដើម្បីបង្ហាញ"
-                    : "មិនមានសកម្មភាពនៅថ្ងៃនេះទេ"}
+                  មិនទាន់មានទិន្នន័យ
                 </div>
-              )}
+              ) : (
+                <>
+                  {learningPlanItems.length === 0 && (
+                    <div className="rounded-2xl border border-dashed  border-slate-300 bg-slate-50 p-4 text-sm text-slate-500">
+                      {selectedDayYmd === toYmd(new Date())
+                        ? "មិនទាន់មានវគ្គសិក្សាដើម្បីបង្ហាញ"
+                        : "មិនមានសកម្មភាពនៅថ្ងៃនេះទេ"}
+                    </div>
+                  )}
 
-              {learningPlanItems.map((item) =>
-                item.nextLessonLink ? (
-                  <Link
-                    key={item.id}
-                    to={item.nextLessonLink}
-                    className={`block rounded-2xl p-4 transition hover:shadow-md ${
-                      item.done
-                        ? "bg-[#e8edf7] border border-[#cfd8ea]"
-                        : "bg-slate-100 border border-slate-200"
-                    }`}
-                  >
-                    <div className="flex items-start gap-3 ">
-                      <span className="mt-0.5">
-                        {item.done ? (
-                          <IoCheckmarkCircle className="text-3xl text-[#234ea3] " />
-                        ) : (
-                          <IoEllipseOutline className="text-3xl text-slate-500" />
-                        )}
-                      </span>
-                      <div className="min-w-0 ">
-                        <p
-                          className={`truncate text-base sm:text-lg font-semibold ${
-                            item.done
-                              ? "line-through text-slate-500"
-                              : "text-[#1b2235] dark:text-white"
-                          }`}
-                        >
-                          {item.title}
-                        </p>
-                        <p className="mt-1 flex items-center gap-2 text-slate-500">
-                          <span>{item.duration}</span>
-                        </p>
+                  {learningPlanItems.map((item) =>
+                    item.nextLessonLink ? (
+                      <Link
+                        key={item.id}
+                        to={item.nextLessonLink}
+                        className={`block rounded-2xl p-4 transition hover:shadow-md ${
+                          item.done
+                            ? "bg-[#e8edf7] border border-[#cfd8ea]"
+                            : "bg-slate-100 border border-slate-200"
+                        }`}
+                      >
+                        <div className="flex items-start gap-3 ">
+                          <span className="mt-0.5">
+                            {item.done ? (
+                              <IoCheckmarkCircle className="text-3xl text-[#234ea3] " />
+                            ) : (
+                              <IoEllipseOutline className="text-3xl text-slate-500" />
+                            )}
+                          </span>
+                          <div className="min-w-0 ">
+                            <p
+                              className={`truncate text-base sm:text-lg font-semibold ${
+                                item.done
+                                  ? "line-through text-slate-500"
+                                  : "text-[#1b2235] dark:text-white"
+                              }`}
+                            >
+                              {item.title}
+                            </p>
+                            <p className="mt-1 flex items-center gap-2 text-slate-500">
+                              <span>{item.duration}</span>
+                            </p>
+                          </div>
+                        </div>
+                      </Link>
+                    ) : (
+                      <div
+                        key={item.id}
+                        className={`rounded-2xl p-4 ${
+                          item.done
+                            ? "bg-[#e8edf7] border border-[#cfd8ea]"
+                            : "bg-slate-100 border border-slate-200"
+                        }`}
+                      >
+                        <div className="flex items-start gap-3">
+                          <span className="mt-0.5">
+                            {item.done ? (
+                              <IoCheckmarkCircle className="text-3xl text-[#234ea3]" />
+                            ) : (
+                              <IoEllipseOutline className="text-3xl text-slate-500" />
+                            )}
+                          </span>
+                          <div className="min-w-0">
+                            <p
+                              className={`truncate text-base sm:text-lg font-semibold ${
+                                item.done
+                                  ? "line-through text-slate-500"
+                                  : "text-[#1b2235]"
+                              }`}
+                            >
+                              {item.title}
+                            </p>
+                            <p className="mt-1 flex items-center gap-2 text-slate-500">
+                              <span>{item.time}</span>
+                              <span>•</span>
+                              <IoTimeOutline />
+                              <span>{item.duration}</span>
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
-                ) : (
-                  <div
-                    key={item.id}
-                    className={`rounded-2xl p-4 ${
-                      item.done
-                        ? "bg-[#e8edf7] border border-[#cfd8ea]"
-                        : "bg-slate-100 border border-slate-200"
-                    }`}
-                  >
-                    <div className="flex items-start gap-3">
-                      <span className="mt-0.5">
-                        {item.done ? (
-                          <IoCheckmarkCircle className="text-3xl text-[#234ea3]" />
-                        ) : (
-                          <IoEllipseOutline className="text-3xl text-slate-500" />
-                        )}
-                      </span>
-                      <div className="min-w-0">
-                        <p
-                          className={`truncate text-base sm:text-lg font-semibold ${
-                            item.done
-                              ? "line-through text-slate-500"
-                              : "text-[#1b2235]"
-                          }`}
-                        >
-                          {item.title}
-                        </p>
-                        <p className="mt-1 flex items-center gap-2 text-slate-500">
-                          <span>{item.time}</span>
-                          <span>•</span>
-                          <IoTimeOutline />
-                          <span>{item.duration}</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ),
+                    ),
+                  )}
+                </>
               )}
             </div>
           </div>
@@ -1072,39 +1132,41 @@ export default function Learn() {
             <p className="text-sm text-slate-600">
               វគ្គសិក្សាកំពុងដំណើរការ:{" "}
               <span className="font-bold text-slate-800">
-                {mergedEnrollments.length}
+                {!userId || userId === 0 ? 0 : mergedEnrollments.length}
               </span>
             </p>
           </div>
 
-          {mergedEnrollments.length === 0 ? (
+          {!userId || userId === 0 ? (
             <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-slate-500">
-              មិនមានវគ្គសិក្សាកំពុងដំណើរការ
+              មិនទាន់មានទិន្នន័យ
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 ">
-              {mergedEnrollments.map((enrollment) => {
-                const resolvedCourseId =
-                  enrollment?.courseId ??
-                  enrollment?.course?.id ??
-                  enrollment?.course?.courseId;
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 ">
+                {mergedEnrollments.map((enrollment) => {
+                  const resolvedCourseId =
+                    enrollment?.courseId ??
+                    enrollment?.course?.id ??
+                    enrollment?.course?.courseId;
 
-                const course = coursesById[resolvedCourseId];
-                const progress = courseProgressById[resolvedCourseId];
+                  const course = coursesById[resolvedCourseId];
+                  const progress = courseProgressById[resolvedCourseId];
 
-                return (
-                  <div key={enrollment?.id} className="min-h-full ">
-                    {course ? (
-                      <CourseProgress course={course} progress={progress} />
-                    ) : (
-                      <div className="h-full rounded-2xl border border-slate-200 bg-white p-5  text-sm text-slate-500 shadow-sm">
-                        កំពុងដំណេីរការវគ្គសិក្សា...
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+                  return (
+                    <div key={enrollment?.id} className="min-h-full ">
+                      {course ? (
+                        <CourseProgress course={course} progress={progress} />
+                      ) : (
+                        <div className="h-full rounded-2xl border border-slate-200 bg-white p-5  text-sm text-slate-500 shadow-sm">
+                          កំពុងដំណេីរការវគ្គសិក្សា...
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </>
           )}
         </div>
       </div>

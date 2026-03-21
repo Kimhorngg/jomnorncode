@@ -23,7 +23,7 @@ export default function SectionTitle({
 
       {subtitle ? (
         <p
-          className={`max-w-2xl  text-sm leading-6 dark:text-[#62748c] text-slate-500 md:text-base mt-8 ${subtitleClassName}`}
+          className={`max-w-2xl  text-md leading-6 dark:text-[#62748c] text-slate-500 md:text-base mt-8 ${subtitleClassName}`}
         >
           {subtitle}
         </p>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import documentHeroImage from "../../../assets/photo 6.png";
+import documentHeroImage from "../../../assets/test.png";
 import SignUp from "../../../pages/SignUp";
 import Login from "../../../pages/LogIn";
 

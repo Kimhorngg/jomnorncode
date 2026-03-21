@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import lisaImage from "../../../assets/Lisa.png";
+import lisaImage from "../../../assets/Roza.png";
 import manethImage from "../../../assets/Maneth.png";
-import chovornImage from "../../../assets/chovorn.jpg";
+import chovornImage from "../../../assets/Vantha.png";
 
 export default function Carocel() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -60,10 +60,10 @@ export default function Carocel() {
                   </div>
                   <div className="border-b border-[#3F72AF] mt-8 mb-6" />
                   <h2 className="text-2xl font-bold text-[#1e293b] dark:text-white">
-                    សារុន លីសា
+                   នី រ៉ូស្សា
                   </h2>
                   <p className="text-gray-500 dark:text-white mt-2">
-                    និស្សិតឆ្នាំទី២
+                    និស្សិតឆ្នាំទី៣
                   </p>
                 </div>
               </div>

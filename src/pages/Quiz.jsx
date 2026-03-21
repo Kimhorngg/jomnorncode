@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import {
+  isLessonCompletedForUser,
+  isQuizCompletedForUser,
+  setQuizCompletedForUser,
+} from "../utils/lessonProgress";
 
 const API_BASE = "https://jomnorncode-api.cheat.casa/api";
 
@@ -144,12 +149,8 @@ export default function Quiz() {
       return;
     }
 
-    const lessonsDone = lessonIds.every(
-      (id) => localStorage.getItem(`lesson-${id}-lessonCompleted`) === "true",
-    );
-    const quizzesDone = lessonIds.every(
-      (id) => localStorage.getItem(`lesson-${id}-quizCompleted`) === "true",
-    );
+    const lessonsDone = lessonIds.every((id) => isLessonCompletedForUser(id));
+    const quizzesDone = lessonIds.every((id) => isQuizCompletedForUser(id));
 
     if (!lessonsDone || !quizzesDone) {
       toast.error("សូមបញ្ចប់មេរៀនទាំងអស់ជាមុនសិន");
@@ -159,7 +160,10 @@ export default function Quiz() {
     let userId = resolveUserId(authUser);
     if (!userId) {
       try {
-        const meEndpoints = [`${API_BASE}/api/users/me`, `${API_BASE}/users/me`];
+        const meEndpoints = [
+          `${API_BASE}/api/users/me`,
+          `${API_BASE}/users/me`,
+        ];
 
         for (const url of meEndpoints) {
           const meRes = await fetch(url, {
@@ -252,7 +256,9 @@ export default function Quiz() {
 
   const handleOpenCertificate = () => {
     setEnrollModalOpen(false);
-    navigate(`/certificate/${courseId}`);
+    // Navigate to enrollment page first to complete the enrollment process
+    // Then it will automatically navigate to certificate page after enrollment is complete
+    navigate(`/enrollment/${courseId}`);
   };
 
   useEffect(() => {
@@ -279,14 +285,13 @@ export default function Quiz() {
       const currentLessonIndex = orderedLessons.findIndex(
         (lesson) => String(lesson.id) === String(lessonId),
       );
-      const nextLesson = currentLessonIndex >= 0
-        ? orderedLessons[currentLessonIndex + 1] ?? null
-        : null;
+      const nextLesson =
+        currentLessonIndex >= 0
+          ? (orderedLessons[currentLessonIndex + 1] ?? null)
+          : null;
 
       setNextLessonPath(
-        nextLesson
-          ? `/coursedetail/${courseId}/lesson/${nextLesson.id}`
-          : null,
+        nextLesson ? `/coursedetail/${courseId}/lesson/${nextLesson.id}` : null,
       );
 
       // fetch("https://opentdb.com/api.php?amount=5&type=multiple")
@@ -404,7 +409,7 @@ export default function Quiz() {
     const passed = percentage >= 90;
 
     if (passed) {
-      localStorage.setItem(`lesson-${lessonId}-quizCompleted`, "true");
+      setQuizCompletedForUser(lessonId, true);
       window.dispatchEvent(new Event("lessonProgressUpdated"));
     }
 

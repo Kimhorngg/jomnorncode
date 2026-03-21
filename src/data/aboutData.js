@@ -4,7 +4,7 @@ import teacher2Image from "../assets/teacher2.png";
 import kimhorngImage from "../assets/Kimhorng.png";
 import moeunImage from "../assets/Moeun Kimhour.png";
 import phearumImage from "../assets/Phearum.png";
-import manethImage from "../assets/Maneth.png";
+import manethImage from "../assets/Maneth2.png";
 import chovornImage from "../assets/chovorn.jpg";
 import lisaImage from "../assets/Lisa.png";
 import philipImage from "../assets/Philip.png";
@@ -39,13 +39,13 @@ export const members = [
     name: "យ៉ាង គីមហ័ង",
     role: "ប្រធាន",
     img: kimhorngImage,
-    quote: "ហត់ពេលនេះ ដោយមិនវេទនាពេលក្រោយ",
+    quote: "ហត់ពេលនេះ មិនវេទនាពេលក្រោយ",
   },
   {
     name: "ជា​ ភីរម្យ",
     role: "សមាជិក",
     img: phearumImage,
-    quote: "​និយាយបែបណាធ្វេីបែបនឹង",
+    quote: "សន្យានឹងលែងឈប់ទៀតហេីយ​",
   },
   {
     name: "លាង​ ម៉ាណែត",
@@ -57,25 +57,25 @@ export const members = [
     name: "ស៊ន ឆវ័ន",
     role: "សមាជិក",
     img: chovornImage,
-    quote: "ពេលនោះ ដាក់ធ្វើការលើនេះ",
+    quote: "បាត់បង់មិនមែនជាជម្រើសទេ ប៉ុន្តែជាការបង្ខំ",
   },
   {
     name: "សារុន​ លីសា",
     role: "សមាជិក",
     img: lisaImage,
-    quote: "ទង្វេីអោយសមនឹងសម្តី",
+    quote: "លីសា ស្រឡាញ់កូដដូចស្រលាញ់ម៉ាឆា",
   },
   {
     name: "ឆាន់ ហ្វីលីប",
     role: "សមាជិក",
     img: philipImage,
-    quote: "ពេលនោះ ដាក់ធ្វើការលើនេះ",
+    quote: "ចេះរៀនតែរៀនមិនចេះ",
   },
   {
     name: "កើត វ៉ាត់",
     role: "សមាជិក",
     img: vathImage,
-    quote: "ពេលនោះ ដាក់ធ្វើការលើនេះ",
+    quote: "មិនបោះបង់",
   },
 ];
 

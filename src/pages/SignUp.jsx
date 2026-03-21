@@ -26,7 +26,7 @@ const buildSocialFallbackUser = (firebaseUser) => {
     .split(/\s+/);
 
   const firstName = nameParts[0] || "User";
-  const lastName = nameParts.slice(1).join(" ") || "Social";
+  const lastName = nameParts.slice(1).join(" ") || "";
 
   const emailPrefix = safeEmail
     .split("@")[0]
@@ -86,7 +86,8 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
   const { logInWithGoogle, isPending: googlePending } = useGoogleAuth();
 
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
@@ -113,6 +114,12 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
       text: `Welcome to JomnornCode, ${name}!`,
       timer: 2000,
       showConfirmButton: false,
+      didOpen: (modal) => {
+        modal.style.zIndex = "9999";
+        document
+          .querySelector("[role='alertdialog']")
+          ?.parentElement?.style.setProperty("z-index", "9998");
+      },
     });
   };
 
@@ -147,6 +154,15 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
       } catch (registerErr) {
         console.error(`${providerName} register failed:`, registerErr);
 
+        Swal.fire({
+          icon: "error",
+          title: "Failed",
+          text: `${providerName} registration failed`,
+          didOpen: (modal) => {
+            modal.style.zIndex = "9999";
+          },
+        });
+
         const loginRes = await login({
           email: payload.email,
           password: payload.password,
@@ -170,6 +186,9 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
         icon: "error",
         title: `${providerName} Sign In Failed`,
         text: message,
+        didOpen: (modal) => {
+          modal.style.zIndex = "9999";
+        },
       });
 
       console.error(`${providerName} auth error:`, err);
@@ -201,14 +220,10 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
     e.preventDefault();
     if (isRegistering) return;
 
-    const trimmedName = formData.name.trim();
+    const firstName = formData.firstName.trim() || "User";
+    const lastName = formData.lastName.trim() || "";
     const trimmedEmail = formData.email.trim().toLowerCase();
     const trimmedPassword = formData.password.trim();
-
-    const nameParts = trimmedName.split(/\s+/);
-    const firstName = nameParts[0] || "User";
-    const lastName =
-      nameParts.length > 1 ? nameParts.slice(1).join(" ") : "Student";
 
     const emailPrefix = trimmedEmail
       .split("@")[0]
@@ -243,6 +258,12 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
         icon: "error",
         title: "Failed",
         text: message,
+        didOpen: (modal) => {
+          modal.style.zIndex = "9999";
+          document
+            .querySelector("[role='alertdialog']")
+            ?.parentElement?.style.setProperty("z-index", "9998");
+        },
       });
 
       console.error("Email sign up error:", err);
@@ -284,19 +305,36 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
         </p>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <div className="relative">
+
+           <div className="relative">
             <IoPersonOutline className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               required
               type="text"
-              placeholder="ឈ្មោះពេញ"
-              value={formData.name}
+              placeholder="គោត្តនាម"
+              value={formData.firstName}
               onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
+                setFormData({ ...formData, firstName: e.target.value })
               }
               className="w-full rounded-xl border border-gray-300 bg-white py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder:text-gray-400 outline-none focus:border-[#4573a7] focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-400 dark:focus:border-[#6aa1e6] dark:focus:ring-blue-900/40"
             />
           </div>
+
+           <div className="relative">
+            <IoPersonOutline className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input
+              required
+              type="text"
+              placeholder="នាមត្រកូល"
+              value={formData.lastName}
+              onChange={(e) =>
+                setFormData({ ...formData, lastName: e.target.value })
+              }
+              className="w-full rounded-xl border border-gray-300 bg-white py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder:text-gray-400 outline-none focus:border-[#4573a7] focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-400 dark:focus:border-[#6aa1e6] dark:focus:ring-blue-900/40"
+            />
+          </div>
+
+          
 
           <div className="relative">
             <IoMailOutline className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -330,7 +368,11 @@ export default function SignUp({ isOpen, onClose, openLogin }) {
               className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 transition-colors hover:text-[#4573a7] dark:hover:text-[#6aa1e6]"
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
-              {showPassword ? <IoEyeOffOutline size={18} /> : <IoEyeOutline size={18} />}
+              {showPassword ? (
+                <IoEyeOffOutline size={18} />
+              ) : (
+                <IoEyeOutline size={18} />
+              )}
             </button>
           </div>
 

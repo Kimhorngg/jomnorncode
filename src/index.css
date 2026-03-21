@@ -1,11 +1,12 @@
 /* Font khmer Hanuman */
 @import url("https://fonts.googleapis.com/css2?family=Hanuman:wght@100;300;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-hanuman: "Hanuman", serif;
+  --font-hanuman: "Poppins", "Hanuman", serif;
 }
 
 /* Set as default for the whole page */
@@ -117,6 +118,14 @@ html.dark .dark\:border-\[\#314057\] {
 }
 html.dark .dark\:ring-\[\#314057\] {
   --tw-ring-color: #314057;
+}
+
+.swal2-container {
+  z-index: 4000 !important;
+}
+
+.swal2-popup {
+  z-index: 4001 !important;
 }
 /* html.dark .text-[#112d4f],
 html.dark .text-[#102e50],

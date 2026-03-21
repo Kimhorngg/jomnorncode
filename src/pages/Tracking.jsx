@@ -1,7 +1,6 @@
 const API_BASE = "https://jomnorncode-api.cheat.casa/api";
 
 export function createApiClient(token) {
-  
   const cleanToken = String(token || "")
     .replace(/^Bearer\s+/i, "")
     .trim();
@@ -33,7 +32,7 @@ export function createApiClient(token) {
       throw new Error(
         `HTTP ${response.status} ${response.statusText}: ${
           typeof data === "string" ? data : JSON.stringify(data)
-        }`
+        }`,
       );
     }
 
@@ -43,7 +42,7 @@ export function createApiClient(token) {
   return {
     // USERS
     getUsers: (
-      params = "all=true&page=0&size=10&sortBy=createdAt&direction=desc"
+      params = "all=true&page=0&size=10&sortBy=createdAt&direction=desc",
     ) => request(`/api/users?${params}`, { method: "GET" }),
 
     getUserById: (userId) => request(`/api/users/${userId}`, { method: "GET" }),
@@ -58,7 +57,7 @@ export function createApiClient(token) {
 
     // ENROLLMENTS
     getEnrollments: (
-      params = "page=0&size=10&sortBy=createdAt&direction=desc"
+      params = "page=0&size=10&sortBy=createdAt&direction=desc",
     ) => request(`/api/enrollments?${params}`, { method: "GET" }),
 
     getEnrollmentById: (enrollmentId) =>
@@ -76,9 +75,9 @@ export function createApiClient(token) {
     updateEnrollmentProgress: ({ enrollmentId, progressPercentage }) =>
       request(
         `/api/enrollments/${enrollmentId}/progress?progressPercentage=${encodeURIComponent(
-          progressPercentage
+          progressPercentage,
         )}`,
-        { method: "PATCH" }
+        { method: "PATCH" },
       ),
 
     completeEnrollment: (enrollmentId) =>
@@ -91,7 +90,7 @@ export function createApiClient(token) {
 
     // CERTIFICATES
     getCertificates: (
-      params = "page=0&size=10&sortBy=createdAt&direction=desc"
+      params = "page=0&size=10&sortBy=createdAt&direction=desc",
     ) => request(`/api/certificates?${params}`, { method: "GET" }),
 
     getCertificatesByUser: (userId) =>
@@ -115,12 +114,18 @@ export function createApiClient(token) {
       );
     },
 
-    issueCertificate: ({ userId, courseId, fileUrl }) =>
+    issueCertificate: ({ userId, courseId, fileUrl, courseName, userName }) =>
       request(`/api/certificates`, {
         method: "POST",
-        body: JSON.stringify({ userId, courseId, fileUrl }),
+        body: JSON.stringify({
+          userId,
+          courseId,
+          fileUrl,
+          courseName,
+          userName,
+        }),
       }),
-    };
+  };
 }
 
 function toList(payload) {
@@ -132,7 +137,13 @@ function toList(payload) {
 }
 
 function pickId(entity) {
-  return entity?.id ?? entity?.userId ?? entity?.courseId ?? entity?.enrollmentId ?? null;
+  return (
+    entity?.id ??
+    entity?.userId ??
+    entity?.courseId ??
+    entity?.enrollmentId ??
+    null
+  );
 }
 
 function pickEnrollmentId(enrollment) {
@@ -183,7 +194,6 @@ export async function ensureEnrollment(api, userId, courseId) {
   return api.createEnrollment({ userId, courseId });
 }
 
-
 export async function trackAndIssueCertificate({
   token,
   userId,
@@ -194,7 +204,6 @@ export async function trackAndIssueCertificate({
 }) {
   const api = createApiClient(token);
 
-  
   let resolvedUserId = userId ?? null;
   if (!resolvedUserId) {
     const me = await api.getMe();
@@ -205,7 +214,6 @@ export async function trackAndIssueCertificate({
     throw new Error("Cannot resolve current user id from token.");
   }
 
-  
   let user = null;
   let course = null;
   try {
@@ -252,7 +260,7 @@ export async function trackAndIssueCertificate({
     const alreadyIssued = certList.find(
       (c) =>
         Number(pickCertificateCourseId(c)) === Number(courseId) &&
-        Number(pickCertificateUserId(c)) === Number(resolvedUserId)
+        Number(pickCertificateUserId(c)) === Number(resolvedUserId),
     );
 
     if (!alreadyIssued) {
@@ -285,7 +293,6 @@ export async function trackAndIssueCertificate({
     certificateError,
   };
 }
-
 
 export async function demoCalls(token) {
   const api = createApiClient(token);
@@ -322,12 +329,13 @@ export async function demoCalls(token) {
   console.log("Issued certificate", certificate);
 }
 
-
 export async function demoDynamicFlow(token, options = {}) {
   const api = createApiClient(token);
   const userId = options.userId ?? null;
   if (!userId) {
-    throw new Error("Pass options.userId because /api/api/users/me is forbidden for your role.");
+    throw new Error(
+      "Pass options.userId because /api/api/users/me is forbidden for your role.",
+    );
   }
 
   const coursesPayload = await api.getCourses();

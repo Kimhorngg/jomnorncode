@@ -69,8 +69,19 @@ export default function Navbar() {
   const getDisplayName = () => {
     if (user?.fullName) return user.fullName;
     if (user?.displayName) return user.displayName;
-    if (user?.firstName || user?.lastName)
-      return `${user.firstName || ""} ${user.lastName || ""}`.trim();
+    if (user?.firstName && user?.lastName) {
+      // Remove "Student", "Social" from lastName if user only has one name
+      const lastName = user.lastName.trim();
+      if (
+        lastName.toLowerCase() === "student" ||
+        lastName.toLowerCase() === "social" ||
+        lastName === ""
+      ) {
+        return user.firstName;
+      }
+      return `${user.firstName} ${lastName}`;
+    }
+    if (user?.firstName) return user.firstName;
     if (user?.username) return user.username;
     if (user?.email) return user.email.split("@")[0];
     return "User";
@@ -84,197 +95,220 @@ export default function Navbar() {
     return "U";
   };
 
+  const isAdminUser = (() => {
+    const roleValue =
+      user?.role ??
+      user?.userRole ??
+      user?.authorities?.[0]?.authority ??
+      user?.authorities?.[0] ??
+      user?.roles?.[0]?.name ??
+      user?.roles?.[0] ??
+      "";
+
+    return String(roleValue).toLowerCase().includes("admin");
+  })();
+
   return (
     <>
       <nav className="sticky top-0 z-[500] w-full bg-white/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:bg-[#0f172a]/95 dark:supports-[backdrop-filter]:bg-[#0f172a]/80">
         <div className="max-w-420 mx-auto px-6 lg:px-12 py-4 flex items-center justify-between">
-        {/* LOGO */}
-        <Link to="/" className="flex items-center">
-          <img
-            src={logoImage}
-            alt="Logo"
-            className="w-18 h-18 object-contain"
-          />
-        </Link>
+          {/* LOGO */}
+          <Link to="/" className="flex items-center">
+            <img
+              src={logoImage}
+              alt="Logo"
+              className="w-18 h-18 object-contain"
+            />
+          </Link>
 
-        {/* DESKTOP MENU */}
-        <ul className="hidden lg:flex items-center space-x-10">
-          <li>
-            <NavLink to="/" end className={navLinkClass}>
-              ទំព័រដើម
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/learn" className={navLinkClass}>
-              ចូលរៀន
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/course" className={navLinkClass}>
-              វគ្គសិក្សា
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/document" className={navLinkClass}>
-              ឯកសារ
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/about" className={navLinkClass}>
-              អំពីយើង
-            </NavLink>
-          </li>
-        </ul>
+          {/* DESKTOP MENU */}
+          <ul className="hidden lg:flex items-center space-x-10">
+            <li>
+              <NavLink to="/" end className={navLinkClass}>
+                ទំព័រដើម
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/learn" className={navLinkClass}>
+                ចូលរៀន
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/course" className={navLinkClass}>
+                វគ្គសិក្សា
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/document" className={navLinkClass}>
+                ឯកសារ
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/about" className={navLinkClass}>
+                អំពីយើង
+              </NavLink>
+            </li>
+          </ul>
 
-        {/* RIGHT SIDE */}
-        <div className="flex items-center space-x-4">
-          {/* MOBILE MENU BUTTON */}
-          <button
-            onClick={() => setMobileOpen((open) => !open)}
-            className="lg:hidden p-2 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? (
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-5 h-5"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            ) : (
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-5 h-5"
-              >
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <line x1="3" y1="12" x2="21" y2="12" />
-                <line x1="3" y1="18" x2="21" y2="18" />
-              </svg>
-            )}
-          </button>
-          {/* DARK MODE */}
-          <button
-            onClick={() => setIsDarkMode(!isDarkMode)}
-            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-slate-200"
-          >
-            {isDarkMode ? (
-              <IoSunnyOutline size={22} />
-            ) : (
-              <IoMoonOutline size={22} />
-            )}
-          </button>
-
-          {/* PROFILE */}
-          <div className="relative" ref={dropdownRef}>
+          {/* RIGHT SIDE */}
+          <div className="flex items-center space-x-4">
+            {/* MOBILE MENU BUTTON */}
             <button
-              onClick={() => setUserOpen(!userOpen)}
-              className="flex items-center gap-2 rounded-full border px-1 py-1 pr-3 hover:bg-gray-50 dark:border-slate-700 dark:hover:bg-slate-800"
+              onClick={() => setMobileOpen((open) => !open)}
+              className="lg:hidden p-2 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+              aria-label="Toggle menu"
             >
-              {user ? (
-                <>
-                  <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-[#3f71af] bg-gray-200">
-                    {avatarSrc ? (
-                      <img
-                        src={avatarSrc}
-                        alt="profile"
-                        referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="flex items-center justify-center h-full bg-[#3f71af] text-white font-bold">
-                        {getInitial()}
-                      </div>
-                    )}
-                  </div>
-
-                  <span className="hidden sm:block text-sm font-semibold text-gray-700 dark:text-white">
-                    {getDisplayName()}
-                  </span>
-                </>
+              {mobileOpen ? (
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-5 h-5"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
               ) : (
-                <div className="p-2 bg-gray-100 rounded-full dark:bg-slate-800">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                    />
-                  </svg>
-                </div>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-5 h-5"
+                >
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <line x1="3" y1="12" x2="21" y2="12" />
+                  <line x1="3" y1="18" x2="21" y2="18" />
+                </svg>
+              )}
+            </button>
+            {/* DARK MODE */}
+            <button
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-slate-200"
+            >
+              {isDarkMode ? (
+                <IoSunnyOutline size={22} />
+              ) : (
+                <IoMoonOutline size={22} />
               )}
             </button>
 
-            {userOpen && (
-              <div className="absolute right-0 mt-3 w-60 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border py-2">
+            {/* PROFILE */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setUserOpen(!userOpen)}
+                className="flex items-center gap-2 rounded-full border px-1 py-1 pr-3 hover:bg-gray-50 dark:border-slate-700 dark:hover:bg-slate-800"
+              >
                 {user ? (
                   <>
-                    <div className="px-4 py-4 border-b dark:border-gray-700">
-                      <p className="text-sm font-bold text-[#1f3a5f] dark:text-white">
-                        {getDisplayName()}
-                      </p>
-                      <p className="text-xs text-gray-500">{user.email}</p>
+                    <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-[#3f71af] bg-gray-200">
+                      {avatarSrc ? (
+                        <img
+                          src={avatarSrc}
+                          alt="profile"
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="flex items-center justify-center h-full bg-[#3f71af] text-white font-bold">
+                          {getInitial()}
+                        </div>
+                      )}
                     </div>
 
-                    <Link
-                      to="/profile"
-                      onClick={() => setUserOpen(false)}
-                      className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700"
-                    >
-                      ប្រវត្តិរូបសង្ខេប
-                    </Link>
-
-                    <button
-                      onClick={handleLogout}
-                      className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50"
-                    >
-                      ចាកចេញពីគណនី
-                    </button>
+                    <span className="hidden sm:block text-sm font-semibold text-gray-700 dark:text-white">
+                      {getDisplayName()}
+                    </span>
                   </>
                 ) : (
-                  <>
-                    <button
-                      onClick={() => {
-                        setIsSignUpOpen(true);
-                        setUserOpen(false);
-                      }}
-                      className="w-full text-left px-4 py-2  hover:bg-gray-50 hover:text-[#112d50] "
+                  <div className="p-2 bg-gray-100 rounded-full dark:bg-slate-800">
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
                     >
-                      បង្កើតគណនីថ្មី
-                    </button>
-
-                    <button
-                      onClick={() => {
-                        setIsLoginOpen(true);
-                        setUserOpen(false);
-                      }}
-                      className="w-full text-left px-4 py-2  hover:bg-gray-50 hover:text-[#112d50]"
-                    >
-                      ចូលប្រើប្រាស់
-                    </button>
-                  </>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      />
+                    </svg>
+                  </div>
                 )}
-              </div>
-            )}
+              </button>
+
+              {userOpen && (
+                <div className="absolute right-0 mt-3 w-60 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border py-2">
+                  {user ? (
+                    <>
+                      <div className="px-4 py-4 border-b dark:border-gray-700">
+                        <p className="text-sm font-bold text-[#1f3a5f] dark:text-white">
+                          {getDisplayName()}
+                        </p>
+                        <p className="text-xs text-gray-500">{user.email}</p>
+                      </div>
+
+                      <Link
+                        to="/profile"
+                        onClick={() => setUserOpen(false)}
+                        className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700"
+                      >
+                        ប្រវត្តិរូបសង្ខេប
+                      </Link>
+
+                      {isAdminUser ? (
+                        <Link
+                          to="/dashboard"
+                          onClick={() => setUserOpen(false)}
+                          className="block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700"
+                        >
+                          ផ្ទាំងគ្រប់គ្រង
+                        </Link>
+                      ) : null}
+
+                      <button
+                        onClick={handleLogout}
+                        className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50"
+                      >
+                        ចាកចេញពីគណនី
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        onClick={() => {
+                          setIsSignUpOpen(true);
+                          setUserOpen(false);
+                        }}
+                        className="w-full text-left px-4 py-2  hover:bg-gray-50 hover:text-[#112d50] "
+                      >
+                        បង្កើតគណនីថ្មី
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          setIsLoginOpen(true);
+                          setUserOpen(false);
+                        }}
+                        className="w-full text-left px-4 py-2  hover:bg-gray-50 hover:text-[#112d50]"
+                      >
+                        ចូលប្រើប្រាស់
+                      </button>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
 
         {/* MOBILE MENU */}
         {mobileOpen && (

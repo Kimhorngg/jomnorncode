@@ -1,12 +1,15 @@
 import jsPDF from "jspdf";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import {
   IoCheckmarkCircle,
   IoDownloadOutline,
   IoRibbonOutline,
 } from "react-icons/io5";
 import img from "../assets/Certificate.png";
+import { createApiClient } from "./Tracking";
 
-const generateCertificate = (name, course) => {
+const generateCertificate = async (name, course, certificateData) => {
   const doc = new jsPDF();
 
   doc.addImage(
@@ -26,9 +29,121 @@ const generateCertificate = (name, course) => {
   doc.text(course, 105, 185, { align: "center" });
 
   doc.save(`${name}-${course}.pdf`);
+
+  // Save certificate to backend if data is available
+  if (certificateData?.userId && certificateData?.courseId) {
+    try {
+      const token =
+        localStorage.getItem("token") ||
+        localStorage.getItem("accessToken") ||
+        localStorage.getItem("authToken");
+
+      if (!token) {
+        console.warn("[Cert Save] ❌ No auth token found");
+        toast.warning("Could not save certificate record (auth needed)");
+        // Still dispatch event for PDF generation
+        window.dispatchEvent(new Event("certificateIssued"));
+        return;
+      }
+
+      try {
+        const api = createApiClient(token);
+
+        console.log("[Cert Save] 🚀 Starting with:", {
+          userId: certificateData.userId,
+          courseId: certificateData.courseId,
+          courseName: course,
+          userName: name,
+        });
+
+        const result = await api.issueCertificate({
+          userId: Number(certificateData.userId),
+          courseId: Number(certificateData.courseId),
+          fileUrl: `${name}-${course}.pdf`,
+          courseName: course,
+          userName: name,
+        });
+
+        console.log("[Cert Save] ✅ API SUCCESS:", result);
+        toast.success("វិញ្ញាបនបត្របានដាក់ឯកសារ");
+        // Dispatch event so dashboard can refresh
+        window.dispatchEvent(new Event("certificateIssued"));
+      } catch (apiError) {
+        console.error("[Cert Save] ⚠️ API error:", apiError.message);
+        // Try fallback POST method
+        console.log("[Cert Save] 🔄 Attempting fallback POST...");
+
+        const endpoints = [
+          "https://jomnorncode-api.cheat.casa/api/api/certificates",
+          "https://jomnorncode-api.cheat.casa/api/api/certificates",
+        ];
+
+        let saved = false;
+        for (const url of endpoints) {
+          try {
+            console.log(`[Cert Save] POST to: ${url}`);
+            const response = await fetch(url, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                userId: Number(certificateData.userId),
+                courseId: Number(certificateData.courseId),
+                userName: name,
+                courseName: course,
+                issuedAt: new Date().toISOString(),
+                createdAt: new Date().toISOString(),
+                fileUrl: `${name}-${course}.pdf`,
+              }),
+            });
+
+            const responseText = await response.text();
+            console.log(
+              `[Cert Save] Response ${response.status}:`,
+              responseText.substring(0, 200),
+            );
+
+            if (response.ok) {
+              saved = true;
+              console.log("[Cert Save] ✅ Fallback SUCCESS");
+              toast.success("វិញ្ញាបនបត្របានដាក់ឯកសារ");
+              window.dispatchEvent(new Event("certificateIssued"));
+              break;
+            }
+          } catch (error) {
+            console.error("[Cert Save] ❌ Fallback error:", error);
+          }
+        }
+
+        if (!saved) {
+          console.warn("[Cert Save] ⚠️ All methods failed");
+          toast.warning("PDF created but certificate record may not be saved");
+        }
+
+        // Always dispatch event
+        window.dispatchEvent(new Event("certificateIssued"));
+      }
+    } catch (error) {
+      console.error("[Cert Save] 🔴 FATAL ERROR:", error);
+      toast.warning("Certificate PDF created but couldn't save record");
+      window.dispatchEvent(new Event("certificateIssued"));
+    }
+  } else {
+    console.error("[Cert Save] ❌ Missing data:", {
+      hasUserId: !!certificateData?.userId,
+      hasCourseId: !!certificateData?.courseId,
+      certificateData,
+    });
+    toast.warning("Certificate data incomplete - cannot save to backend");
+    // Still dispatch event so PDF was generated
+    window.dispatchEvent(new Event("certificateIssued"));
+  }
 };
 
 export default function Certificate({ name, course, certificate }) {
+  const [isDownloading, setIsDownloading] = useState(false);
   const issuedAt = certificate?.issuedAt || certificate?.createdAt || null;
   const displayDate = issuedAt
     ? new Date(issuedAt).toLocaleDateString("en-CA", {
@@ -41,6 +156,17 @@ export default function Certificate({ name, course, certificate }) {
         month: "long",
         day: "numeric",
       });
+
+  const handleDownload = async () => {
+    setIsDownloading(true);
+    try {
+      await generateCertificate(name, course, certificate);
+    } catch (error) {
+      console.error("Download error:", error);
+    } finally {
+      setIsDownloading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,#f5f7fb_0%,#e9eef8_100%)] px-6 py-10 sm:py-14 dark:bg-none dark:bg-[#101827]">
@@ -139,11 +265,14 @@ export default function Certificate({ name, course, certificate }) {
               </p>
 
               <button
-                onClick={() => generateCertificate(name, course)}
-                className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-[#f59e0c] px-6 py-4 text-base font-bold text-white transition hover:bg-[#d97706]"
+                onClick={handleDownload}
+                disabled={isDownloading}
+                className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-[#f59e0c] px-6 py-4 text-base font-bold text-white transition hover:bg-[#d97706] disabled:cursor-not-allowed disabled:opacity-60"
               >
                 <IoDownloadOutline className="text-xl" />
-                បង្កើតវិញ្ញាបនបត្ររបស់អ្នកជា PDF
+                {isDownloading
+                  ? "កំពុងទាញយក..."
+                  : "បង្កើតវិញ្ញាបនបត្ររបស់អ្នកជា PDF"}
               </button>
             </div>
           </div>

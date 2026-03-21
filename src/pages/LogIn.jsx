@@ -8,7 +8,7 @@ import {
   IoLockClosedOutline,
 } from "react-icons/io5";
 import { useLoginMutation, useRegisterMutation } from "../services/authApi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../features/auth/authSlice";
 import { useGoogleAuth } from "../components/social-auth/GoogleAuth";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +20,7 @@ const buildSocialFallbackUser = (firebaseUser) => {
     .trim()
     .split(" ");
   const firstName = nameParts[0] || "User";
-  const lastName = nameParts.slice(1).join(" ") || "Social";
+  const lastName = nameParts.slice(1).join(" ") || "";
   return {
     email: safeEmail,
     firstName,
@@ -63,6 +63,7 @@ const normalizeAuthResponse = (res, fallbackUser = null) => {
 export default function Login({ isOpen, onClose, openSignUp }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -72,9 +73,31 @@ export default function Login({ isOpen, onClose, openSignUp }) {
   const socialSubmittingRef = useRef(false);
   const isModal = typeof isOpen !== "undefined";
 
-  const finishAuthSuccess = () => {
-    if (isModal) onClose?.();
-    else navigate("/profile");
+  const finishAuthSuccess = (userData = null) => {
+    // Check if user is admin
+    const isAdminUser = () => {
+      const checkUser = userData || user;
+      if (!checkUser) return false;
+      const roleValue =
+        checkUser?.role ??
+        checkUser?.userRole ??
+        checkUser?.authorities?.[0]?.authority ??
+        checkUser?.authorities?.[0] ??
+        checkUser?.roles?.[0]?.name ??
+        checkUser?.roles?.[0] ??
+        "";
+      return String(roleValue).toLowerCase().includes("admin");
+    };
+
+    // Admin users always navigate to dashboard, regardless of modal or full-page
+    if (isAdminUser()) {
+      if (isModal) onClose?.();
+      navigate("/dashboard");
+    } else if (isModal) {
+      onClose?.();
+    } else {
+      navigate("/profile");
+    }
   };
 
   const handleClose = () => {
@@ -96,9 +119,9 @@ export default function Login({ isOpen, onClose, openSignUp }) {
 
       dispatch(setCredentials(authPayload));
       toast.success("Login success");
-      finishAuthSuccess();
+      finishAuthSuccess(authPayload.user);
       Swal.fire({
-        icon: "ជោគជ័យ",
+        icon: "success",
         title: "ចូលបានជោគជ័យ",
         text: "ស្វាគមន៍មកកាន់ជំនាន់កូដ!",
         timer: 1500,
@@ -106,7 +129,7 @@ export default function Login({ isOpen, onClose, openSignUp }) {
       });
     } catch (err) {
       Swal.fire({
-        icon: "កំហុស",
+        icon: "error",
         title: "ចូលបរាជ័យ",
         text:
           err?.data?.message ||
@@ -130,7 +153,7 @@ export default function Login({ isOpen, onClose, openSignUp }) {
         throw new Error(registerRes?.message || "Register failed");
       dispatch(setCredentials(authPayload));
       toast.success("ចូលដោយប្រើ Social-SignIn បានជោគជ័យ");
-      finishAuthSuccess();
+      finishAuthSuccess(authPayload.user);
     } catch (registerErr) {
       try {
         const loginRes = await login({
@@ -141,7 +164,7 @@ export default function Login({ isOpen, onClose, openSignUp }) {
         if (!authPayload) throw new Error(loginRes?.message || "Login failed");
         dispatch(setCredentials(authPayload));
         toast.success("Social login success");
-        finishAuthSuccess();
+        finishAuthSuccess(authPayload.user);
       } catch (loginErr) {
         const message =
           registerErr?.data?.message ||
@@ -177,7 +200,7 @@ export default function Login({ isOpen, onClose, openSignUp }) {
   if (!shouldRender) return null;
 
   return (
-    <div className="fixed inset-0 z-2000 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-[#0f2f4f]/60" onClick={handleClose} />
       <div
         className="relative w-full max-w-90 rounded-3xl bg-[#f7f5f2] p-6 shadow-2xl dark:bg-[#111827]"
@@ -226,7 +249,11 @@ export default function Login({ isOpen, onClose, openSignUp }) {
               className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 transition-colors hover:text-[#4573a7] dark:hover:text-[#6aa1e6]"
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
-              {showPassword ? <IoEyeOffOutline size={18} /> : <IoEyeOutline size={18} />}
+              {showPassword ? (
+                <IoEyeOffOutline size={18} />
+              ) : (
+                <IoEyeOutline size={18} />
+              )}
             </button>
           </div>
           <button

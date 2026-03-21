@@ -2,6 +2,10 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import {
+  isLessonCompletedForUser,
+  isQuizCompletedForUser,
+} from "../../../utils/lessonProgress";
 
 const LEARN_STARTED_COURSES_KEY = "learn-started-courses";
 
@@ -42,15 +46,15 @@ export default function CourseCurriculum({ courseId, lessons = [] }) {
     () => (lessons?.length ? lessons : fallbackLessons),
     [lessons, fallbackLessons],
   );
-  const visibleLessons = showAll ? effectiveLessons : effectiveLessons.slice(0, 3);
+  const visibleLessons = showAll
+    ? effectiveLessons
+    : effectiveLessons.slice(0, 3);
 
   const loadCompletedLessons = () => {
     const nextState = effectiveLessons.reduce((acc, lesson) => {
       const lessonId = String(lesson.id);
       acc[lessonId] =
-        localStorage.getItem(`lesson-${lessonId}-lessonCompleted`) ===
-          "true" &&
-        localStorage.getItem(`lesson-${lessonId}-quizCompleted`) === "true";
+        isLessonCompletedForUser(lessonId) && isQuizCompletedForUser(lessonId);
       return acc;
     }, {});
 
@@ -92,8 +96,10 @@ export default function CourseCurriculum({ courseId, lessons = [] }) {
       if (Array.isArray(payload?.result)) return payload.result;
       if (Array.isArray(payload?.result?.data)) return payload.result.data;
       if (Array.isArray(payload?.result?.items)) return payload.result.items;
-      if (Array.isArray(payload?.result?.content)) return payload.result.content;
-      if (Array.isArray(payload?.result?.lessons)) return payload.result.lessons;
+      if (Array.isArray(payload?.result?.content))
+        return payload.result.content;
+      if (Array.isArray(payload?.result?.lessons))
+        return payload.result.lessons;
       return [];
     };
 
@@ -102,7 +108,10 @@ export default function CourseCurriculum({ courseId, lessons = [] }) {
         .map((lesson, index) => ({
           id: lesson.lessonId ?? lesson.id ?? lesson.lesson_id ?? index + 1,
           sequenceNumber:
-            lesson.sequenceNumber ?? lesson.sequence ?? lesson.order ?? index + 1,
+            lesson.sequenceNumber ??
+            lesson.sequence ??
+            lesson.order ??
+            index + 1,
           title:
             lesson.lessonTitle ??
             lesson.title ??
@@ -125,7 +134,9 @@ export default function CourseCurriculum({ courseId, lessons = [] }) {
         for (const url of urls) {
           let response = await fetch(url, { headers });
           if ((response.status === 401 || response.status === 403) && token) {
-            response = await fetch(url, { headers: { Accept: "application/json" } });
+            response = await fetch(url, {
+              headers: { Accept: "application/json" },
+            });
           }
           if (!response.ok) continue;
 
@@ -156,7 +167,14 @@ export default function CourseCurriculum({ courseId, lessons = [] }) {
     return () => {
       window.removeEventListener("lessonProgressUpdated", loadCompletedLessons);
     };
-  }, [effectiveLessons]);
+  }, [effectiveLessons, authToken]);
+
+  // Reload completed lessons when component mounts or lessons change
+  useEffect(() => {
+    if (effectiveLessons.length > 0) {
+      loadCompletedLessons();
+    }
+  }, [effectiveLessons.length, courseId]);
 
   const handleLearnClick = (event, lesson) => {
     event.preventDefault();
@@ -205,10 +223,7 @@ export default function CourseCurriculum({ courseId, lessons = [] }) {
         ),
       ];
 
-      localStorage.setItem(
-        LEARN_STARTED_COURSES_KEY,
-        JSON.stringify(nextList),
-      );
+      localStorage.setItem(LEARN_STARTED_COURSES_KEY, JSON.stringify(nextList));
       window.dispatchEvent(new Event("learnCourseStarted"));
     } catch {
       // ignore local persistence failure and still continue to lesson
@@ -249,7 +264,9 @@ export default function CourseCurriculum({ courseId, lessons = [] }) {
             <div className="w-10 h-10 flex text-xl sm:text-2xl items-center justify-center bg-gray-200 text-[#ffa405] font-bold rounded-full">
               {toKhmerNumber(index + 1)}
             </div>
-            <span className="text-[#6c7180] text-lg sm:text-xl">{lesson.title}</span>
+            <span className="text-[#6c7180] text-lg sm:text-xl">
+              {lesson.title}
+            </span>
           </div>
           <Link
             to={`/coursedetail/${courseId}/lesson/${lesson.id}`}
@@ -260,7 +277,7 @@ export default function CourseCurriculum({ courseId, lessons = [] }) {
             }}
             className={`mt-3 sm:mt-0 inline-block px-5  py-2.5 rounded-full font-medium shadow-md transition-all duration-200 hover:scale-105 ${
               completedLessonIds[String(lesson.id)]
-                ? "bg-[#f59e0c] hover:bg-[#d97706] text-white"
+                ? "bg-[#ffa207] hover:bg-[#e88e07] text-white"
                 : "bg-[#3f71af] hover:bg-[#112d4f] text-white"
             }`}
           >

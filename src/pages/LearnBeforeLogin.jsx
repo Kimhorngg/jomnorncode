@@ -1,5 +1,12 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import SignUp from "./SignUp";
+import Login from "./LogIn";
+
 export default function LearnBeforeLogin() {
+  const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-[#f3f4f6] px-4 sm:px-8 md:px-16 lg:px-40 py-10 sm:py-14 md:py-16">
       {/* Header */}
@@ -91,12 +98,33 @@ export default function LearnBeforeLogin() {
               វិញ្ញាបនបត្រតាមផ្លូវ។
             </p>
 
-            <button className="mt-6 sm:mt-8 bg-[#112d4f] text-white px-5 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-[#0d223d] transition w-full sm:w-auto">
+            <button
+              onClick={() => setIsSignUpOpen(true)}
+              className="mt-6 sm:mt-8 bg-[#112d4f] text-white px-5 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-[#0d223d] transition w-full sm:w-auto"
+            >
               ចុះឈ្មោះឥឡូវនេះ
             </button>
           </div>
         </div>
       </div>
+
+      <SignUp
+        isOpen={isSignUpOpen}
+        onClose={() => setIsSignUpOpen(false)}
+        openLogin={() => {
+          setIsSignUpOpen(false);
+          setIsLoginOpen(true);
+        }}
+      />
+
+      <Login
+        isOpen={isLoginOpen}
+        onClose={() => setIsLoginOpen(false)}
+        openSignUp={() => {
+          setIsLoginOpen(false);
+          setIsSignUpOpen(true);
+        }}
+      />
     </div>
   );
 }

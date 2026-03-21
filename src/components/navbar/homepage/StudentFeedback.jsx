@@ -1,5 +1,5 @@
 import React from "react";
-import chovornImage from "../../../assets/chovorn.jpg";
+import chovornImage from "../../../assets/chorvorn1.jpg";
 import manethImage from "../../../assets/Maneth.png";
 
 export default function StudentFeedback() {

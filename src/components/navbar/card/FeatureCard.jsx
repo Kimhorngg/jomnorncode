@@ -11,10 +11,14 @@ export default function FeatureCard({ item }) {
       </div>
 
       {/* Title */}
-      <p className="mt-3 text-lg font-semibold text-slate-900 dark:text-[#62748d]">{item.title}</p>
+      <p className="mt-3 text-lg font-semibold text-slate-900 dark:text-[#62748d]">
+        {item.title}
+      </p>
 
       {/* Description */}
-      <p className="mt-2 text-base leading-7 dark:text-[#d1d5dc] text-slate-600">{item.desc}</p>
+      <p className="mt-2 text-base leading-7 font-normal dark:text-[#d1d5dc] text-slate-600">
+        {item.desc}
+      </p>
     </div>
   );
 }

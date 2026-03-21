@@ -27,7 +27,7 @@ function pickEnrollmentProgress(enrollment) {
     enrollment?.progressPercentage ??
       enrollment?.progressPercent ??
       enrollment?.progress ??
-      0
+      0,
   );
 }
 
@@ -137,16 +137,19 @@ export default function CertificatePage() {
         const enrollmentList = toList(enrollmentPayload);
 
         const enrollment = enrollmentList.find(
-          (item) =>
-            String(pickEnrollmentCourseId(item)) === String(courseId),
+          (item) => String(pickEnrollmentCourseId(item)) === String(courseId),
         );
 
         console.log("The isEnrollmentComplete: ", enrollment);
         const isEnrolled = !!enrollment;
         const progressPercentage = pickEnrollmentProgress(enrollment);
         const isProgressComplete = progressPercentage >= 100;
-        const isEnrollmentCompleted = enrollment?.progressPercentage === 100;
-    
+        // Check if enrollment is completed - either by progressPercentage >= 100 or by completed flag
+        const isEnrollmentCompleted =
+          progressPercentage >= 100 ||
+          enrollment?.completed === true ||
+          enrollment?.isCompleted === true ||
+          String(enrollment?.status || "").toLowerCase() === "completed";
 
         if (isMounted) {
           setEligibility({
@@ -186,6 +189,15 @@ export default function CertificatePage() {
             item?.courseId || item?.course?.id || item?.course?.courseId;
           return String(itemCourseId) === String(courseId);
         });
+
+        // Ensure certificate has userId and courseId
+        if (certificate) {
+          certificate = {
+            ...certificate,
+            userId: certificate?.userId || Number(userId),
+            courseId: certificate?.courseId || Number(courseId),
+          };
+        }
 
         // fallback display only after eligibility passes
         if (!certificate) {
@@ -281,10 +293,6 @@ export default function CertificatePage() {
     `Course ${courseId}`;
 
   return (
-    <Certificate
-      name={name}
-      course={course}
-      certificate={certificateData}
-    />
+    <Certificate name={name} course={course} certificate={certificateData} />
   );
 }

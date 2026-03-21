@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import { ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
 import HeroSectionCourseDetail from "../components/navbar/course-details/HeroSectionCourseDetail";
 import WhatYouWillLearn from "../components/navbar/course-details/WhatYouWillLearn";
 import CourseCurriculum from "../components/navbar/course-details/CourseCurriculum";
@@ -13,6 +14,44 @@ export default function CourseDetail() {
   const [courseData, setCourseData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [zoomLevel, setZoomLevel] = useState(100);
+
+  // Load zoom level from localStorage on mount
+  useEffect(() => {
+    const savedZoom = localStorage.getItem("courseDetailZoom");
+    if (savedZoom) {
+      setZoomLevel(Number(savedZoom));
+    }
+  }, []);
+
+  // Apply zoom to entire document and save to localStorage
+  useEffect(() => {
+    document.documentElement.style.zoom = `${zoomLevel}%`;
+    localStorage.setItem("courseDetailZoom", zoomLevel);
+  }, [zoomLevel]);
+
+  // Cleanup zoom on unmount
+  useEffect(() => {
+    return () => {
+      document.documentElement.style.zoom = "100%";
+    };
+  }, []);
+
+  const handleZoomIn = () => {
+    if (zoomLevel < 200) {
+      setZoomLevel(zoomLevel + 10);
+    }
+  };
+
+  const handleZoomOut = () => {
+    if (zoomLevel > 70) {
+      setZoomLevel(zoomLevel - 10);
+    }
+  };
+
+  const handleResetZoom = () => {
+    setZoomLevel(100);
+  };
 
   useEffect(() => {
     const getAuthToken = () => {
@@ -313,27 +352,61 @@ export default function CourseDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fafafa] dark:bg-[#091220] pb-12">
-      <div data-aos="fade-up">
-        <HeroSectionCourseDetail
-          title={courseData?.title}
-          description={courseData?.description}
-          image={courseData?.image}
-          onStartLearning={handleStartLearning}
-          onBackToCourses={() => navigate("/course")}
-        />
+    <>
+      {/* Zoom Controls - Fixed Position */}
+      <div className="fixed top-4 right-4 z-40 flex gap-2 bg-white rounded-lg shadow-lg p-2 md:p-3 border border-gray-300">
+        <button
+          onClick={handleZoomOut}
+          disabled={zoomLevel <= 70}
+          className="p-2 hover:bg-gray-100 rounded transition disabled:opacity-50 disabled:cursor-not-allowed"
+          title="Zoom out"
+        >
+          <ZoomOut size={20} className="text-gray-700" />
+        </button>
+        <div className="flex items-center px-3 py-2 bg-gray-50 rounded min-w-[70px] justify-center">
+          <span className="text-sm font-semibold text-gray-700">
+            {zoomLevel}%
+          </span>
+        </div>
+        <button
+          onClick={handleZoomIn}
+          disabled={zoomLevel >= 200}
+          className="p-2 hover:bg-gray-100 rounded transition disabled:opacity-50 disabled:cursor-not-allowed"
+          title="Zoom in"
+        >
+          <ZoomIn size={20} className="text-gray-700" />
+        </button>
+        <button
+          onClick={handleResetZoom}
+          className="p-2 hover:bg-gray-100 rounded transition"
+          title="Reset zoom"
+        >
+          <RotateCcw size={20} className="text-gray-700" />
+        </button>
       </div>
 
-      <div data-aos="fade-up" data-aos-delay="100">
-        <WhatYouWillLearn
-          title={courseData?.title}
-          description={courseData?.description}
-        />
-      </div>
+      <div className="min-h-screen bg-[#fafafa] dark:bg-[#091220] pb-12">
+        <div data-aos="fade-up">
+          <HeroSectionCourseDetail
+            title={courseData?.title}
+            description={courseData?.description}
+            image={courseData?.image}
+            onStartLearning={handleStartLearning}
+            onBackToCourses={() => navigate("/course")}
+          />
+        </div>
 
-      <div data-aos="fade-up" data-aos-delay="200">
-        <CourseCurriculum courseId={courseId} lessons={courseData?.lessons} />
+        <div data-aos="fade-up" data-aos-delay="100">
+          <WhatYouWillLearn
+            title={courseData?.title}
+            description={courseData?.description}
+          />
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="200">
+          <CourseCurriculum courseId={courseId} lessons={courseData?.lessons} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }

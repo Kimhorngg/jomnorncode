@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import {
+  isLessonCompletedForUser,
+  isQuizCompletedForUser,
+} from "../../../utils/lessonProgress";
 
 export default function LessonProgressCard() {
   const { courseId, lessonId } = useParams();
@@ -7,12 +11,8 @@ export default function LessonProgressCard() {
   const [quizCompleted, setQuizCompleted] = useState(false);
 
   const loadProgress = () => {
-    setLessonCompleted(
-      localStorage.getItem(`lesson-${lessonId}-lessonCompleted`) === "true",
-    );
-    setQuizCompleted(
-      localStorage.getItem(`lesson-${lessonId}-quizCompleted`) === "true",
-    );
+    setLessonCompleted(isLessonCompletedForUser(lessonId));
+    setQuizCompleted(isQuizCompletedForUser(lessonId));
   };
 
   useEffect(() => {
