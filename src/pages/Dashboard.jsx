@@ -24,11 +24,6 @@ import toast from "react-hot-toast";
 
 const navItems = [
   {
-    id: "dashboard",
-    label: "Dashboard",
-    icon: LayoutDashboard,
-  },
-  {
     id: "courses",
     label: "Course Management",
     icon: BookOpen,
@@ -553,16 +548,6 @@ function DashboardSection() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">
-          Admin Dashboard
-        </h1>
-        <p className="mt-1 text-sm text-slate-500">
-          Welcome back. Here&apos;s a quick overview of your JomnornCode
-          performance.
-        </p>
-      </div>
-
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {statCards.map((card) => {
           const Icon = card.icon;
@@ -570,14 +555,14 @@ function DashboardSection() {
           return (
             <div
               key={card.label}
-              className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"
+              className="rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#101827] p-5 shadow-sm"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-sm font-medium text-slate-500">
+                  <p className="text-sm font-medium text-slate-500 dark:text-slate-300">
                     {card.label}
                   </p>
-                  <p className="mt-3 text-3xl font-bold text-slate-900">
+                  <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-white">
                     {card.value}
                   </p>
                 </div>
@@ -587,7 +572,7 @@ function DashboardSection() {
                   <Icon className="h-5 w-5" />
                 </div>
               </div>
-              <p className="mt-4 text-xs font-medium text-slate-400">
+              <p className="mt-4 text-xs font-medium text-slate-400 dark:text-slate-400">
                 {card.note}
               </p>
             </div>
@@ -596,19 +581,19 @@ function DashboardSection() {
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.6fr_0.9fr]">
-        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#101827] p-6 shadow-sm">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <h2 className="text-xl font-bold text-slate-900">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white">
                 Recent Activity
               </h2>
-              <p className="text-sm text-slate-500">
+              <p className="text-sm text-slate-500 dark:text-slate-300">
                 Latest admin actions and platform updates.
               </p>
             </div>
             <button
               type="button"
-              className="rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 transition hover:border-slate-300 hover:text-slate-900"
+              className="rounded-full border border-slate-200 dark:border-slate-700 px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 transition hover:border-slate-300 dark:hover:border-slate-600 hover:text-slate-900 dark:hover:text-white"
             >
               View All
             </button>
@@ -1369,18 +1354,18 @@ function CourseSection({ activeSubSection, onChangeSubSection }) {
           </div>
 
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-slate-900">
+            <h3 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white">
               Existing Courses
             </h3>
             <div className="grid gap-4 lg:grid-cols-2">
               {courseItems.map((course, index) => (
                 <div
                   key={resolveCourseId(course) ?? `course-card-${index}`}
-                  className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"
+                  className="rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#101827] p-5 shadow-sm"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-start gap-3">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-100 text-sky-500">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-100 dark:bg-sky-900/30 text-sky-500">
                         <BookOpen className="h-5 w-5" />
                       </div>
                       <div>
@@ -1457,19 +1442,19 @@ function CourseSection({ activeSubSection, onChangeSubSection }) {
       {selectedCourse === "all-courses" ? (
         <div className="space-y-4">
           {/* Search Input */}
-          <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
-            <Search className="h-5 w-5 text-slate-400" />
+          <div className="flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#101827] px-4 py-3 shadow-sm">
+            <Search className="h-5 w-5 text-slate-400 dark:text-slate-500" />
             <input
               type="text"
               placeholder="Search courses by name or description..."
               value={searchCourse}
               onChange={(e) => setSearchCourse(e.target.value)}
-              className="flex-1 bg-transparent outline-none text-slate-700 placeholder-slate-400"
+              className="flex-1 bg-transparent outline-none text-slate-700 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
             />
             {searchCourse && (
               <button
                 onClick={() => setSearchCourse("")}
-                className="text-slate-400 hover:text-slate-600"
+                className="text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-400"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -1477,10 +1462,10 @@ function CourseSection({ activeSubSection, onChangeSubSection }) {
           </div>
 
           {/* Courses Table */}
-          <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <div className="overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#101827] shadow-sm">
             <div className="overflow-x-auto">
               <table className="min-w-full text-left">
-                <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-400">
+                <thead className="bg-slate-50 dark:bg-slate-800 text-xs uppercase tracking-wide text-slate-400 dark:text-slate-300">
                   <tr>
                     <th className="px-5 py-4 font-semibold">Course</th>
                     <th className="px-5 py-4 font-semibold">Lessons</th>
@@ -1506,14 +1491,14 @@ function CourseSection({ activeSubSection, onChangeSubSection }) {
                     .map((course, index) => (
                       <tr
                         key={resolveCourseId(course) ?? `course-row-${index}`}
-                        className="border-t border-slate-100 text-sm text-slate-600"
+                        className="border-t border-slate-100 dark:border-slate-700 text-sm text-slate-600 dark:text-slate-300"
                       >
                         <td className="px-5 py-5">
                           <div className="flex items-center gap-3">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-100 text-sky-500">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-100 dark:bg-sky-900/30 text-sky-500">
                               <BookOpen className="h-4 w-4" />
                             </div>
-                            <span className="font-semibold text-slate-800">
+                            <span className="font-semibold text-slate-800 dark:text-white">
                               {resolveCourseTitle(course)}
                             </span>
                           </div>
@@ -1528,7 +1513,7 @@ function CourseSection({ activeSubSection, onChangeSubSection }) {
                           <span
                             className={`rounded-full px-3 py-1 text-xs font-semibold ${
                               statusClassNames[resolveCourseStatus(course)] ||
-                              "bg-emerald-100 text-emerald-600"
+                              "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-200"
                             }`}
                           >
                             {resolveCourseStatus(course)}
@@ -1539,7 +1524,7 @@ function CourseSection({ activeSubSection, onChangeSubSection }) {
                             <button
                               type="button"
                               onClick={() => handleManageLessons(course)}
-                              className="rounded-lg bg-sky-100 px-3 py-1.5 text-xs font-semibold text-sky-600 transition hover:bg-sky-200"
+                              className="rounded-lg bg-sky-100 dark:bg-sky-900/30 px-3 py-1.5 text-xs font-semibold text-sky-600 dark:text-sky-200 transition hover:bg-sky-200 dark:hover:bg-sky-900/50"
                               title="Manage Lessons"
                             >
                               Lessons
@@ -1547,7 +1532,7 @@ function CourseSection({ activeSubSection, onChangeSubSection }) {
                             <button
                               type="button"
                               onClick={() => handleEditCourse(course)}
-                              className="text-slate-400 transition hover:text-sky-500"
+                              className="text-slate-400 dark:text-slate-500 transition hover:text-sky-500 dark:hover:text-sky-400"
                               title="Edit Course"
                             >
                               <Pencil className="h-4 w-4" />
@@ -1666,13 +1651,13 @@ function CourseSection({ activeSubSection, onChangeSubSection }) {
       {/* Edit Course Modal */}
       {selectedCourseForEdit && selectedCourse === "all-courses" ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="w-full max-w-md rounded-3xl bg-white p-6 shadow-xl">
-            <h3 className="mb-4 text-xl font-bold text-slate-900">
+          <div className="w-full max-w-md rounded-3xl bg-white dark:bg-[#101827] p-6 shadow-xl">
+            <h3 className="mb-4 text-xl font-bold text-slate-900 dark:text-white">
               Edit Course
             </h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-slate-700">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
                   Course Title
                 </label>
                 <input
@@ -1734,11 +1719,11 @@ function CourseSection({ activeSubSection, onChangeSubSection }) {
       {/* Delete Confirmation Modal */}
       {showDeleteConfirm ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="w-full max-w-sm rounded-3xl bg-white p-6 shadow-xl">
-            <h3 className="mb-2 text-lg font-bold text-slate-900">
+          <div className="w-full max-w-sm rounded-3xl bg-white dark:bg-[#101827] p-6 shadow-xl">
+            <h3 className="mb-2 text-lg font-bold text-slate-900 dark:text-white">
               Delete Course
             </h3>
-            <p className="mb-6 text-sm text-slate-600">
+            <p className="mb-6 text-sm text-slate-600 dark:text-slate-300">
               Are you sure you want to delete this course? This action cannot be
               undone.
             </p>
@@ -1753,7 +1738,7 @@ function CourseSection({ activeSubSection, onChangeSubSection }) {
               <button
                 type="button"
                 onClick={() => setShowDeleteConfirm(null)}
-                className="flex-1 rounded-xl border border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                className="flex-1 rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 transition hover:bg-slate-50 dark:hover:bg-slate-800"
               >
                 Cancel
               </button>
@@ -1765,13 +1750,13 @@ function CourseSection({ activeSubSection, onChangeSubSection }) {
       {/* Add Lesson Modal */}
       {showAddLessonModal ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="w-full max-w-md rounded-3xl bg-white p-6 shadow-xl">
-            <h3 className="mb-4 text-xl font-bold text-slate-900">
+          <div className="w-full max-w-md rounded-3xl bg-white dark:bg-[#101827] p-6 shadow-xl">
+            <h3 className="mb-4 text-xl font-bold text-slate-900 dark:text-white">
               Create New Lesson
             </h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-slate-700">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
                   Lesson Title *
                 </label>
                 <input
@@ -1784,11 +1769,11 @@ function CourseSection({ activeSubSection, onChangeSubSection }) {
                       title: e.target.value,
                     })
                   }
-                  className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-2.5 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100"
+                  className="mt-2 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2.5 outline-none text-slate-900 dark:text-white focus:border-sky-500 focus:ring-2 focus:ring-sky-100 dark:focus:ring-sky-900"
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-slate-700">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
                   Description
                 </label>
                 <textarea
@@ -1801,7 +1786,7 @@ function CourseSection({ activeSubSection, onChangeSubSection }) {
                       description: e.target.value,
                     })
                   }
-                  className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-2.5 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100"
+                  className="mt-2 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2.5 outline-none text-slate-900 dark:text-white focus:border-sky-500 focus:ring-2 focus:ring-sky-100 dark:focus:ring-sky-900"
                 />
               </div>
               <div className="flex gap-3 pt-4">
@@ -3202,7 +3187,9 @@ function UsersSection({ activeSubSection, onChangeSubSection }) {
       if (url.includes("certificates")) {
         console.log(`[Cert Response]`, {
           isArray: Array.isArray(parsed),
-          keys: Array.isArray(parsed) ? `[${parsed.length}]` : Object.keys(parsed || {}),
+          keys: Array.isArray(parsed)
+            ? `[${parsed.length}]`
+            : Object.keys(parsed || {}),
           first: Array.isArray(parsed) ? parsed[0] : parsed,
         });
       }
@@ -3340,7 +3327,8 @@ function UsersSection({ activeSubSection, onChangeSubSection }) {
                 title: cert?.courseName || cert?.course?.title || "Certificate",
               },
               // Keep courseName for backward compatibility
-              courseName: cert?.courseName || cert?.course?.title || "Certificate",
+              courseName:
+                cert?.courseName || cert?.course?.title || "Certificate",
             }));
             if (certificates.length) break;
           }
@@ -3642,7 +3630,7 @@ function UsersSection({ activeSubSection, onChangeSubSection }) {
                   Certificates (
                   {userCertificates[getUserId(selectedUser)]?.length || 0})
                 </p>
-                
+
                 {/* Certificate Search Filter */}
                 <div className="mb-4">
                   <input
@@ -3879,9 +3867,7 @@ function UsersSection({ activeSubSection, onChangeSubSection }) {
               {(() => {
                 const filteredUsers = users.filter((user) => {
                   const displayName = getDisplayName(user).toLowerCase();
-                  return displayName.includes(
-                    searchCertificate.toLowerCase(),
-                  );
+                  return displayName.includes(searchCertificate.toLowerCase());
                 });
                 const startIdx =
                   (currentCertificatesPage - 1) * certificatesListPerPage;
@@ -3893,89 +3879,88 @@ function UsersSection({ activeSubSection, onChangeSubSection }) {
                     <div className="space-y-4">
                       {paginatedUsers.length > 0 ? (
                         paginatedUsers.map((user) => {
-                      const userId = getUserId(user);
-                      const certificates = userCertificates[userId] || [];
-                      console.log("meow",certificates);
+                          const userId = getUserId(user);
+                          const certificates = userCertificates[userId] || [];
+                          console.log("meow", certificates);
 
-                      return (
-                        <div
-                          key={userId}
-                          className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"
-                        >
-                          <div className="mb-4 flex items-start justify-between gap-4 border-b border-slate-100 pb-4">
-                            <div>
-                              <p className="text-lg font-bold text-slate-900">
-                                {getDisplayName(user)}
-                              </p>
-                              <p className="mt-1 text-sm text-slate-500">
-                                {certificates?.length} certificate(s)
-                              </p>
-                            </div>
-                            <span
-                              className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                                certificates.length > 0
-                                  ? "bg-emerald-100 text-emerald-600"
-                                  : "bg-slate-200 text-slate-600"
-                              }`}
+                          return (
+                            <div
+                              key={userId}
+                              className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"
                             >
-                              {certificates.length > 0
-                                ? "✓ Completed"
-                                : "In Progress"}
-                            </span>
-                          </div>
+                              <div className="mb-4 flex items-start justify-between gap-4 border-b border-slate-100 pb-4">
+                                <div>
+                                  <p className="text-lg font-bold text-slate-900">
+                                    {getDisplayName(user)}
+                                  </p>
+                                  <p className="mt-1 text-sm text-slate-500">
+                                    {certificates?.length} certificate(s)
+                                  </p>
+                                </div>
+                                <span
+                                  className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                                    certificates.length > 0
+                                      ? "bg-emerald-100 text-emerald-600"
+                                      : "bg-slate-200 text-slate-600"
+                                  }`}
+                                >
+                                  {certificates.length > 0
+                                    ? "✓ Completed"
+                                    : "In Progress"}
+                                </span>
+                              </div>
 
-                          {certificates.length > 0 ? (
-                            <div className="space-y-3">
-                              {certificates.map((cert, idx) => {
-                                const certCourseName =
-                                  cert?.course?.title ||
-                                  cert?.courseName ||
-                                  cert?.title ||
-                                  "Certificate";
-                                const certDate = cert?.createdAt
-                                  ? new Date(cert.createdAt).toLocaleDateString(
-                                      "en-US",
-                                      {
-                                        month: "short",
-                                        day: "numeric",
-                                        year: "numeric",
-                                      },
-                                    )
-                                  : "N/A";
+                              {certificates.length > 0 ? (
+                                <div className="space-y-3">
+                                  {certificates.map((cert, idx) => {
+                                    const certCourseName =
+                                      cert?.course?.title ||
+                                      cert?.courseName ||
+                                      cert?.title ||
+                                      "Certificate";
+                                    const certDate = cert?.createdAt
+                                      ? new Date(
+                                          cert.createdAt,
+                                        ).toLocaleDateString("en-US", {
+                                          month: "short",
+                                          day: "numeric",
+                                          year: "numeric",
+                                        })
+                                      : "N/A";
 
-                                return (
-                                  <div
-                                    key={idx}
-                                    className="rounded-2xl border border-emerald-200 bg-emerald-50 p-3"
-                                  >
-                                    <div className="flex items-start justify-between gap-2">
-                                      <div className="flex-1">
-                                        <p className="font-semibold text-emerald-900">
-                                          🎓 {certCourseName}
-                                        </p>
-                                        <p className="text-xs text-emerald-700 mt-1">
-                                          Issued: {certDate}
-                                        </p>
+                                    return (
+                                      <div
+                                        key={idx}
+                                        className="rounded-2xl border border-emerald-200 bg-emerald-50 p-3"
+                                      >
+                                        <div className="flex items-start justify-between gap-2">
+                                          <div className="flex-1">
+                                            <p className="font-semibold text-emerald-900">
+                                              🎓 {certCourseName}
+                                            </p>
+                                            <p className="text-xs text-emerald-700 mt-1">
+                                              Issued: {certDate}
+                                            </p>
+                                          </div>
+                                          <span className="text-lg">✓</span>
+                                        </div>
                                       </div>
-                                      <span className="text-lg">✓</span>
-                                    </div>
-                                  </div>
-                                );
-                              })}
+                                    );
+                                  })}
+                                </div>
+                              ) : (
+                                <p className="text-sm text-slate-500 py-3">
+                                  No certificates earned yet.
+                                </p>
+                              )}
                             </div>
-                          ) : (
-                            <p className="text-sm text-slate-500 py-3">
-                              No certificates earned yet.
-                            </p>
-                          )}
+                          );
+                        })
+                      ) : (
+                        <div className="rounded-3xl border border-slate-200 bg-white p-5 text-center text-slate-500">
+                          No data to display
                         </div>
-                      );
-                    })
-                  ) : (
-                    <div className="rounded-3xl border border-slate-200 bg-white p-5 text-center text-slate-500">
-                      No data to display
-                    </div>
-                  )}
+                      )}
                     </div>
                     {filteredUsers.length > certificatesListPerPage && (
                       <div className="flex items-center justify-center gap-2">
@@ -3985,56 +3970,57 @@ function UsersSection({ activeSubSection, onChangeSubSection }) {
                               Math.max(1, currentCertificatesPage - 1),
                             )
                           }
-                    disabled={currentCertificatesPage === 1}
-                    className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
-                  >
-                    ← Prev
-                  </button>
+                          disabled={currentCertificatesPage === 1}
+                          className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          ← Prev
+                        </button>
 
-                  <div className="flex gap-1">
-                    {Array.from(
-                      {
-                        length: Math.ceil(
-                          filteredUsers.length / certificatesListPerPage,
-                        ),
-                      },
-                      (_, i) => i + 1,
-                    ).map((page) => (
-                      <button
-                        key={page}
-                        onClick={() => setCurrentCertificatesPage(page)}
-                        className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
-                          currentCertificatesPage === page
-                            ? "bg-sky-500 text-white"
-                            : "border border-slate-300 text-slate-700 hover:bg-slate-100"
-                        }`}
-                      >
-                        {page}
-                      </button>
-                    ))}
-                  </div>
+                        <div className="flex gap-1">
+                          {Array.from(
+                            {
+                              length: Math.ceil(
+                                filteredUsers.length / certificatesListPerPage,
+                              ),
+                            },
+                            (_, i) => i + 1,
+                          ).map((page) => (
+                            <button
+                              key={page}
+                              onClick={() => setCurrentCertificatesPage(page)}
+                              className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
+                                currentCertificatesPage === page
+                                  ? "bg-sky-500 text-white"
+                                  : "border border-slate-300 text-slate-700 hover:bg-slate-100"
+                              }`}
+                            >
+                              {page}
+                            </button>
+                          ))}
+                        </div>
 
-                  <button
-                    onClick={() =>
-                      setCurrentCertificatesPage(
-                        Math.min(
-                          Math.ceil(
-                            filteredUsers.length / certificatesListPerPage,
-                          ),
-                          currentCertificatesPage + 1,
-                        ),
-                      )
-                    }
-                    disabled={
-                      currentCertificatesPage ===
-                      Math.ceil(
-                        filteredUsers.length / certificatesListPerPage,
-                      )
-                    }
-                    className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
-                  >
-                    Next →
-                  </button>
+                        <button
+                          onClick={() =>
+                            setCurrentCertificatesPage(
+                              Math.min(
+                                Math.ceil(
+                                  filteredUsers.length /
+                                    certificatesListPerPage,
+                                ),
+                                currentCertificatesPage + 1,
+                              ),
+                            )
+                          }
+                          disabled={
+                            currentCertificatesPage ===
+                            Math.ceil(
+                              filteredUsers.length / certificatesListPerPage,
+                            )
+                          }
+                          className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          Next →
+                        </button>
                       </div>
                     )}
                   </>
@@ -4102,11 +4088,21 @@ function UsersSection({ activeSubSection, onChangeSubSection }) {
                 <table className="min-w-full text-left text-sm">
                   <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-400">
                     <tr>
-                      <th className="px-3 sm:px-5 py-3 sm:py-4 font-semibold text-xs sm:text-xs">Student</th>
-                      <th className="px-3 sm:px-5 py-3 sm:py-4 font-semibold text-xs sm:text-xs hidden sm:table-cell">Courses</th>
-                      <th className="px-3 sm:px-5 py-3 sm:py-4 font-semibold text-xs sm:text-xs hidden md:table-cell">Progress</th>
-                      <th className="px-3 sm:px-5 py-3 sm:py-4 font-semibold text-xs sm:text-xs">Certificates</th>
-                      <th className="px-3 sm:px-5 py-3 sm:py-4 font-semibold text-xs sm:text-xs">Action</th>
+                      <th className="px-3 sm:px-5 py-3 sm:py-4 font-semibold text-xs sm:text-xs">
+                        Student
+                      </th>
+                      <th className="px-3 sm:px-5 py-3 sm:py-4 font-semibold text-xs sm:text-xs hidden sm:table-cell">
+                        Courses
+                      </th>
+                      <th className="px-3 sm:px-5 py-3 sm:py-4 font-semibold text-xs sm:text-xs hidden md:table-cell">
+                        Progress
+                      </th>
+                      <th className="px-3 sm:px-5 py-3 sm:py-4 font-semibold text-xs sm:text-xs">
+                        Certificates
+                      </th>
+                      <th className="px-3 sm:px-5 py-3 sm:py-4 font-semibold text-xs sm:text-xs">
+                        Action
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -4462,7 +4458,7 @@ export default function Dashboard() {
                   className="inline-flex h-10 sm:h-12 items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-3 sm:px-6 text-xs sm:text-sm font-semibold text-slate-600 transition hover:border-slate-300 hover:text-slate-900 whitespace-nowrap min-w-max flex-shrink-0"
                 >
                   <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
-                  <span className="hidden sm:inline">Go Back Home</span>
+                  <span className="hidden sm:inline ">Go Back Home</span>
                   <span className="sm:hidden">Back</span>
                 </Link>
               </div>
@@ -4493,9 +4489,7 @@ export default function Dashboard() {
           </div>
 
           <div className="px-3 py-4 sm:px-4 sm:py-6 md:px-6 lg:px-8 lg:py-8 overflow-x-auto">
-            <div className="w-full">
-              {activeContent}
-            </div>
+            <div className="w-full">{activeContent}</div>
           </div>
         </main>
       </div>

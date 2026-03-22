@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import { setCredentials } from "../features/auth/authSlice";
 
 const buildDisplayName = (user) => {
@@ -300,6 +301,15 @@ export default function Profile() {
   return (
     <div className="min-h-[70vh] bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 px-6 py-12 lg:px-12 dark:from-[#0e172b] dark:via-[#1a2a3a] dark:to-[#0e172b]">
       <div className="mx-auto max-w-420">
+        {/* Back Button */}
+        <button
+          onClick={() => navigate("/")}
+          className="mb-6 inline-flex items-center gap-2 rounded-xl bg-[#3f71ae] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#2d5a99]"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          ត្រឡប់ក្រោយ
+        </button>
+
         <div className="overflow-hidden rounded-3xl bg-white shadow-2xl dark:bg-[#111827]">
           <div className="h-1 bg-gradient-to-r from-[#112d52] to-[#3f71ae]"></div>
 

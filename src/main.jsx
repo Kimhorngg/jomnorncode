@@ -22,8 +22,6 @@ import Profile from "./pages/Profile";
 import Enrollment from "./pages/Enrollment";
 import Dashboard from "./pages/Dashboard";
 import AdminRoute from "./components/AdminRoute";
-import FullscreenEditor from "./pages/FullscreenEditor";
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -98,10 +96,6 @@ const router = createBrowserRouter([
         <Dashboard />
       </AdminRoute>
     ),
-  },
-  {
-    path: "/fullscreen-editor",
-    element: <FullscreenEditor />,
   },
 ]);
 

@@ -387,7 +387,7 @@
 import React, { useMemo, useRef, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Editor from "@monaco-editor/react";
-import { Maximize2, Minimize2 } from "lucide-react";
+import { Minimize2 } from "lucide-react";
 
 import CodeData from "./code-monoco.json";
 import {
@@ -941,23 +941,6 @@ export default function PracticEditor() {
               អនុវត្តជាមួយកូដ
             </h2>
             <div className="flex gap-3">
-              <button
-                onClick={() => {
-                  const currentCode =
-                    editorRef.current?.getValue() || exampleCode;
-                  navigate("/fullscreen-editor", {
-                    state: {
-                      code: currentCode,
-                      language: editorLanguage,
-                    },
-                  });
-                }}
-                className="px-3 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition shadow-sm flex items-center gap-2"
-                title="Open full-screen editor"
-              >
-                <Maximize2 size={18} />
-                <span className="hidden md:inline text-sm">ពង្រីក</span>
-              </button>
               <button
                 onClick={runExampleCode}
                 disabled={running}

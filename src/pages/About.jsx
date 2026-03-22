@@ -150,7 +150,7 @@ export default function About() {
 
         {/* ABOUT SECTION */}
         <section className="mx-auto max-w-420 px-6 lg:px-12 py-12 md:py-16">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
+          <div className="grid items-stretch gap-10 lg:grid-cols-2">
             <div data-aos="fade-up">
               <hr className="border-gray-300 my-5 w-full max-w-[320px]" />
               <div className="flex items-center gap-4">
@@ -206,14 +206,14 @@ export default function About() {
             </div>
 
             <div
-              className="rounded-2xl border border-slate-200 dark:border-[#314057] bg-white dark:bg-[#1c293e] p-4 shadow-sm mt-8 lg:mt-0"
+              className="rounded-2xl border border-slate-200 dark:border-[#314057] bg-white dark:bg-[#1c293e] p-4 shadow-sm mt-8 lg:mt-0 h-full flex flex-col"
               data-aos="fade-left"
             >
-              <div className="overflow-hidden rounded-xl bg-slate-100 dark:bg-[#0f172a]">
+              <div className="overflow-hidden rounded-xl bg-slate-100 dark:bg-[#0f172a] h-full">
                 <img
                   src={learningImage}
                   alt="learning"
-                  className="h-56 w-full object-cover sm:h-64 md:h-72"
+                  className="w-full h-full object-cover"
                 />
               </div>
             </div>
