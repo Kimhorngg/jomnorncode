@@ -8,6 +8,7 @@ import LessonProgressCard from "../components/navbar/learnlessonpage/LessonProgr
 import ExampleEditor from "../components/navbar/learnlessonpage/ExampleEditor";
 import DefinitionCard from "../components/navbar/learnlessonpage/DefinitionCard";
 import PracticeEditor from "../components/navbar/learnlessonpage/PracticeEditor";
+import LockOverlay from "../components/LockOverlay";
 
 export default function LearnLesson() {
   const { lessonId } = useParams();
@@ -53,6 +54,7 @@ export default function LearnLesson() {
 
   return (
     <>
+      <LockOverlay />
       {/* Zoom Controls - Fixed Position */}
       <div className="fixed top-4 right-4 z-40 flex gap-2 bg-white rounded-lg shadow-lg p-2 md:p-3 border border-gray-300">
         <button

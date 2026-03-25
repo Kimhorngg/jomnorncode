@@ -329,11 +329,11 @@ export default function Profile() {
                   </div>
                 )}
               </div>
-              <div className="flex-1">
-                <h1 className="text-3xl font-bold text-[#112d52] dark:text-white">
+              <div className="flex-1 min-w-0">
+                <h1 className="text-3xl font-bold text-[#112d52] dark:text-white truncate">
                   {displayName}
                 </h1>
-                <p className="mt-2 text-sm text-[#3f71ae] font-semibold">
+                <p className="mt-2 text-sm text-[#3f71ae] font-semibold truncate overflow-hidden">
                   {user.email || "អ៊ីមែលមិនមាន"}
                 </p>
               </div>
@@ -456,7 +456,7 @@ export default function Profile() {
                 <p className="text-md uppercase font-semibold tracking-widest text-[#112d52] dark:text-[#3f71ae]">
                   ឈ្មោះ
                 </p>
-                <p className="mt-2 text-base font-bold text-slate-900 dark:text-white group-hover:text-[#112d52] dark:group-hover:text-[#3f71ae] transition-colors">
+                <p className="mt-2 text-base font-bold text-slate-900 dark:text-white group-hover:text-[#112d52] dark:group-hover:text-[#3f71ae] transition-colors truncate">
                   {accountName || "-"}
                 </p>
               </div>
@@ -464,7 +464,7 @@ export default function Profile() {
                 <p className="text-md uppercase font-semibold tracking-widest text-[#112d52] dark:text-[#3f71ae]">
                   ឈ្មោះបង្ហាញ
                 </p>
-                <p className="mt-2 text-base font-bold text-slate-900 dark:text-white group-hover:text-[#112d52] dark:group-hover:text-[#3f71ae] transition-colors">
+                <p className="mt-2 text-base font-bold text-slate-900 dark:text-white group-hover:text-[#112d52] dark:group-hover:text-[#3f71ae] transition-colors truncate">
                   {buildPreferredDisplayName(user) || "-"}
                 </p>
               </div>
@@ -472,7 +472,7 @@ export default function Profile() {
                 <p className="text-md uppercase font-semibold tracking-widest text-[#112d52] dark:text-[#3f71ae]">
                   អ៊ីមែល
                 </p>
-                <p className="mt-2 text-base font-bold text-slate-900 dark:text-white group-hover:text-[#112d52] dark:group-hover:text-[#3f71ae] transition-colors break-all">
+                <p className="mt-2 text-base font-bold text-slate-900 dark:text-white group-hover:text-[#112d52] dark:group-hover:text-[#3f71ae] transition-colors truncate">
                   {user.email || "-"}
                 </p>
               </div>
@@ -480,7 +480,7 @@ export default function Profile() {
                 <p className="text-md uppercase font-semibold tracking-widest text-[#112d52] dark:text-[#3f71ae]">
                   ឈ្មោះអ្នកប្រើ
                 </p>
-                <p className="mt-2 text-base font-bold text-slate-900 dark:text-white group-hover:text-[#112d52] dark:group-hover:text-[#3f71ae] transition-colors">
+                <p className="mt-2 text-base font-bold text-slate-900 dark:text-white group-hover:text-[#112d52] dark:group-hover:text-[#3f71ae] transition-colors truncate">
                   {user.username || "-"}
                 </p>
               </div>

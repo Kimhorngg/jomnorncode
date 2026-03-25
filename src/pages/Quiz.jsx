@@ -7,6 +7,7 @@ import {
   isQuizCompletedForUser,
   setQuizCompletedForUser,
 } from "../utils/lessonProgress";
+import LockOverlay from "../components/LockOverlay";
 
 const API_BASE = "https://jomnorncode-api.cheat.casa/api";
 
@@ -555,7 +556,9 @@ export default function Quiz() {
   const progress = Math.round(((currentIndex + 1) / questions.length) * 100);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-between px-4 sm:px-8 lg:px-50 py-6">
+    <>
+      <LockOverlay />
+      <div className="min-h-screen bg-gray-100 flex flex-col justify-between px-4 sm:px-8 lg:px-50 py-6">
       <div>
         <Link
           to={`/coursedetail/${courseId}/lesson/${lessonId}`}
@@ -634,5 +637,6 @@ export default function Quiz() {
         </button>
       </div>
     </div>
+    </>
   );
 }

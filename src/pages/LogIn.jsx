@@ -163,7 +163,7 @@ export default function Login({ isOpen, onClose, openSignUp }) {
         const authPayload = normalizeAuthResponse(loginRes, fallbackUser);
         if (!authPayload) throw new Error(loginRes?.message || "Login failed");
         dispatch(setCredentials(authPayload));
-        toast.success("Social login success");
+        toast.success("ចូលប្រើប្រាស់តាម Google បានដោយជោគជ័យ");
         finishAuthSuccess(authPayload.user);
       } catch (loginErr) {
         const message =

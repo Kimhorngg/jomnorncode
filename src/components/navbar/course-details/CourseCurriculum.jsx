@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { Lock } from "lucide-react";
 import {
   isLessonCompletedForUser,
   isQuizCompletedForUser,
@@ -268,21 +269,35 @@ export default function CourseCurriculum({ courseId, lessons = [] }) {
               {lesson.title}
             </span>
           </div>
-          <Link
-            to={`/coursedetail/${courseId}/lesson/${lesson.id}`}
-            onClick={(event) => handleLearnClick(event, lesson)}
-            state={{
-              lessonTitle: lesson.title,
-              sequenceNumber: lesson.sequenceNumber ?? index + 1,
-            }}
-            className={`mt-3 sm:mt-0 inline-block px-5  py-2.5 rounded-full font-medium shadow-md transition-all duration-200 hover:scale-105 ${
-              completedLessonIds[String(lesson.id)]
-                ? "bg-[#ffa207] hover:bg-[#e88e07] text-white"
-                : "bg-[#3f71af] hover:bg-[#112d4f] text-white"
-            }`}
-          >
-            ចូលរៀន
-          </Link>
+          
+          {authToken ? (
+            <Link
+              to={`/coursedetail/${courseId}/lesson/${lesson.id}`}
+              onClick={(event) => handleLearnClick(event, lesson)}
+              state={{
+                lessonTitle: lesson.title,
+                sequenceNumber: lesson.sequenceNumber ?? index + 1,
+              }}
+              className={`mt-3 sm:mt-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-medium shadow-md transition-all duration-200 hover:scale-105 ${
+                completedLessonIds[String(lesson.id)]
+                  ? "bg-[#ffa207] hover:bg-[#e88e07] text-white"
+                  : "bg-[#3f71af] hover:bg-[#112d4f] text-white"
+              }`}
+            >
+              ចូលរៀន
+            </Link>
+          ) : (
+            <button
+              onClick={() => {
+                toast.error("សូមចូលគណនីជាមុនសិន");
+                navigate("/login");
+              }}
+              className="mt-3 sm:mt-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-medium shadow-md transition-all duration-200 bg-gray-400 text-white cursor-not-allowed opacity-75 hover:opacity-90"
+            >
+              <Lock size={18} />
+              ចូលរៀន
+            </button>
+          )}
         </div>
       ))}
 
